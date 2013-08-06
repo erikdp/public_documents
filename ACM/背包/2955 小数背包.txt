@@ -1,0 +1,110 @@
+Robberies
+Time Limit: 2000/1000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)
+
+
+Problem Description
+The aspiring Roy the Robber has seen a lot of American movies, and knows that the bad guys usually gets caught in the end, often because they become too greedy. He has decided to work in the lucrative business of bank robbery only for a short while, before retiring to a comfortable job at a university.
+
+
+
+
+For a few months now, Roy has been assessing the security of various banks and the amount of cash they hold. He wants to make a calculated risk, and grab as much money as possible.
+
+
+His mother, Ola, has decided upon a tolerable probability of getting caught. She feels that he is safe enough if the banks he robs together give a probability less than this.
+ 
+
+Input
+The first line of input gives T, the number of cases. For each scenario, the first line of input gives a floating point number P, the probability Roy needs to be below, and an integer N, the number of banks he has plans for. Then follow N lines, where line j gives an integer Mj and a floating point number Pj . 
+Bank j contains Mj millions, and the probability of getting caught from robbing it is Pj .
+ 
+
+Output
+For each test case, output a line with the maximum number of millions he can expect to get while the probability of getting caught is less than the limit set.
+
+Notes and Constraints
+0 < T <= 100
+0.0 <= P <= 1.0
+0 < N <= 100
+0 < Mj <= 100
+0.0 <= Pj <= 1.0
+A bank goes bankrupt if it is robbed, and you may assume that all probabilities are independent as the police have very low funds.
+ 
+
+Sample Input
+3
+0.04 3
+1 0.02
+2 0.03
+3 0.05
+0.06 3
+2 0.03
+2 0.03
+3 0.05
+0.10 3
+1 0.03
+2 0.02
+3 0.05
+ 
+
+Sample Output
+2
+4
+6
+ 
+
+Descriptipn:    抢银行。抢每个银行被抓的几率为caught[]，互为独立事件，在容忍上限内，抢最多的钱。    
+ 4 How to Do:    01背包，但需要改变一点。需要将能抢来的最多的钱最为背包容量。
+
+#include<iostream>
+using namespace std;
+
+int vo[101];
+double gai[101];
+double dp[10001];
+
+double Max(double a,double b)
+{
+	if(a>b) return a;
+	return b;
+}
+
+int main()
+{
+	double p;
+	int t,n,i,j,sum;
+	scanf("%d",&t);
+	while(t--)
+	{
+		memset(dp,0,sizeof(dp));
+		scanf("%lf%d",&p,&n);
+		p=1-p;
+		sum=0;
+		for(i=0;i<n;i++)
+		{
+			scanf("%d%lf",&vo[i],&gai[i]);
+			sum+=vo[i];
+		}
+		dp[0]=1.0;//这里
+		for(i=0;i<n;i++)
+		{
+			for(j=sum;j>=vo[i];j--)
+			{
+				dp[j]=Max(dp[j],dp[j-vo[i]]*(1-gai[i]));
+			}
+		}
+		for(i=sum;i>=0;i--)
+		{
+			if(dp[i]>=p)
+			{
+				printf("%d\n",i);
+				break;
+			}
+		}
+	}
+	return 0;
+}
+
+
+
+

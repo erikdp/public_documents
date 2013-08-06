@@ -1,0 +1,145 @@
+I Hate It
+Time Limit: 9000/3000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)
+
+
+Problem Description
+很多学校流行一种比较的习惯。老师们很喜欢询问，从某某到某某当中，分数最高的是多少。
+这让很多学生很反感。
+
+不管你喜不喜欢，现在需要你做的是，就是按照老师的要求，写一个程序，模拟老师的询问。当然，老师有时候需要更新某位同学的成绩。
+ 
+
+Input
+本题目包含多组测试，请处理到文件结束。
+在每个测试的第一行，有两个正整数 N 和 M ( 0<N<=200000,0<M<5000 )，分别代表学生的数目和操作的数目。
+学生ID编号分别从1编到N。
+第二行包含N个整数，代表这N个学生的初始成绩，其中第i个数代表ID为i的学生的成绩。
+接下来有M行。每一行有一个字符 C (只取'Q'或'U') ，和两个正整数A，B。
+当C为'Q'的时候，表示这是一条询问操作，它询问ID从A到B(包括A,B)的学生当中，成绩最高的是多少。
+当C为'U'的时候，表示这是一条更新操作，要求把ID为A的学生的成绩更改为B。
+
+ 
+
+Output
+对于每一次询问操作，在一行里面输出最高成绩。
+ 
+
+Sample Input
+5 6
+1 2 3 4 5
+Q 1 5
+U 3 6
+Q 3 4
+Q 4 5
+U 2 9
+Q 1 5
+ 
+
+Sample Output
+5
+6
+5
+9
+
+HintHuge input,the C function scanf() will work better than cin
+
+
+
+
+#include<iostream>
+using namespace std;
+const int INF=200001;
+
+int a[INF];
+
+struct T
+{
+	int l,r,mid,score;
+}tree[INF*3];
+
+int Max(int a,int b)
+{
+	if(a>b) return a;
+	return b;
+}
+
+void Build_tree(int root,int l,int r)//建立树
+{
+	tree[root].l=l;
+	tree[root].r=r;
+	tree[root].mid=(l+r)/2;
+	if(l==r)
+	{
+		tree[root].score=a[l];
+		return ;
+	}
+	Build_tree(2*root,l,tree[root].mid);//建立左子树
+	Build_tree(2*root+1,tree[root].mid+1,r);//建立右子树
+	tree[root].score=Max(tree[2*root].score,tree[2*root+1].score);//取最大
+}
+
+int Search(int root, int l, int r)//查找区间
+{
+	if(l==tree[root].l&&tree[root].r==r)//正好的区间
+	{
+		return tree[root].score;
+	}
+	if(r<=tree[root].mid)//只有左子树
+	{
+		return Search(root*2,l,r);
+	}
+	else if(l>tree[root].mid)//只有右子树
+	{
+		return Search(root*2+1,l,r);
+	}
+	else
+		return	Max(Search(2*root,l,tree[root].mid),Search(2*root+1,tree[root].mid+1,r));//包含两个子树
+}
+
+void Updata(int root, int id, int score)//更新树
+{
+	if(tree[root].l==id&&tree[root].r==id)//找到对应更新的结点
+	{
+		tree[root].score=score;
+		return ;
+	}
+	if(id<=tree[root].mid)//左子树
+	{
+		Updata(root*2,id,score);
+	}
+	if(id>tree[root].mid)//右子树
+	{
+		Updata(root*2+1,id,score);
+	}
+	tree[root].score=Max(tree[2*root].score,tree[2*root+1].score);//更新上一层结点
+}
+
+int main()
+{
+	char q;
+	int n,m,i,Q_l,Q_r,U_id,U_score;
+	while(scanf("%d%d",&n,&m)!=EOF)
+	{
+		for(i=1;i<=n;i++)
+		{
+			scanf("%d",&a[i]);
+		}
+		Build_tree(1,1,n);//建树
+		while(m--)
+		{
+			getchar();
+			q=getchar();
+			if(q=='Q')
+			{
+				scanf("%d%d",&Q_l,&Q_r);
+				printf("%d\n",Search(1,Q_l,Q_r));//找区间
+			}
+			else
+			{
+				scanf("%d%d",&U_id,&U_score);
+				Updata(1,U_id,U_score);//更新树
+			}
+		}
+	}
+	return 0;
+} 

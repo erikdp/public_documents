@@ -1,0 +1,127 @@
+Dividing
+Time Limit: 2000/1000 MS (Java/Others)    Memory Limit: 65536/32768 K (Java/Others)
+
+
+Problem Description
+Marsha and Bill own a collection of marbles. They want to split the collection among themselves so that both receive an equal share of the marbles. This would be easy if all the marbles had the same value, because then they could just split the collection in half. But unfortunately, some of the marbles are larger, or more beautiful than others. So, Marsha and Bill start by assigning a value, a natural number between one and six, to each marble. Now they want to divide the marbles so that each of them gets the same total value. 
+Unfortunately, they realize that it might be impossible to divide the marbles in this way (even if the total value of all marbles is even). For example, if there are one marble of value 1, one of value 3 and two of value 4, then they cannot be split into sets of equal value. So, they ask you to write a program that checks whether there is a fair partition of the marbles.
+
+ 
+
+Input
+Each line in the input describes one collection of marbles to be divided. The lines consist of six non-negative integers n1, n2, ..., n6, where ni is the number of marbles of value i. So, the example from above would be described by the input-line ``1 0 1 2 0 0''. The maximum total number of marbles will be 20000. 
+
+The last line of the input file will be ``0 0 0 0 0 0''; do not process this line.
+
+ 
+
+Output
+For each colletcion, output ``Collection #k:'', where k is the number of the test case, and then either ``Can be divided.'' or ``Can't be divided.''. 
+
+Output a blank line after each test case.
+
+ 
+
+Sample Input
+1 0 1 2 0 0
+1 0 0 0 1 1
+0 0 0 0 0 0
+ 
+
+Sample Output
+Collection #1:
+Can't be divided.
+
+Collection #2:
+Can be divided.
+ 
+
+#include<iostream>
+using namespace std;
+
+int sum;
+int dp[120001];
+
+inline Max(int a,int b)
+{
+	if(a>b) return a;
+	return b;
+}
+
+inline void Com(int vo)
+{
+	int i;
+	for(i=vo;i<=sum;i++)
+	{
+		if(dp[i-vo]==-1) continue;//这里别忘啦
+		dp[i]=Max(dp[i],dp[i-vo]+vo);
+	}
+}
+
+inline void One(int vo)
+{
+	int i;
+	for(i=sum;i>=vo;i--)
+	{
+		if(dp[i-vo]==-1) continue;
+		dp[i]=Max(dp[i],dp[i-vo]+vo);
+	}
+}
+
+inline void Mutil(int num,int i)
+{
+	int k;
+	if(num*i>=sum)
+	{
+		Com(i);
+	}
+	else
+	{
+		k=1;
+		while(k<num)
+		{
+			One(k*i);
+			num-=k;
+			k*=2;
+		}
+		One(num*i);
+	}
+}
+
+int main()
+{
+	int num[8],flag=1,i;
+	while(1)
+	{
+		sum=0;
+		memset(dp,-1,sizeof(dp));
+		dp[0]=0;//还有这里
+		for(i=1;i<=6;i++)
+		{
+			scanf("%d",&num[i]);
+			sum+=num[i]*i;
+		}
+		if(sum==0) break;
+		printf("Collection #%d:\n",flag++);
+		if(sum%2)
+		{
+			printf("Can't be divided.\n\n");
+			continue;
+		}
+		sum/=2;
+		for(i=1;i<=6;i++)
+		{
+			if(num[i]==0) continue;
+			Mutil(num[i],i);
+		}
+		if(dp[sum]==-1)
+		{
+			printf("Can't be divided.\n\n");
+		}
+		else
+		{
+			printf("Can be divided.\n\n");
+		}
+	}
+	return 0;
+}

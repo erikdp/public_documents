@@ -1,0 +1,237 @@
+饭卡
+Time Limit: 5000/1000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)
+
+Problem Description
+电子科大本部食堂的饭卡有一种很诡异的设计，即在购买之前判断余额。如果购买一个商品之前，卡上的剩余金额大于或等于5元，就一定可以购买成功（即使购买后卡上余额为负），否则无法购买（即使金额足够）。所以大家都希望尽量使卡上的余额最少。
+某天，食堂中有n种菜出售，每种菜可购买一次。已知每种菜的价格以及卡上的余额，问最少可使卡上的余额为多少。
+
+ 
+
+Input
+多组数据。对于每组数据：
+第一行为正整数n，表示菜的数量。n<=1000。
+第二行包括n个正整数，表示每种菜的价格。价格不超过50。
+第三行包括一个正整数m，表示卡上的余额。m<=1000。
+
+n=0表示数据结束。
+
+ 
+
+Output
+对于每组输入,输出一行,包含一个整数，表示卡上可能的最小余额。
+ 
+
+Sample Input
+1
+50
+5
+10
+1 2 3 2 1 1 2 3 2 1
+50
+0
+ 
+
+Sample Output
+-45
+32
+ 
+
+
+
+
+题目大意：
+
+饭卡小于5元时不能购买，给出各种菜价，给出卡上剩余最低价格。
+
+分析：
+
+饭卡小于5元显然直接输出。
+
+分类。1、选最大菜价，01背包（详见背包九讲）。把其余菜价装入金额减去5元的背包，在减最大的。
+
+2、不选最大菜价，总有可能是一个菜价减去小于5元，减去最大可得更优解，故矛盾。必选最大菜价。
+
+
+这里需要注意的是，要预留5元，用来最后买最贵的菜，这样才能使最后的余额最小。这一点弄清楚来，题目变成赤裸裸的01背包了。
+
+//这个我是参考别人思路的
+#include<iostream>
+using namespace std;
+
+int a[1002],dp[1002];
+
+inline Max(int a,int b)
+{
+	if(a>b) return a;
+	return b;
+}
+
+int main()
+{
+	int n,i,j,vo,MAX;
+	while(scanf("%d",&n)!=EOF&&n)
+	{
+		MAX=0;
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&a[i]);
+			if(a[i]>a[MAX])
+			{
+				MAX=i;
+			}
+		}
+		memset(dp,0,sizeof(dp));
+		scanf("%d",&vo);
+		if(vo<5)
+		{
+			printf("%d\n",vo);
+			continue;
+		}
+		for(i=0;i<n;i++)
+		{
+			if(i==MAX) continue;
+			for(j=vo-5;j>=a[i];j--)
+			{
+				dp[j]=Max(dp[j],dp[j-a[i]]+a[i]);
+			}
+		}
+		printf("%d\n",vo-dp[vo-5]-a[MAX]);
+	}
+	return 0;
+}
+
+
+//这个是自己的思路
+//我的思路，把先预留5个空间
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int dp[1002],a[1002];
+
+int Max(int a,int b)
+{
+    if(a>b) return a;
+    return b;
+}
+
+int main()
+{
+    int n,i,j,vo,MAX,temp,tempp,b,k;
+    while(scanf("%d",&n)!=EOF,n)
+    {
+        for(i=0;i<n;i++) scanf("%d",&a[i]);
+        scanf("%d",&vo);
+        if(vo<5)
+        {
+            printf("%d\n",vo);
+            continue;
+        }
+        sort(a,a+n);
+        memset(dp,0,sizeof(dp));
+        MAX=0;
+        for(j=0;j<n;j++)//第几件物品
+        {
+            for(i=vo;i>=5;i--)//当前容积
+            {
+                temp=dp[i]+a[j];
+				tempp=0;//初始要小，因为当i<a[j]时候temp是不存在的，因为没考虑i<a[j]的情况，w了很多次
+				if(i>=a[j])
+				{
+					for(k=i-a[j];k>=5;k--)//找到拐点
+					{
+						if(dp[k]!=dp[i]) break;//这个就是拐点条件
+					}
+					tempp=dp[k]+a[j];
+				}
+				b=Max(temp,tempp);
+                if(b>MAX)
+                {
+                    MAX=b;
+                }
+                if(i-5>=temp)//可以更新dp[i],否则不可以
+                {
+					if(dp[i]<temp)//其实这个条件可以不要，因为temp=dp[i]+a[j]>=dp[i]
+						dp[i]=temp;
+                }
+                if(i-5>=tempp)//可以更新dp[i],否则不可以
+                {
+                    if(dp[i]<tempp)
+                        dp[i]=tempp;
+                }
+            }
+        }
+        printf("%d\n",vo-MAX);
+    }
+    return 0;
+}
+
+
+
+
+//这个是自己的思路
+//我的思路，把先预留5个空间
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int dp[1002],a[1002];
+
+int Max(int a,int b)
+{
+    if(a>b) return a;
+    return b;
+}
+
+int main()
+{
+    int n,i,j,vo,MAX,temp,tempp,b,k;
+    while(scanf("%d",&n)!=EOF,n)
+    {
+        for(i=0;i<n;i++) scanf("%d",&a[i]);
+        scanf("%d",&vo);
+		//if(vo<5)
+		//{
+        //    printf("%d\n",vo);
+		//    continue;
+        //}
+        sort(a,a+n);
+        memset(dp,0,sizeof(dp));
+        MAX=0;
+        for(j=0;j<n;j++)//第几件物品
+        {
+            for(i=vo;i>=5;i--)//当前容积
+            {
+                temp=dp[i]+a[j];
+				tempp=0;//初始要小，因为当i<a[j]时候temp是不存在的，因为没考虑i<a[j]的情况，w了很多次
+				if(i>=a[j])
+				{
+					for(k=i-a[j];k>=5;k--)//找到拐点
+					{
+						if(dp[k]!=dp[i]) break;//这个就是拐点条件
+					}
+					tempp=dp[k]+a[j];
+				}
+				b=Max(temp,tempp);
+                if(b>MAX)
+                {
+                    MAX=b;
+                }
+                if(i-5>=temp)//可以更新dp[i],否则不可以
+                {
+					//	if(dp[i]<temp)//其实这个条件可以不要，因为temp=dp[i]+a[j]>=dp[i]
+					dp[i]=temp;
+                }
+                if(i-5>=tempp)//可以更新dp[i],否则不可以
+                {
+                    if(dp[i]<tempp)
+                        dp[i]=tempp;
+                }
+            }
+        }
+        printf("%d\n",vo-MAX);
+    }
+    return 0;
+}

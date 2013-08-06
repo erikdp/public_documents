@@ -1,0 +1,44 @@
+\documentclass[12pt,a4paper,landscape]{article}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{CJK}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+\title{GoAgent网站证书不受信任解决方法(windows + Chrome)}
+\author{ismdeep}
+\date{2013-8-5 15:37:06}
+
+
+\maketitle
+
+%设置listings
+\lstset{numbers=left,
+numberstyle=\tiny,
+keywordstyle=\color{blue!100}, commentstyle=\color{red!50!green!50!blue!50},
+frame=single,tabsize=4,showtabs=false,extendedchars=false,
+rulesepcolor=\color{red!20!green!20!blue!20}
+}
+
+
+
+%正文开始
+
+
+这段时间以及之前的一段时间内，用GoAgent翻墙上登自己的Facebook账号就出现如下情况。
+\includegraphics[scale=0.65]{pic/该网站的安全证书不受信任.jpg}
+
+
+
+
+
+\end{CJK}
+\end{document}
+
+

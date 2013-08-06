@@ -1,0 +1,756 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0062)http://www.cppblog.com/kuangbin/archive/2011/10/13/167605.html -->
+<html><head id="Head"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+	[导入]卡特兰数  ACM  数论 - ACM博客_kuangbin - C++博客
+</title><meta id="metaKeywords" name="keywords" content="[导入]卡特兰数  ACM  数论"><link type="text/css" rel="stylesheet" href="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/common.css"><link id="MainCss" type="text/css" rel="stylesheet" href="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/style.css"><link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cppblog.com/kuangbin/rss.aspx"><script type="text/javascript" async="" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/ga.js"></script><script type="text/javascript" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/osd.js"></script></head>
+<body>
+    <form name="Form1" method="post" action="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客.html" onsubmit="javascript:return WebForm_OnSubmit();" id="Form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="
+__VIEWSTATE" value="">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/WebResource.axd" type="text/javascript"></script>
+
+<script language="JavaScript">
+									function ctlent(evt,id)
+											{
+												if(evt.ctrlKey && evt.keyCode == 13)
+												{	
+													try
+													{
+														TempSave(id);
+													}
+													catch(ex)
+													{
+													}
+													finally
+													{
+													    __doPostBack('AjaxHolder$PostComment$btnSubmit','')
+													}
+												}
+		
+												}</script>
+												<script language="JavaScript">function SetReplyAuhor(author){document.getElementById('AjaxHolder_PostComment_tbComment').value+="@"+author+"\n";document.getElementById('AjaxHolder_PostComment_tbComment').focus();return false}</script>
+<script src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/ScriptResource.axd" type="text/javascript"></script>
+<script src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/ScriptResource(1).axd" type="text/javascript"></script>
+<script src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/ScriptResource(2).axd" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+        JAVASCRIPT: 
+<script charset="Shift_JIS" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/honehone_clock_tr.js"></script><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="160" height="70" id="honehoneclock" align="middle"><param name="allowScriptAccess" value="always"><param name="movie" value="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><param name="wmode" value="transparent"><embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf" quality="high" bgcolor="#ffffff" width="160" height="70" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></object> 
+
+
+<table align="center" width="98%" cellspacing="0" cellpadding="0" border="0" style="margin-top:10px">
+<tbody><tr>
+	<td valign="top" width="70%" style="padding:0">
+		<table align="center" width="100%" height="90" cellspacing="0" cellpadding="5" border="0" bgcolor="white">
+		<tbody><tr>
+			<td class="banner" background="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/bg_banner.gif">
+			
+<div id="header">
+	<span>
+		<a id="Header1_HeaderTitle" href="http://www.cppblog.com/kuangbin/">ACM博客_kuangbin</a><br>
+		<div class="sub">人一我百，人十我万！追逐青春的梦想，怀着自信的心，永不放弃~~~~~~~我要成为AC神！！！  by kuangbin@shu
+http://www.cnblogs.com/kuangbin/
+</div>
+	</span>
+</div>
+			</td>
+		</tr>
+		</tbody></table>
+		<table align="center" width="100%" height="90" cellspacing="0" cellpadding="5" border="0" bgcolor="white" class="index">
+		<tbody><tr>
+			<td class="banner">
+			
+					
+<div class="block">
+	<h1 class="block_title"><a id="viewpost1_TitleUrl" href="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客.html">[导入]卡特兰数  ACM  数论</a></h1>
+	<div class="post">
+		<div class="postcontent">
+			<h1 style="background-image: none; border-bottom: #aaaaaa 1px solid; padding-bottom: 0px; line-height: 1.2em; margin: 0px 0px 0.1em; width: auto; color: black; font-size: 1.6em; font-weight: normal; padding-top: 0px; background-origin: initial; background-clip: initial;" id="firstHeading" class="firstHeading"><span style="color: red; font-size: 24pt;">维基百科资料</span>:</h1>
+<h1 style="background-image: none; border-bottom: #aaaaaa 1px solid; padding-bottom: 0px; line-height: 1.2em; margin: 0px 0px 0.1em; width: auto; color: black; font-size: 1.6em; font-weight: normal; padding-top: 0px; background-origin: initial; background-clip: initial;" class="firstHeading">卡塔兰数</h1>
+<div style="position: relative; line-height: 1.5em; width: 1232px; font-size: 15px;" id="bodyContent">
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;"><strong>卡塔兰数</strong>是<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" class="mw-redirect" title="组合数学" href="http://www.cppblog.com/zh-cn/%E7%B5%84%E5%90%88%E6%95%B8%E5%AD%B8">组合数学</a>中一个常出现在各种计数问题中出现的<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="数列" href="http://www.cppblog.com/zh-cn/%E6%95%B0%E5%88%97">数列</a>。由以<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" class="mw-redirect" title="比利时" href="http://www.cppblog.com/zh-cn/%E6%AF%94%E5%88%A9%E6%99%82">比利时</a>的数学家<a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="欧仁·查理·卡塔兰（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=%E6%AC%A7%E4%BB%81%C2%B7%E6%9F%A5%E7%90%86%C2%B7%E5%8D%A1%E5%A1%94%E5%85%B0&action=edit&redlink=1">欧仁·查理·卡塔兰</a><span class="Apple-converted-space">&nbsp;</span>(<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="1814年" href="http://www.cppblog.com/zh-cn/1814%E5%B9%B4">1814</a>–<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="1894年" href="http://www.cppblog.com/zh-cn/1894%E5%B9%B4">1894</a>)命名。</p>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">卡塔兰数的一般项公式为<span class="Apple-converted-space">&nbsp;</span><img style="margin: 0px; vertical-align: middle; border-style: none;" class="tex" alt="C_n = \frac{1}{n+1}{2n \choose n} = \frac{(2n)!}{(n+1)!n!}" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/d118d8cea7b639dfd5244fcba65910cf.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 另类递归式：&nbsp; h(n)<span style="color: #000000;">=</span><span style="color: #000000;">((</span><span style="color: #000000;">4</span><span style="color: #000000;">*</span><span style="color: #000000;">n</span><span style="color: #000000;">-</span><span style="color: #000000;">2</span><span style="color: #000000;">)</span><span style="color: #000000;">/</span><span style="color: #000000;">(n</span><span style="color: #000000;">+</span><span style="color: #000000;">1</span><span style="color: #000000;">))</span><span style="color: #000000;">*</span><span style="color: #000000;">h(n</span><span style="color: #000000;">-</span><span style="color: #000000;">1</span><span style="color: #000000;">);</span></p>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">前几项为 （<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="整数数列线上大全" href="http://www.cppblog.com/zh-cn/%E6%95%B4%E6%95%B8%E6%95%B8%E5%88%97%E7%B7%9A%E4%B8%8A%E5%A4%A7%E5%85%A8">OEIS</a>中的数列<a style="background-image: none; color: #3366bb; text-decoration: none; background-origin: initial; background-clip: initial; padding: 0px;" class="extiw" title="oeis:A000108" href="http://oeis.org/A000108">A000108</a>）: 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440, 9694845, 35357670, 129644790, 477638700, 1767263190, 6564120420, 24466267020, 91482563640, 343059613650, 1289904147324, 4861946401452, ...</p>
+<h2 style="background-image: none; border-bottom: #aaaaaa 1px solid; padding-bottom: 0.17em; margin: 0px 0px 0.6em; width: auto; color: black; font-size: 22px; font-weight: normal; padding-top: 0.5em; background-origin: initial; background-clip: initial;"><span style="float: right; margin-left: 1em; font-size: 15px; font-weight: normal !important;" class="editsection">[<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="编辑段落：性质" href="http://www.cppblog.com/w/index.php?title=%E5%8D%A1%E5%A1%94%E5%85%B0%E6%95%B0&action=edit&section=1">编辑</a>]</span><span id=".E6.80.A7.E8.B4.A8" class="mw-headline">性质</span></h2>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;"><em>C</em><sub><em>n</em></sub>的另一个表达形式为<img style="margin: 0px; vertical-align: middle; border-style: none;" class="tex" alt="C_n = {2n\choose n} - {2n\choose n-1} \quad\mbox{ for }n\ge 1" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/bd669af776b1293f2e8848dbcfa5a6f3.png"><span class="Apple-converted-space">&nbsp;</span>所以，<em>C</em><sub><em>n</em></sub>是一个<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="自然数" href="http://www.cppblog.com/zh-cn/%E8%87%AA%E7%84%B6%E6%95%B0">自然数</a>；这一点在先前的通项公式中并不显而易见。这个表达形式也是André对前一公式证明的基础。(见下文的<a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="第二个证明（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=%E7%AC%AC%E4%BA%8C%E4%B8%AA%E8%AF%81%E6%98%8E&action=edit&redlink=1">第二个证明</a>。)</p>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">卡塔兰数满足以下<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" class="mw-redirect" title="递推关系" href="http://www.cppblog.com/zh-cn/%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB">递推关系</a></p>
+<dl style="margin-top: 0.2em; margin-bottom: 0.5em;"><dd style="line-height: 1.5em; margin-bottom: 0.1em; margin-left: 2em;"><img style="vertical-align: middle; border-style: none;" class="tex" alt="C_0 = 1 \quad \mbox{and} \quad C_{n+1}=\sum_{i=0}^{n}C_i\,C_{n-i}\quad\mbox{for }n\ge 0." src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/6217b3c99a3243afcd5d8dbd58186822.png"></dd></dl>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">它也满足</p>
+<dl style="margin-top: 0.2em; margin-bottom: 0.5em;"><dd style="line-height: 1.5em; margin-bottom: 0.1em; margin-left: 2em;"><img style="vertical-align: middle; border-style: none;" class="tex" alt="C_0 = 1 \quad \mbox{and} \quad C_{n+1}=\frac{2(2n+1)}{n+2}C_n," src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/8a49332e4a46b3a2c7accec81160f5e3.png"></dd></dl>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">这提供了一个更快速的方法来计算卡塔兰数。</p>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">卡塔兰数的渐近增长为</p>
+<dl style="margin-top: 0.2em; margin-bottom: 0.5em;"><dd style="line-height: 1.5em; margin-bottom: 0.1em; margin-left: 2em;"><img style="vertical-align: middle; border-style: none;" class="tex" alt="C_n \sim \frac{4^n}{n^{3/2}\sqrt{\pi}}" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/3f838aaa56c7ec71f80454fc181fea99.png"></dd></dl>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">它的含义是左式除以右式的商<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="极限" href="http://www.cppblog.com/zh-cn/%E6%9E%81%E9%99%90">趋向于</a>1当<em>n</em>&nbsp;→&nbsp;∞。（这可以用<em>n</em>!的<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="斯特灵公式" href="http://www.cppblog.com/zh-cn/%E6%96%AF%E7%89%B9%E9%9D%88%E5%85%AC%E5%BC%8F">斯特灵公式</a>来证明。）</p>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">所有的奇卡塔兰数<em>C</em><sub><em>n</em></sub>都满足<span style="font-family: serif;" class="texhtml"><em>n</em><span class="Apple-converted-space">&nbsp;</span>= 2<sup><em>k</em></sup><span class="Apple-converted-space">&nbsp;</span>− 1</span>。所有其他的卡塔兰数都是偶数。</p>
+<h2 style="background-image: none; border-bottom: #aaaaaa 1px solid; padding-bottom: 0.17em; margin: 0px 0px 0.6em; width: auto; color: black; font-size: 22px; font-weight: normal; padding-top: 0.5em; background-origin: initial; background-clip: initial;"><span style="float: right; margin-left: 1em; font-size: 15px; font-weight: normal !important;" class="editsection">[<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="编辑段落：应用" href="http://www.cppblog.com/w/index.php?title=%E5%8D%A1%E5%A1%94%E5%85%B0%E6%95%B0&action=edit&section=2">编辑</a>]</span><span id=".E5.BA.94.E7.94.A8" class="mw-headline">应用</span></h2>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;"><a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="组合数学" href="http://www.cppblog.com/zh-cn/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6">组合数学</a>中有非常多.的组合结构可以用卡塔兰数来计数。在Richard P. Stanley的Enumerative Combinatorics: Volume 2一书的习题中包括了66个相异的可由卡塔兰数表达的组合结构。以下用<em>C</em><sub><em>n</em></sub>=3和<em>C</em><sub><em>n</em></sub>=4举若干例：</p>
+<ul style="line-height: 1.5em; list-style-type: square; margin: 0.3em 0px 0px 1.5em; list-style-image: url(&#39;http://bits.wikimedia.org/skins-1.5/vector/images/bullet-icon.png?1&#39;); padding: 0px;">
+<li style="margin-bottom: 0.1em;"><em>C</em><sub><em>n</em></sub>表示长度<em>2n</em>的dyck word的个数。Dyck word是一个有<em>n</em>个X和<em>n</em>个Y组成的字串，且所有的部分字串皆满足X的个数大于等于Y的个数。以下为长度为6的dyck words:</li>
+</ul>
+<center>XXXYYY XYXXYY XYXYXY XXYYXY XXYXYY</center>
+<ul style="line-height: 1.5em; list-style-type: square; margin: 0.3em 0px 0px 1.5em; list-style-image: url(&#39;http://bits.wikimedia.org/skins-1.5/vector/images/bullet-icon.png?1&#39;); padding: 0px;">
+<li style="margin-bottom: 0.1em;">将上例的X换成左括号，Y换成右括号，<em>C</em><sub><em>n</em></sub>表示所有包含<em>n</em>组括号的合法运算式的个数:</li>
+</ul>
+<center>((())) ()(()) ()()() (())() (()())</center>
+<ul style="line-height: 1.5em; list-style-type: square; margin: 0.3em 0px 0px 1.5em; list-style-image: url(&#39;http://bits.wikimedia.org/skins-1.5/vector/images/bullet-icon.png?1&#39;); padding: 0px;">
+<li style="margin-bottom: 0.1em;"><em>C</em><sub><em>n</em></sub>表示有<em>n+1</em>个叶子的<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="二叉树" href="http://www.cppblog.com/zh-cn/%E4%BA%8C%E5%8F%89%E6%A0%91">二叉树</a>的个数。</li>
+</ul>
+<p style="margin-bottom: 0.1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <img border="0" alt="" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/Catalan_number_binary_tree_example.png" width="496" height="92"></p>
+<ul style="line-height: 1.5em; list-style-type: square; margin: 0.3em 0px 0px 1.5em; list-style-image: url(&#39;http://bits.wikimedia.org/skins-1.5/vector/images/bullet-icon.png?1&#39;); padding: 0px;">
+<li style="margin-bottom: 0.1em;"><em>C</em><sub><em>n</em></sub>表示所有不同构的含<em>n</em>个分枝结点的满<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="二叉树" href="http://www.cppblog.com/zh-cn/%E4%BA%8C%E5%8F%89%E6%A0%91">二叉树</a>的个数。（一个有根二叉树是满的当且仅当每个结点都有两个子树或没有子树。）</li>
+</ul>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;"><em>证明：</em></p>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">令1表示进栈，0表示出栈，则可转化为求一个<em>2n</em>位、含<em>n</em>个1、<em>n</em>个0的二进制数，满足从左往右扫描到任意一位时，经过的0数不多于1数。显然含<em>n</em>个1、<em>n</em>个0的<em>2n</em>位二进制数共有<img style="margin: 0px; vertical-align: middle; border-style: none;" class="tex" alt="{2n \choose n}" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/c92da943df73dc077dbee5514376346a.png">个，下面考虑不满足要求的数目.</p>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">考虑一个含<em>n</em>个1、<em>n</em>个0的2n位二进制数，扫描到第<em>2m+1</em>位上时有<em>m+1</em>个0和<em>m</em>个1（容易证明一定存在这样的情况），则后面的0-1排列中必有<em>n-m</em>个1和<em>n-m-1</em>个0。将<em>2m+2</em>及其以后的部分0变成1、1变成0，则对应一个<em>n+1</em>个0和<em>n-1</em>个1的二进制数。反之亦然（相似的思路证明两者一一对应）。</p>
+<p style="line-height: 1.5em; margin: 0.4em 0px 0.5em;">从而<img style="margin: 0px; vertical-align: middle; border-style: none;" class="tex" alt="C_n = {2n \choose n} - {2n \choose n + 1} = \frac{1}{n+1}{2n \choose n}" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/4828faf1c29e4b699529f2275cc63453.png">。证毕。</p>
+<ul style="line-height: 1.5em; list-style-type: square; margin: 0.3em 0px 0px 1.5em; list-style-image: url(&#39;http://bits.wikimedia.org/skins-1.5/vector/images/bullet-icon.png?1&#39;); padding: 0px;">
+<li style="margin-bottom: 0.1em;"><em>C</em><sub><em>n</em></sub>表示所有在<em>n</em><span class="Apple-converted-space">&nbsp;</span>×<span class="Apple-converted-space">&nbsp;</span><em>n</em>格点中不越过对角线的<strong>单调路径</strong>的个数。一个单调路径从格点左下角出发，在格点右上角结束，每一步均为向上或向右。计算这种路径的个数等价于计算Dyck word的个数： X代表“向右”，Y代表“向上”。下图为<em>n</em><span class="Apple-converted-space">&nbsp;</span>= 4的情况：</li>
+<li style="margin-bottom: 0.1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img border="0" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/450px-Catalan_number_4x4_grid_example.svg.png"></li>
+</ul>
+<ul style="line-height: 1.5em; list-style-type: square; margin: 0.3em 0px 0px 1.5em; list-style-image: url(&#39;http://bits.wikimedia.org/skins-1.5/vector/images/bullet-icon.png?1&#39;); padding: 0px;">
+<li style="margin-bottom: 0.1em;"><em>C</em><sub><em>n</em></sub>表示通过连结顶点而将<em>n</em>&nbsp;+&nbsp;2边的<a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="凸多边形（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=%E5%87%B8%E5%A4%9A%E8%BE%B9%E5%BD%A2&action=edit&redlink=1">凸多边形</a>分成<a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="三角形（几何）（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=%E4%B8%89%E8%A7%92%E5%BD%A2%EF%BC%88%E5%87%A0%E4%BD%95%EF%BC%89&action=edit&redlink=1">三角形</a>的方法个数。下图中为<em>n</em><span class="Apple-converted-space">&nbsp;</span>= 4的情况：</li>
+</ul>
+<p style="margin-bottom: 0.1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img border="0" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/400px-Catalan-Hexagons-example.svg.png"></p>
+<ul style="line-height: 1.5em; list-style-type: square; margin: 0.3em 0px 0px 1.5em; list-style-image: url(&#39;http://bits.wikimedia.org/skins-1.5/vector/images/bullet-icon.png?1&#39;); padding: 0px;">
+<li style="margin-bottom: 0.1em;"><em>C</em><sub><em>n</em></sub>表示对{1, ...,<span class="Apple-converted-space">&nbsp;</span><em>n</em>}依序进出<a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="栈（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=%E6%A0%88&action=edit&redlink=1">栈</a>的<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" class="mw-redirect" title="置换" href="http://www.cppblog.com/zh-cn/%E7%BD%AE%E6%8D%A2">置换</a>个数。一个置换<em>w</em>是依序进出栈的当<em>S</em>(<em>w</em>) = (1, ...,<span class="Apple-converted-space">&nbsp;</span><em>n</em>), 其中<em>S</em>(<em>w</em>)递归定义如下：令<em>w</em><span class="Apple-converted-space">&nbsp;</span>=<span class="Apple-converted-space">&nbsp;</span><em>unv</em>，其中<em>n</em>为<em>w</em>的最大元素，<em>u</em>和<em>v</em>为更短的数列；再令<em>S</em>(<em>w</em>) =<em>S</em>(<em>u</em>)<em>S</em>(<em>v</em>)<em>n</em>，其中<em>S</em>为所有含一个元素的数列的单位元。</li>
+</ul>
+<ul style="line-height: 1.5em; list-style-type: square; margin: 0.3em 0px 0px 1.5em; list-style-image: url(&#39;http://bits.wikimedia.org/skins-1.5/vector/images/bullet-icon.png?1&#39;); padding: 0px;">
+<li style="margin-bottom: 0.1em;"><em>C</em><sub><em>n</em></sub>表示集合{1, ...,<span class="Apple-converted-space">&nbsp;</span><em>n</em>}的<a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="不交叉划分（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=%E4%B8%8D%E4%BA%A4%E5%8F%89%E5%88%92%E5%88%86&action=edit&redlink=1">不交叉划分</a>的个数. 那么,<span class="Apple-converted-space">&nbsp;</span><em>C</em><sub><em>n</em></sub><span class="Apple-converted-space">&nbsp;</span>永远不大于第<em>n</em>项<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="贝尔数" href="http://www.cppblog.com/zh-cn/%E8%B4%9D%E5%B0%94%E6%95%B0">贝尔数</a>.<span class="Apple-converted-space">&nbsp;</span><em>C</em><sub><em>n</em></sub>也表示集合{1, ..., 2<em>n</em>}的<a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="不交叉划分（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=%E4%B8%8D%E4%BA%A4%E5%8F%89%E5%88%92%E5%88%86&action=edit&redlink=1">不交叉划分</a>的个数，其中每个段落的长度为2。综合这两个结论，可以用<a style="background-image: none; color: #0645ad; text-decoration: none; background-origin: initial; background-clip: initial;" title="数学归纳法" href="http://www.cppblog.com/zh-cn/%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95">数学归纳法</a>证明 that all of the<span class="Apple-converted-space">&nbsp;</span><em>free</em><span class="Apple-converted-space">&nbsp;</span><a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="Cumulant（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=Cumulant&action=edit&redlink=1">cumulant</a>s of degree more than 2 of the<span class="Apple-converted-space">&nbsp;</span><a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="Wigner semicircle law（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=Wigner_semicircle_law&action=edit&redlink=1">Wigner semicircle law</a><span class="Apple-converted-space">&nbsp;</span>are zero. This law is important in<span class="Apple-converted-space">&nbsp;</span><a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="Free probability（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=Free_probability&action=edit&redlink=1">free probability</a><span class="Apple-converted-space">&nbsp;</span>theory and the theory of<span class="Apple-converted-space">&nbsp;</span><a style="background-image: none; color: #cc2200; text-decoration: none; background-origin: initial; background-clip: initial;" class="new" title="Random matrices（尚未撰写）" href="http://www.cppblog.com/w/index.php?title=Random_matrices&action=edit&redlink=1">random matrices</a>.</li>
+</ul>
+<ul style="line-height: 1.5em; list-style-type: square; margin: 0.3em 0px 0px 1.5em; list-style-image: url(&#39;http://bits.wikimedia.org/skins-1.5/vector/images/bullet-icon.png?1&#39;); padding: 0px;">
+<li style="margin-bottom: 0.1em;"><em>C</em><sub><em>n</em></sub>表示用<em>n</em>个长方形填充一个高度为<em>n</em>的阶梯状图形的方法个数。下图为<span class="Apple-converted-space">&nbsp;</span><em>n</em>&nbsp;=&nbsp;4的情况:</li>
+</ul>
+<p style="margin-bottom: 0.1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img border="0" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/400px-Catalan_stairsteps_4.svg.png"></p>
+</div>
+<p><br><br><span style="color: red; font-size: 24pt;">百度百科资料</span><span style="font-size: large;" size="5">:<br>简介<br><br>　　中文:卡特兰数<br>　　Catalan数是组合数学中一个常出现在各种计数问题中出现的数列。由以比利时的数学家欧仁·查理·卡塔兰&nbsp;(<span style="color: #000000;">1814</span><span style="color: #000000;">–</span><span style="color: #000000;">1894</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">)命名。<br>　　原理：<br>　　令h(</span><span style="color: #000000;">0</span><span style="color: #000000;">)</span><span style="color: #000000;">=</span><span style="color: #000000;">1</span><span style="color: #000000;">,h(</span><span style="color: #000000;">1</span><span style="color: #000000;">)＝</span><span style="color: #000000;">1</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">,catalan数满足递归式：<br>　　h(n)</span><span style="color: #000000;">=</span><span style="color: #000000;">&nbsp;h(</span><span style="color: #000000;">0</span><span style="color: #000000;">)</span><span style="color: #000000;">*</span><span style="color: #000000;">h(n</span><span style="color: #000000;">-</span><span style="color: #000000;">1</span><span style="color: #000000;">)&nbsp;</span><span style="color: #000000;">+</span><span style="color: #000000;">&nbsp;h(</span><span style="color: #000000;">1</span><span style="color: #000000;">)</span><span style="color: #000000;">*</span><span style="color: #000000;">h(n</span><span style="color: #000000;">-</span><span style="color: #000000;">2</span><span style="color: #000000;">)&nbsp;</span><span style="color: #000000;">+</span><span style="color: #000000;">&nbsp;<img src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/dot.gif">&nbsp;</span><span style="color: #000000;">+</span><span style="color: #000000;">&nbsp;h(n</span><span style="color: #000000;">-</span><span style="color: #000000;">1</span><span style="color: #000000;">)h(</span><span style="color: #000000;">0</span><span style="color: #000000;">)&nbsp;(其中n</span><span style="color: #000000;">&gt;=</span><span style="color: #000000;">2</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">)<br>　　该递推关系的解为：<br>　　h(n)</span><span style="color: #000000;">=</span><span style="color: #000000;">C(2n,n)</span><span style="color: #000000;">/</span><span style="color: #000000;">(n&nbsp;</span><span style="color: #000000;">+</span><span style="color: #000000;">&nbsp;</span><span style="color: #000000;">1</span><span style="color: #000000;">)&nbsp;(n</span><span style="color: #000000;">=</span><span style="color: #000000;">1</span><span style="color: #000000;">,</span><span style="color: #000000;">2</span><span style="color: #000000;">,</span><span style="color: #000000;">3</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">,<img src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/dot.gif">)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Arial;" face="Arial">另类递归式：&nbsp; h(n)<span style="color: #000000;">=</span><span style="color: #000000;">((</span><span style="color: #000000;">4</span><span style="color: #000000;">*</span><span style="color: #000000;">n</span><span style="color: #000000;">-</span><span style="color: #000000;">2</span><span style="color: #000000;">)</span><span style="color: #000000;">/</span><span style="color: #000000;">(n</span><span style="color: #000000;">+</span><span style="color: #000000;">1</span><span style="color: #000000;">))</span><span style="color: #000000;">*</span><span style="color: #000000;">h(n</span><span style="color: #000000;">-</span><span style="color: #000000;">1</span><span style="color: #000000;">);</span></span><br>　　<br>　　前几项为&nbsp;（OEIS中的数列A000108）:&nbsp;</span><span style="color: #000000;">1</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">1</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">2</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">5</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">14</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">42</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">132</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">429</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">1430</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">4862</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">16796</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">58786</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">208012</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">742900</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">2674440</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">9694845</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">35357670</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">129644790</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">477638700</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">1767263190</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">6564120420</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">24466267020</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">91482563640</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">343059613650</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">1289904147324</span><span style="color: #000000;">,&nbsp;</span><span style="color: #000000;">4861946401452</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">,&nbsp;<img src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/dot.gif"><br>应用<br><br>　　我总结了一下，最典型的四类应用：（实质上却都一样，无非是递归等式的应用，就看你能不能分解问题写出递归式了）<br></span><span style="color: #000000;">1</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">.括号化问题。<br><br>　　矩阵链乘：&nbsp;P</span><span style="color: #000000;">=</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">a1×a2×a3×……×an，依据乘法结合律，不改变其顺序，只用括号表示成对的乘积，试问有几种括号化的方案？(h(n)种)<br></span><span style="color: #000000;">2</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">.出栈次序问题。<br><br>　　一个栈(无穷大)的进栈序列为1,</span><span style="color: #000000;">2</span><span style="color: #000000;">,</span><span style="color: #000000;">3</span><span style="color: #000000;">,..n,有多少个不同的出栈序列</span><span style="color: #000000;">?</span></span><span style="color: #000000;"><br><span style="font-size: large;" size="5">　　类似：<br>　　(</span></span><span style="color: #000000;"><span style="font-size: large;" size="5">1</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">)有2n个人排成一行进入剧场。入场费5元。其中只有n个人有一张5元钞票，另外n人只有10元钞票，剧院无其它钞票，问有多少中方法使得只要有10元的人买票，售票处就有5元的钞票找零？(将持5元者到达视作将5元入栈，持10元者到达视作使栈中某5元出栈)<br>　　(</span><span style="color: #000000;">2</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">)在圆上选择2n个点,将这些点成对连接起来，使得所得到的n条线段不相交的方法数。<br></span><span style="color: #000000;">3</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">.将多边行划分为三角形问题。<br><br>　　将一个凸多边形区域分成三角形区域的方法数</span><span style="color: #000000;">?</span></span><span style="color: #000000;"><br><span style="font-size: large;" size="5">　　类似：一位大城市的律师在她住所以北n个街区和以东n个街区处工作。每天她走2n个街区去上班。如果她<br>　　从不穿越（但可以碰到）从家到办公室的对角线，那么有多少条可能的道路？<br>　　类似：在圆上选择2n个点,将这些点成对连接起来使得所得到的n条线段不相交的方法数</span></span><span style="color: #000000;"><span style="font-size: large;" size="5">?</span></span><span style="color: #000000;"><br></span><span style="color: #000000;"><span style="font-size: large;" size="5">4</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">.给顶节点组成二叉树的问题。<br><br>　　给定N个节点，能构成多少种形状不同的二叉树？<br>　　(一定是二叉树</span><span style="color: #000000;">!</span></span><span style="color: #000000;"><br><span style="font-size: large;" size="5">　　先去一个点作为顶点,然后左边依次可以取0至N</span></span><span style="font-size: large;" size="5"><span style="color: #000000;">-</span><span style="color: #000000;">1个相对应的,右边是N</span><span style="color: #000000;">-</span><span style="color: #000000;">1到0个,两两配对相乘,就是h(</span><span style="color: #000000;">0</span><span style="color: #000000;">)</span><span style="color: #000000;">*</span><span style="color: #000000;">h(n</span><span style="color: #000000;">-</span><span style="color: #000000;">1</span><span style="color: #000000;">)&nbsp;</span><span style="color: #000000;">+</span><span style="color: #000000;">&nbsp;h(</span><span style="color: #000000;">2</span><span style="color: #000000;">)</span><span style="color: #000000;">*</span><span style="color: #000000;">h(n</span><span style="color: #000000;">-</span><span style="color: #000000;">2</span><span style="color: #000000;">)&nbsp;</span><span style="color: #000000;">+</span><span style="color: #000000;">&nbsp;<img src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/dot.gif">&nbsp;</span><span style="color: #000000;">+</span><span style="color: #000000;">&nbsp;h(n</span><span style="color: #000000;">-</span><span style="color: #000000;">1</span><span style="color: #000000;">)h(</span><span style="color: #000000;">0</span><span style="color: #000000;">)</span><span style="color: #000000;">=</span></span><span style="color: #000000;"><span style="font-size: large;" size="5">h(n))<br>　　（能构成h（N）个）</span></span></p><br>文章来源:<a href="http://www.cnblogs.com/kuangbin/archive/2011/10/13/2210935.html">http://www.cnblogs.com/kuangbin/archive/2011/10/13/2210935.html</a>
+		</div>
+		<div class="itemdesc">
+			发表于 2011-10-13 22:32 <a href="http://www.cppblog.com/kuangbin/">kuangbin</a> 阅读(9) <a href="http://www.cppblog.com/kuangbin/archive/2011/10/13/167605.html#Post">评论(0)</a> &nbsp;<a href="http://www.cppblog.com/kuangbin/admin/EditPosts.aspx?postid=167605">编辑</a>&nbsp;<a href="http://www.cppblog.com/kuangbin/AddToFavorite.aspx?id=167605">收藏</a> <a href="http://www.cppblog.com/kuangbin/services/trackbacks/167605.aspx">引用</a>  
+		</div>
+	</div>
+	<div class="seperator">&nbsp;</div>
+	<img src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/167605.html" width="1" height="1">
+	
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+rdf:about="http://www.cppblog.com/kuangbin/archive/2011/10/13/167605.html"
+dc:identifier="http://www.cppblog.com/kuangbin/archive/2011/10/13/167605.html"
+dc:title="[导入]卡特兰数  ACM  数论"
+trackback:ping="http://www.cppblog.com/kuangbin/services/trackbacks/167605.aspx" />
+</rdf:RDF>
+-->
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('AjaxHolder$scriptmanager1', document.getElementById('Form1'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tAjaxHolder$UpdatePanel1'], [], [], 90);
+//]]>
+</script>
+
+<div id="AjaxHolder_UpdatePanel1">
+	    
+    
+<style>
+td { font-size: 12px }
+.commentTextBox 
+{ 
+    font-family : Verdana; 
+    font-size: 13px;
+ }
+</style>
+<!--Beging Temp Save-->
+<style>.userData { BEHAVIOR: url(#default#userdata) }
+	</style>
+<div class="userData" id="CommentsPersistDiv"></div>
+<script type="text/javascript">
+function pageLoad()
+{
+    Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(handleInitializeRequest);
+    //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(handleEndRequest);
+}
+
+function handleInitializeRequest(sender, args)
+{
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    var eid = args.get_postBackElement().id;
+    if (eid.indexOf("DeleteLink")>0) 
+    {
+       args.get_postBackElement().innerHTML = "<font color='red'>正在删除...</font>";         
+    }    
+    if (eid.indexOf("btnSubmit")>0) 
+    {
+       document.getElementById("AjaxHolder_PostComment_ltSubmitMsg").innerHTML="正在提交...";
+       document.getElementById("AjaxHolder_PostComment_btnSubmit").disabled = true;
+       
+    }    
+   
+}	
+
+function TempSave(ElementID)
+{
+	try
+	{
+	CommentsPersistDiv.setAttribute("CommentContent",document.getElementById(ElementID).value);
+	CommentsPersistDiv.save("CommentXMLStore");
+	}
+	catch(ex)
+	{
+	}
+	
+}
+function Restore(ElementID)
+{
+	CommentsPersistDiv.load("CommentXMLStore");
+	document.getElementById(ElementID).value=CommentsPersistDiv.getAttribute("CommentContent");
+}	
+			
+			
+</script>
+<!--Ene TempSave-->
+<div class="commentform">
+<script type="text/javascript" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/google_service.js">
+</script>
+<script type="text/javascript">
+var c_enable_dfp = true;
+if (navigator.userAgent.indexOf("Chrome/6.0.401.1") > 0) {
+c_enable_dfp = false;
+}
+if (c_enable_dfp) {
+try{
+  GS_googleAddAdSenseService("ca-pub-4210569241504288");
+  GS_googleEnableAllServices();
+  } catch (e) { }
+}
+</script><script src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/google_ads.js"></script>
+<script type="text/javascript">
+if (c_enable_dfp) {
+try{
+  GA_googleAddSlot("ca-pub-4210569241504288", "cppblog_blogpost_bottom");
+  GA_googleAddSlot("ca-pub-4210569241504288", "cppblog_commentbox_up");
+  } catch (e) { }
+}
+</script>
+<script type="text/javascript">
+if (c_enable_dfp) {
+try{
+  GA_googleFetchAds();
+  } catch (e) { }
+}
+</script>
+<span id="AjaxHolder_PostComment_ltSubmitMsg" style="color:Red;"></span>
+<br>
+<a name="Feedback"></a>
+	<table cellspacing="1" cellpadding="1" border="0">
+		<tbody><tr>			
+		<td id="AjaxHolder_PostComment_tdOnCommentForm" colspan="3">
+		<a href="http://q.cnblogs.com/" target="_blank">博问 - 解决您的IT难题</a><br>
+				
+		</td>
+	
+		</tr>
+		<tr>
+			<td colspan="3">
+<script type="Text/Javascript">
+try{
+  GA_googleFillSlot("cppblog_commentbox_up");
+  } catch (e) { }
+</script><script src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/ads"></script>
+<br> </td>
+		</tr>
+		<tr>
+			<td width="75"></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td colspan="2">
+			<a href="http://www.cnblogs.com/" target="_blank">博客园</a>&nbsp;  <a href="http://q.cnblogs.com/" target="_blank">博问</a>&nbsp; <a href="http://news.cnblogs.com/" target="_blank">IT新闻</a>&nbsp; <!--<a href="http://home.cnblogs.com/ing/" target="_blank">闪存</a>&nbsp;  --><a href="http://job.cnblogs.com/cate-cpp_programmer/" target="_blank">C++程序员招聘</a>
+			</td>
+		</tr>
+		<tr>
+			<td width="55">标题</td>
+			<td><input name="AjaxHolder$PostComment$tbTitle" type="text" value="re: [导入]卡特兰数  ACM  数论" id="AjaxHolder_PostComment_tbTitle" class="commenttb" style="width:320"></td>
+			<td><span id="AjaxHolder_PostComment_RequiredFieldValidator1" style="color:Red;visibility:hidden;">请输入标题</span></td>
+		</tr>
+		<tr>
+			<td>姓名</td>
+			<td><input name="AjaxHolder$PostComment$tbName" type="text" id="AjaxHolder_PostComment_tbName" class="commenttb" style="width:320"></td>
+			<td><span id="AjaxHolder_PostComment_RequiredFieldValidator2" style="color:Red;visibility:hidden;">请输入你的姓名</span></td>
+		</tr>
+		<tr>
+			<td>主页</td>
+			<td><input name="AjaxHolder$PostComment$tbUrl" type="text" id="AjaxHolder_PostComment_tbUrl" class="commenttb" style="width:320"></td>
+			<td><font face="宋体"></font></td>
+		</tr>
+		<tr>
+			<td align="left" colspan="3">
+				<table id="AjaxHolder_PostComment_tbCaptchaImage" class="CommentForm" cellspacing="0" cellpadding="0" border="0">
+		<tbody><tr>
+			<td colspan="3">
+							<span id="AjaxHolder_PostComment_Requiredfieldvalidator4" style="color:Red;display:none;">请输入验证码</span>
+							<span id="AjaxHolder_PostComment_lblImage" style="color:Red;font-weight:bold;"></span>
+						</td>
+		</tr>
+		<tr>
+			<td width="78">验证码</td>
+			<td><input name="AjaxHolder$PostComment$CodeNumberTextBox" type="text" id="AjaxHolder_PostComment_CodeNumberTextBox">*</td>
+			<td align="left">
+							<img src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/JpegImage.aspx" id="AjaxHolder_PostComment_Img1">
+						</td>
+		</tr>
+	</tbody></table>
+	
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">内容(提交失败后,可以通过“恢复上次提交”恢复刚刚提交的内容)
+				<span id="AjaxHolder_PostComment_RequiredFieldValidator3" style="color:Red;visibility:hidden;">请输入评论内容</span><br>
+				<textarea name="AjaxHolder$PostComment$tbComment" rows="10" cols="50" id="AjaxHolder_PostComment_tbComment" class="commentTextBox" onkeydown="ctlent(event,&#39;AjaxHolder_PostComment_tbComment&#39;)" style="Width:480;Height:220"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+		<span id="AjaxHolder_PostComment_Message" style="color:Red;"></span>
+		</td>
+		</tr><tr>
+			<td colspan="3"><input id="AjaxHolder_PostComment_chkRemember" type="checkbox" name="AjaxHolder$PostComment$chkRemember" checked="checked" tabindex="-1"><label for="AjaxHolder_PostComment_chkRemember">Remember Me?</label></td>
+		</tr>
+		<tr>
+			<td height="23"><input type="submit" name="AjaxHolder$PostComment$btnSubmit" value="提交" onclick="TempSave(&#39;AjaxHolder_PostComment_tbComment&#39;);WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;AjaxHolder$PostComment$btnSubmit&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="AjaxHolder_PostComment_btnSubmit">
+				</td>
+			<td colspan="2" height="23">&nbsp;
+				<a id="AjaxHolder_PostComment_lnkLogin" href="http://www.cppblog.com/login.aspx?ReturnURL=http://www.cppblog.com/kuangbin/archive/2011/10/13/167605.html&SourceURL=/kuangbin/archive/2011/10/13/167605.html">登录</a>&nbsp;&nbsp;<a id="AjaxHolder_PostComment_linkLoginComment" onclick="if(document.getElementById(&#39;AjaxHolder_PostComment_tbComment&#39;).value != &#39;&#39;) return confirm(&#39;未提交的评论内容将会丢失, 你真的要进入高级评论吗?&#39;);" href="http://www.cppblog.com/kuangbin/archive/2011/10/13/167605.html?login=1#Post">使用高级评论</a>&nbsp;&nbsp;<a href="http://www.cppblog.com/RequireRegister.aspx">新用户注册</a>&nbsp;&nbsp;<a href="http://www.cppblog.com/kuangbin/archive/2011/10/13/167605.html#Top">返回页首</a>&nbsp;&nbsp;<a id="AjaxHolder_PostComment_lbRestore" onclick="Restore(&#39;AjaxHolder_PostComment_tbComment&#39;); return false;" href="http://www.cppblog.com/kuangbin/archive/2011/10/13/167605.html#Post">恢复上次提交</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+		</tr>
+		<tr>
+			<td colspan="3">[使用Ctrl+Enter键可以直接提交]</td>
+		</tr>
+		<tr>
+		<td colspan="3">
+		<script type="text/javascript">
+		if (c_enable_dfp) {
+		try{
+		  GA_googleFillSlot("cppblog_blogpost_bottom");
+		  } catch (e) { }
+		}
+		</script><script src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/ads(1)"></script><div id="google_ads_div_cppblog_blogpost_bottom_ad_wrapper">
+<div id="google_ads_div_cppblog_blogpost_bottom_ad_container" style="display:inline-block;">
+<ins style="width: 300px; height: 250px; display: inline-table; position: relative; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; border-image: initial; "><ins style="width: 300px; height: 250px; display: block; position: relative; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; border-image: initial; "><iframe id="google_ads_iframe_cppblog_blogpost_bottom" name="google_ads_iframe_cppblog_blogpost_bottom" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; border-image: initial; position: absolute; top: 0px; left: 0px; "></iframe></ins></ins></div>
+</div>
+<script>GA_googleCreateDomIframe("google_ads_div_cppblog_blogpost_bottom_ad_container" ,"cppblog_blogpost_bottom");</script>
+		</td>
+		</tr>
+		<tr>			
+		<td colspan="3">
+		<div id="itnews_block" style="line-height:180%;" class="other_info_list">IT新闻：<br>· <a href="http://news.cnblogs.com/n/150673/" target="_blank">defcon 20年会即将到来</a><br>· <a href="http://news.cnblogs.com/n/150662/" target="_blank">Firebug 1.10.0发布</a><br>· <a href="http://news.cnblogs.com/n/150661/" target="_blank">苹果低头：产品将重新加入EPEAT环保标准</a><br>· <a href="http://news.cnblogs.com/n/150659/" target="_blank">Gartner：2016年云服务支出将达2070亿美元</a><br>· <a href="http://news.cnblogs.com/n/150653/" target="_blank">惠普或失通用汽车6亿美元IT服务合同</a><br></div><div id="cnblogs_posts" style="line-height:1.8;">博客园首页随笔：<br>· <a href="http://www.cnblogs.com/bbvi/archive/2012/07/14/2591641.html" target="_blank">原创 瀑布流插件（可以排序，滚动加载）</a><br>· <a href="http://www.cnblogs.com/grenet/archive/2012/07/14/2581219.html" target="_blank">PS网页设计教程VII——在Photoshop中设计卡通店面布局</a><br>· <a href="http://www.cnblogs.com/hooray/archive/2012/07/14/2591588.html" target="_blank">不完美解决click和dblclick事件冲突问题</a><br>· <a href="http://www.cnblogs.com/Fengger/archive/2012/07/14/2591565.html" target="_blank">用C#构造HighChart类库，把数据转换成JSON---第一阶段失败告终</a><br>· <a href="http://www.cnblogs.com/yangcaogui/archive/2012/07/14/2574486.html" target="_blank">学习之路十五：C#基础知识简单梳理</a><br></div><div id="job_block" style="line-height:1.8;">知识库：<br>· <a href="http://kb.cnblogs.com/page/150578/" target="_blank">我在谷歌的一次有趣的面试经历</a><br>· <a href="http://kb.cnblogs.com/page/122175/" target="_blank">程序员究竟该如何提高效率</a><br>· <a href="http://kb.cnblogs.com/page/130485/" target="_blank">缺乏想象力的程序员</a><br>· <a href="http://kb.cnblogs.com/page/149498/" target="_blank">WWDC2012：Objective-C的新特性</a><br>· <a href="http://kb.cnblogs.com/page/149449/" target="_blank">产品经理（尤其是创业的）需要懂技术吗？懂到什么程度？</a><br></div>
+		</td>
+		</tr>
+		<tr>
+			<td colspan="3" height="5"></td>
+		</tr>
+		<tr>
+			<td colspan="3"></td>
+		</tr>
+		<tr>
+			<td colspan="3" height="1"><div id="blogsite">网站导航:
+			<a href="http://www.cnblogs.com/">博客园</a>&nbsp;&nbsp;
+			<a href="http://news.cnblogs.com/">IT新闻</a>&nbsp;&nbsp;
+			<a href="http://www.blogjava.net/">BlogJava</a>&nbsp;&nbsp;
+			<a href="http://kb.cnblogs.com/">知识库</a>&nbsp;&nbsp;
+			<a href="http://job.cnblogs.com/">程序员招聘</a>&nbsp;&nbsp;
+			<a href="http://www.cppblog.com/kuangbin/archive/2011/10/13/167605.html?opt=admin">管理</a>
+			</div></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				
+<br>
+
+<br>
+
+</td>
+		</tr>
+	</tbody></table>	
+</div>
+<div id="AjaxHolder_PostComment_ValidationSummary1" style="color:Red;display:none;">
+
+	</div>
+
+</div>
+
+				
+
+			</div></td>
+		</tr>
+		</tbody></table>
+	</td>
+	<td width="10">&nbsp;</td>
+	<td valign="top">
+		<table align="center" width="100%" height="90" cellspacing="0" cellpadding="5" border="0" bgcolor="white">
+		<tbody><tr>
+			<td class="banner">
+			
+			<table width="100%" height="200">
+			<tbody><tr>
+				<td><table id="Calendar1_entryCal" cellspacing="0" cellpadding="1" title="Calendar" border="0" style="color:#CC0099;border-color:#F7F7F7;border-width:1px;border-style:solid;font-family:Verdana;font-size:12px;height:100%;width:100%;border-collapse:collapse;">
+	<tbody><tr><td colspan="7" style="background-color:#F7F7F7;"><table cellspacing="0" border="0" style="color:#FF6600;font-family:Verdana;font-size:12px;width:100%;border-collapse:collapse;">
+		<tbody><tr><td valign="bottom" style="width:15%;"><a href="javascript:__doPostBack('Calendar1$entryCal','V4261')" style="color:#CC0099" title="Go to the previous month">&lt;</a></td><td align="center" style="width:70%;">2011年10月</td><td align="right" valign="bottom" style="width:15%;"><a href="javascript:__doPostBack('Calendar1$entryCal','V4322')" style="color:#CC0099" title="Go to the next month">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th align="center" abbr="日" scope="col" style="background-color:White;font-family:Arial;font-size:12px;font-weight:normal;">日</th><th align="center" abbr="一" scope="col" style="background-color:White;font-family:Arial;font-size:12px;font-weight:normal;">一</th><th align="center" abbr="二" scope="col" style="background-color:White;font-family:Arial;font-size:12px;font-weight:normal;">二</th><th align="center" abbr="三" scope="col" style="background-color:White;font-family:Arial;font-size:12px;font-weight:normal;">三</th><th align="center" abbr="四" scope="col" style="background-color:White;font-family:Arial;font-size:12px;font-weight:normal;">四</th><th align="center" abbr="五" scope="col" style="background-color:White;font-family:Arial;font-size:12px;font-weight:normal;">五</th><th align="center" abbr="六" scope="col" style="background-color:White;font-family:Arial;font-size:12px;font-weight:normal;">六</th></tr><tr><td align="center" style="color:#303030;width:14%;">25</td><td align="center" style="color:#303030;width:14%;">26</td><td align="center" style="color:#303030;width:14%;">27</td><td align="center" style="color:#303030;width:14%;">28</td><td align="center" style="color:#303030;width:14%;">29</td><td align="center" style="color:#303030;width:14%;">30</td><td align="center" style="width:14%;">1</td></tr><tr><td align="center" style="width:14%;"><a href="http://www.cppblog.com/kuangbin/archive/2011/10/02.html"><u>2</u></a></td><td align="center" style="width:14%;">3</td><td align="center" style="width:14%;"><a href="http://www.cppblog.com/kuangbin/archive/2011/10/04.html"><u>4</u></a></td><td align="center" style="width:14%;">5</td><td align="center" style="width:14%;">6</td><td align="center" style="width:14%;"><a href="http://www.cppblog.com/kuangbin/archive/2011/10/07.html"><u>7</u></a></td><td align="center" style="width:14%;">8</td></tr><tr><td align="center" style="width:14%;">9</td><td align="center" style="width:14%;">10</td><td align="center" style="width:14%;">11</td><td align="center" style="width:14%;">12</td><td align="center" style="width:14%;"><a href="http://www.cppblog.com/kuangbin/archive/2011/10/13.html"><u>13</u></a></td><td align="center" style="width:14%;">14</td><td align="center" style="width:14%;">15</td></tr><tr><td align="center" style="width:14%;">16</td><td align="center" style="width:14%;">17</td><td align="center" style="width:14%;">18</td><td align="center" style="width:14%;">19</td><td align="center" style="width:14%;">20</td><td align="center" style="width:14%;">21</td><td align="center" style="width:14%;">22</td></tr><tr><td align="center" style="width:14%;">23</td><td align="center" style="width:14%;">24</td><td align="center" style="width:14%;">25</td><td align="center" style="width:14%;">26</td><td align="center" style="width:14%;">27</td><td align="center" style="width:14%;">28</td><td align="center" style="width:14%;">29</td></tr><tr><td align="center" style="width:14%;"><a href="http://www.cppblog.com/kuangbin/archive/2011/10/30.html"><u>30</u></a></td><td align="center" style="width:14%;">31</td><td align="center" style="color:#303030;width:14%;">1</td><td align="center" style="color:#303030;width:14%;">2</td><td align="center" style="color:#303030;width:14%;">3</td><td align="center" style="color:#303030;width:14%;">4</td><td align="center" style="color:#303030;width:14%;">5</td></tr>
+</tbody></table></td>
+			</tr>
+			</tbody></table>
+				
+<h1>&nbsp;公告</h1><br>
+<script type="text/javascript" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/r.js"></script><script type="text/javascript">rm_f1st('0','220','true','false','000000','70ttnz6cvpw','true','ff0000');</script><object data="http://rh.revolvermaps.com/f/g.swf" type="application/x-shockwave-flash" id="rm_3a3sZq" width="220" height="220"><param name="movie" value="http://rh.revolvermaps.com/f/g.swf"><param name="allowNetworking" value="all"><param name="allowScriptAccess" value="always"><param name="wmode" value="window"><param name="flashvars" value="m=0&amp;n=false&amp;b=000000&amp;r=true&amp;i=70ttnz6cvpw&amp;v=true&amp;c=ff0000&amp;s=220"></object><noscript>&lt;applet codebase="http://rh.revolvermaps.com/j" code="core.RE" width="220" height="220" archive="g.jar"&gt;&lt;param name="cabbase" value="g.cab" /&gt;&lt;param name="r" value="true" /&gt;&lt;param name="n" value="false" /&gt;&lt;param name="i" value="70ttnz6cvpw" /&gt;&lt;param name="m" value="0" /&gt;&lt;param name="s" value="220" /&gt;&lt;param name="c" value="ff0000" /&gt;&lt;param name="v" value="true" /&gt;&lt;param name="b" value="000000" /&gt;&lt;param name="rfc" value="true" /&gt;&lt;/applet&gt;</noscript>
+	
+				
+<h1>&nbsp;导航</h1>
+<ul class="list" type="square">
+	<li class="listitem"><a id="MyLinks1_HomeLink" class="listitem" href="http://www.cppblog.com/">C++博客</a></li>
+	<li class="listitem"><a id="MyLinks1_MyHomeLink" class="listitem" href="http://www.cppblog.com/kuangbin/">首页</a></li>
+	<li class="listitem"><a id="MyLinks1_NewPostLink" class="listitem" href="http://www.cppblog.com/kuangbin/admin/EditPosts.aspx?opt=1">发新随笔</a></li>
+	<li class="listitem"><a id="MyLinks1_NewArticleLink" class="listitem" href="http://www.cppblog.com/EnterMyBlog.aspx?NewArticle=1">发新文章</a></li>
+	<li class="listitem"><a id="MyLinks1_ContactLink" accesskey="9" class="listitem" href="http://www.cppblog.com/kuangbin/contact.aspx?id=1">联系</a></li>
+	<li class="listitem"><a id="MyLinks1_Syndication" class="listitem" href="http://www.cppblog.com/kuangbin/Rss.aspx">聚合</a><a id="MyLinks1_XMLLink" href="http://www.cppblog.com/kuangbin/Rss.aspx"><img src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/xml.gif" style="border-width:0px;"></a>
+	</li><li class="listitem"><a id="MyLinks1_Admin" class="listitem" href="http://www.cppblog.com/kuangbin/admin/EditPosts.aspx">管理</a></li>
+</ul>
+
+				
+<h1>&nbsp;统计</h1>
+	<ul class="list" type="square">
+		<li class="listitem">随笔： 101
+		</li><li class="listitem">文章： 0
+		</li><li class="listitem">评论： 2
+		</li><li class="listitem">引用： 0
+	</li>
+</ul>
+				
+<h3>常用链接</h3>
+<ul>
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl01_lnkLinkItem" href="http://www.cppblog.com/kuangbin/MyPosts.html">我的随笔</a></li>
+	
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl02_lnkLinkItem" href="http://www.cppblog.com/kuangbin/MyComments.html">我的评论</a></li>
+	
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl03_lnkLinkItem" href="http://www.cppblog.com/kuangbin/OtherPosts.html">我参与的随笔</a></li>
+	</ul>
+<h3>留言簿</h3>
+<ul>
+	<li>
+		<a id="SingleColumn1__717760_lnkMessages" href="http://www.cppblog.com/kuangbin/Contact.aspx?id=1">给我留言</a>
+	</li><li>
+		<a id="SingleColumn1__717760_lnkPublicMsgView" href="http://www.cppblog.com/kuangbin/default.aspx?opt=msg">查看公开留言</a>
+	</li><li>
+		<a id="SingleColumn1__717760_lnkPrivateMsgView" href="http://www.cppblog.com/kuangbin/admin/MyMessages.aspx">查看私人留言</a>
+	</li>
+</ul>
+
+		<h1 class="listtitle">随笔分类</h1>
+		
+				<ul class="list" type="square">
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl01_Link" class="listitem" href="http://www.cppblog.com/kuangbin/category/17636.html">ACM学习</a> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl01_RssLink" title="Subscribe to ACM学习" class="listitem" href="http://www.cppblog.com/kuangbin/category/17636.html/rss">(rss)</a></li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl02_Link" class="listitem" href="http://www.cppblog.com/kuangbin/category/17633.html">HDOJ（杭电OJ题目）</a> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl02_RssLink" title="Subscribe to HDOJ（杭电OJ题目）" class="listitem" href="http://www.cppblog.com/kuangbin/category/17633.html/rss">(rss)</a></li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl03_Link" class="listitem" href="http://www.cppblog.com/kuangbin/category/17632.html">POJ (北大OJ题目）(1)</a> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl03_RssLink" title="Subscribe to POJ (北大OJ题目）(1)" class="listitem" href="http://www.cppblog.com/kuangbin/category/17632.html/rss">(rss)</a></li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl04_Link" class="listitem" href="http://www.cppblog.com/kuangbin/category/17638.html">ZOJ（浙大OJ题目）</a> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl04_RssLink" title="Subscribe to ZOJ（浙大OJ题目）" class="listitem" href="http://www.cppblog.com/kuangbin/category/17638.html/rss">(rss)</a></li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl05_Link" class="listitem" href="http://www.cppblog.com/kuangbin/category/17637.html">简单ACM 题</a> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl05_RssLink" title="Subscribe to 简单ACM 题" class="listitem" href="http://www.cppblog.com/kuangbin/category/17637.html/rss">(rss)</a></li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl06_Link" class="listitem" href="http://www.cppblog.com/kuangbin/category/17634.html">图论</a> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl06_RssLink" title="Subscribe to 图论" class="listitem" href="http://www.cppblog.com/kuangbin/category/17634.html/rss">(rss)</a></li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl07_Link" class="listitem" href="http://www.cppblog.com/kuangbin/category/17635.html">最大流(1)</a> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl07_RssLink" title="Subscribe to 最大流(1)" class="listitem" href="http://www.cppblog.com/kuangbin/category/17635.html/rss">(rss)</a></li>
+			
+				</ul>
+			
+	
+		<h1 class="listtitle">随笔档案</h1>
+		
+				<ul class="list" type="square">
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl01_Link" class="listitem" href="http://www.cppblog.com/kuangbin/archive/2012/03.html">2012年3月 (6)</a> </li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl02_Link" class="listitem" href="http://www.cppblog.com/kuangbin/archive/2012/02.html">2012年2月 (2)</a> </li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl03_Link" class="listitem" href="http://www.cppblog.com/kuangbin/archive/2012/01.html">2012年1月 (1)</a> </li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl04_Link" class="listitem" href="http://www.cppblog.com/kuangbin/archive/2011/12.html">2011年12月 (2)</a> </li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl05_Link" class="listitem" href="http://www.cppblog.com/kuangbin/archive/2011/11.html">2011年11月 (22)</a> </li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl06_Link" class="listitem" href="http://www.cppblog.com/kuangbin/archive/2011/10.html">2011年10月 (10)</a> </li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl07_Link" class="listitem" href="http://www.cppblog.com/kuangbin/archive/2011/09.html">2011年9月 (7)</a> </li>
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl08_Link" class="listitem" href="http://www.cppblog.com/kuangbin/archive/2011/08.html">2011年8月 (51)</a> </li>
+			
+				</ul>
+			
+	
+		<h1 class="listtitle">博客</h1>
+		
+				<ul class="list" type="square">
+			
+				<li class="listitem"><a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl01_Link" class="listitem" href="http://www.cnblogs.com/kuangbin/">我的博客园博客</a> </li>
+			
+				</ul>
+			
+	
+
+
+<script language="JavaScript">
+function SearchGoogle(key,evt,site)
+		{
+			if(evt.keyCode==13 || evt.keyCode==0 || evt.type =='click')
+			{
+				key.focus();
+				var keystr = encodeURIComponent(key.value);
+				url = "http://www.google.com/search?q=";
+				url = url+keystr;
+				url += "&ie=UTF-8&oe=GB2312&hl=zh-CN&domains="+site+"&sitesearch="+site;
+				window.location=url;
+				return false;
+			}
+		}
+</script>
+<h3>搜索</h3>
+<ul>
+	<li>
+		</li><li><input style="WIDTH: 130px" type="text" name="q" id="q" onkeydown="return SearchGoogle(document.getElementById(&#39;q&#39;),event,&#39;www.cppblog.com/kuangbin&#39;)">&nbsp;<input onclick="SearchGoogle(document.getElementById(&#39;q&#39;),event,&#39;www.cppblog.com/kuangbin&#39;)" type="button" value="搜索" name="sa">
+	</li>
+</ul>
+
+<h3>最新评论
+	<a id="SingleColumn1__379aa35_RSSHyperlink1" href="http://www.cppblog.com/kuangbin/CommentsRSS.aspx"><img src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/xml.gif" style="border-width:0px;"></a></h3>
+<div class="RecentComment">
+	
+			<ul>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__379aa35_CommentList_ctl01_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2012/06/10/154311.html#178317">1.&nbsp;re: ACM  HDU 1173  采矿（很爽的水题）</a>
+			</li>
+			<li style="word-break:break-all">
+				@刘灿灿
+<br>STL中的排序函数，不懂可以问百度~~~
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--kuangbin</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__379aa35_CommentList_ctl02_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2012/06/10/154311.html#178310">2.&nbsp;re: ACM  HDU 1173  采矿（很爽的水题）</a>
+			</li>
+			<li style="word-break:break-all">
+				请问sort(a,a+n);        sort(b,b+n);是什么意思呀
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--刘灿灿</li>
+		
+			</ul>
+		
+</div>
+
+<h3>阅读排行榜</h3>
+<div class="RecentComment">
+	
+			<ul style="word-break:break-all">
+		
+			<li>
+				<a id="SingleColumn1__34baa4b_TopList_ctl01_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/08/25/154321.aspx">1.&nbsp;ACM  HDU 1257  最少拦截系统(160)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__34baa4b_TopList_ctl02_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/11/17/167588.aspx">2.&nbsp;[导入]POJ数学题目(144)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__34baa4b_TopList_ctl03_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/08/26/154452.aspx">3.&nbsp;ACM POJ Power Network（最大流算法）(91)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__34baa4b_TopList_ctl04_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/08/25/154296.aspx">4.&nbsp;HDU 1045  Fire Net（建模，用二分匹配）(90)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__34baa4b_TopList_ctl05_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/08/25/154288.aspx">5.&nbsp;[导入]2011-ACM/ICPC亚洲区中国大陆5个赛区信息汇集(90)</a>
+			</li>
+		
+			</ul>
+		
+</div>
+
+<h3>评论排行榜</h3>
+<div class="RecentComment">
+	
+			<ul style="word-break:break-all">
+		
+			<li>
+				<a id="SingleColumn1__7162f9_TopList_ctl01_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/08/25/154311.aspx">1.&nbsp;ACM  HDU 1173  采矿（很爽的水题）(2)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__7162f9_TopList_ctl02_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/08/25/154310.aspx">2.&nbsp;ACM  HDU 1279 验证角谷猜想（简单水题）(0)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__7162f9_TopList_ctl03_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/08/25/154309.aspx">3.&nbsp;ACM HDU 1282 回文数猜想（简单水题）(0)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__7162f9_TopList_ctl04_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/08/25/154308.aspx">4.&nbsp;ACM  HDU 1283  最简单的计算机（简单水题）(0)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__7162f9_TopList_ctl05_Hyperlink1" href="http://www.cppblog.com/kuangbin/archive/2011/08/25/154307.aspx">5.&nbsp;ACM  POJ 1258  Agri-Net  （简单最小生成树）(0)</a>
+			</li>
+		
+			</ul>
+		
+</div>
+
+			<br>
+			
+<div class="footer">
+	Powered by: <a href="http://www.cnblogs.com/">博客园</a><br>模板提供：<a href="http://blog.hjenglish.com/">沪江博客</a><br>
+	Copyright ©2012 kuangbin
+</div>
+			</td>
+		</tr>
+		</tbody></table>
+	</td>
+</tr>
+</tbody></table>
+<br>
+
+
+
+<!-- 页面内因素 -->
+
+
+
+    
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("AjaxHolder_PostComment_ValidationSummary1"));
+var Page_Validators =  new Array(document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator1"), document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator2"), document.getElementById("AjaxHolder_PostComment_Requiredfieldvalidator4"), document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator3"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var AjaxHolder_PostComment_RequiredFieldValidator1 = document.all ? document.all["AjaxHolder_PostComment_RequiredFieldValidator1"] : document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator1");
+AjaxHolder_PostComment_RequiredFieldValidator1.controltovalidate = "AjaxHolder_PostComment_tbTitle";
+AjaxHolder_PostComment_RequiredFieldValidator1.errormessage = "请输入标题";
+AjaxHolder_PostComment_RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_RequiredFieldValidator1.initialvalue = "";
+var AjaxHolder_PostComment_RequiredFieldValidator2 = document.all ? document.all["AjaxHolder_PostComment_RequiredFieldValidator2"] : document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator2");
+AjaxHolder_PostComment_RequiredFieldValidator2.controltovalidate = "AjaxHolder_PostComment_tbName";
+AjaxHolder_PostComment_RequiredFieldValidator2.errormessage = "请输入你的姓名";
+AjaxHolder_PostComment_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_RequiredFieldValidator2.initialvalue = "";
+var AjaxHolder_PostComment_Requiredfieldvalidator4 = document.all ? document.all["AjaxHolder_PostComment_Requiredfieldvalidator4"] : document.getElementById("AjaxHolder_PostComment_Requiredfieldvalidator4");
+AjaxHolder_PostComment_Requiredfieldvalidator4.controltovalidate = "AjaxHolder_PostComment_CodeNumberTextBox";
+AjaxHolder_PostComment_Requiredfieldvalidator4.errormessage = "请输入验证码";
+AjaxHolder_PostComment_Requiredfieldvalidator4.display = "Dynamic";
+AjaxHolder_PostComment_Requiredfieldvalidator4.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_Requiredfieldvalidator4.initialvalue = "";
+var AjaxHolder_PostComment_RequiredFieldValidator3 = document.all ? document.all["AjaxHolder_PostComment_RequiredFieldValidator3"] : document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator3");
+AjaxHolder_PostComment_RequiredFieldValidator3.controltovalidate = "AjaxHolder_PostComment_tbComment";
+AjaxHolder_PostComment_RequiredFieldValidator3.errormessage = "请输入评论内容";
+AjaxHolder_PostComment_RequiredFieldValidator3.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_RequiredFieldValidator3.initialvalue = "";
+var AjaxHolder_PostComment_ValidationSummary1 = document.all ? document.all["AjaxHolder_PostComment_ValidationSummary1"] : document.getElementById("AjaxHolder_PostComment_ValidationSummary1");
+AjaxHolder_PostComment_ValidationSummary1.showmessagebox = "True";
+AjaxHolder_PostComment_ValidationSummary1.showsummary = "False";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        
+document.getElementById('AjaxHolder_PostComment_ValidationSummary1').dispose = function() {
+    Array.remove(Page_ValidationSummaries, document.getElementById('AjaxHolder_PostComment_ValidationSummary1'));
+}
+Sys.Application.initialize();
+
+document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator1').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator1'));
+}
+
+document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator2').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator2'));
+}
+
+document.getElementById('AjaxHolder_PostComment_Requiredfieldvalidator4').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_Requiredfieldvalidator4'));
+}
+
+document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator3').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator3'));
+}
+//]]>
+</script>
+</form>
+	<script type="text/javascript" src="./[导入]卡特兰数 ACM 数论 - ACM博客_kuangbin - C++博客_files/ShowHidden.js"></script>   
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-476124-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+
+
+</body></html>

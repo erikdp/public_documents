@@ -1,0 +1,33 @@
+
+[教程] 单独安装Mac下Gcc 4.6[无需Xcode]
+
+Gcc, Mac, xcode, c编译, 单独安装gcc
+本帖最后由 cassyfar 于 11/5/16 07:31 PM 编辑
+
+
+首先要感谢来自High Performance Computing for Mac的Gaurav Khanna先生为mac系列系统实时地更新编译好的Gcc，现在是gcc-4.6
+Special thank to Professor Gaurav Khanna who brings us such a convenient patch to install newest gcc on Mac OS.
+
+安装方法
+1.前往该网站下载最新的gcc编译包，这里直接把地址给大家了
+http://prdownloads.sourceforge.n ... bin.tar.gz?download
+注意：Snowleopard intel专用，其他用户需自行去上述网站下载
+
+2.解压后应该是个名为usr的文件夹，然后打开终端，cd到当前文件夹，输入
+sudo tar -xvf gcc-bin.tar -C /
+复制代码
+3.然后就可以使用了
+建议打开.bash_profile(没有就创建一个)，输入
+export PATH=/usr/local/bin:$PATH
+复制代码
+然后以后使用直接输入 gcc 编译
+
+卸载方法
+如果你的/usr/local里已经有其它文件，那么卸载Gcc 4.6的唯一方法就是手动逐个文件删除。询问作者后作者非常淡定地告诉我：“这只要10分钟。”
+如果你只是抱着尝试心态去使用，请注意它的卸载会很麻烦
+
+Gcc各版本分析
+我专业也不是CS，所以不一定分析的全面。这里提下这个gcc和xcode安装的gcc最大区别是xcode的gcc可以用llvm(我也不知道是什么，据说是low level visualize...)，这个对汇编的优化做得很好，所以是用最新得GCC还是用Apple直属系得GCC，取舍由你吧。对于一般编译，没有区别。
+
+后记：这个网站的东西很多，喜欢unix的可以多去关注下。 
+The screenshots of above steps are listed as follow in the attachment.

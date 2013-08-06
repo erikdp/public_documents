@@ -1,0 +1,641 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0046)http://972169909-qq-com.iteye.com/blog/1156071 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>【最短路/3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站</title>
+    <meta name="description" content="首先献上模板：【点都是默认为从1到n编号，用dijk和floyd时要注意重边】 ①DIJK  #define inf 0x3fffffff  #define M 105    int dist[M], map[M][M], n;  bool mark[M];    void init ()  {  	int i, j;  	for (i = 1; i &lt;= n; i++)    //i==j的 ...">
+    <meta name="keywords" content="C, C++, ACM, 算法, 数据结构 【最短路/3大模板】总结【2012-1-22新增前插的spfa】">
+    <link rel="shortcut icon" href="http://972169909-qq-com.iteye.com/images/favicon.ico" type="image/x-icon">
+    <link rel="search" type="application/opensearchdescription+xml" href="http://972169909-qq-com.iteye.com/open_search.xml" title="ITeye">
+    <link href="http://972169909-qq-com.iteye.com/rss" rel="alternate" title="KIDxの博客" type="application/rss+xml">
+    <link href="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/blog.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/purple.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" async="" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/ga.js"></script><script src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/application.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', 'iteye.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      <link href="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/SyntaxHighlighter.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/shCoreCommon.js" type="text/javascript"></script>
+<script src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/hotkey.js" type="text/javascript"></script>
+  <script src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/code_favorites.js" type="text/javascript"></script>
+<script src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/weiboshare.js" type="text/javascript"></script>
+  <style type="text/css">.dp-cpp .datatypes { color: #2E8B57; font-weight: bold; }</style><style type="text/css">.dp-cpp .datatypes { color: #2E8B57; font-weight: bold; }</style><style type="text/css">.dp-cpp .datatypes { color: #2E8B57; font-weight: bold; }</style><style type="text/css">.dp-cpp .datatypes { color: #2E8B57; font-weight: bold; }</style></head>
+  <body>
+    <div id="header">
+      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="http://972169909-qq-com.iteye.com/blog/1156071#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a href="http://www.iteye.com/job">招聘</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+      <div id="user_nav">
+      <a href="http://972169909-qq-com.iteye.com/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="http://972169909-qq-com.iteye.com/login">登录</a>
+    <a href="http://972169909-qq-com.iteye.com/signup" class="nobg">注册</a>
+  </div>
+
+    </div>
+
+    <div id="page">
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="http://972169909-qq-com.iteye.com/">KIDxの博客</a></h1>
+        </div>
+        <div id="fd"></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class="blog_navbar_for"><a href="http://972169909-qq-com.iteye.com/"><strong>博客</strong></a></li>
+            <li><a href="http://972169909-qq-com.iteye.com/weibo">微博</a></li>
+            <li><a href="http://972169909-qq-com.iteye.com/album">相册</a></li>
+            <li><a href="http://972169909-qq-com.iteye.com/link">收藏</a></li>
+            <li><a href="http://972169909-qq-com.iteye.com/blog/guest_book">留言</a></li>
+            <li><a href="http://972169909-qq-com.iteye.com/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="http://972169909-qq-com.iteye.com/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text">
+              <input class="submit_search" type="submit" value="">
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="blog_main">
+  <div class="blog_title">
+    <h3>
+      <a href="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站.html">【最短路/3大模板】总结【2012-1-22新增前插的spfa】</a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class="blog_categories"><strong>博客分类：</strong> <li><a href="http://972169909-qq-com.iteye.com/category/170686">图论</a></li><li><a href="http://972169909-qq-com.iteye.com/category/171063">最短路</a></li><li><a href="http://972169909-qq-com.iteye.com/category/156594">深搜</a></li> </ul>
+        <div class="news_tag"><a href="http://www.iteye.com/blogs/tag/C">C</a><a href="http://www.iteye.com/blogs/tag/C++">C++</a><a href="http://www.iteye.com/blogs/tag/ACM">ACM</a><a href="http://www.iteye.com/blogs/tag/%E7%AE%97%E6%B3%95">算法</a><a href="http://www.iteye.com/blogs/tag/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a>&nbsp;</div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    <img src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/0ca3f693-db83-35da-b50e-b0c8f7acc4d8.png">
+<br>
+<br>
+<br><span style="font-size: medium;">首先献上模板：【点都是默认为从1到n编号，用dijk和floyd时要注意重边】
+<br>①DIJK</span><div class="dp-highlighter" id=""><div class="bar"><div class="tools">C++代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%23define%20inf%200x3fffffff%0A%23define%20M%20105%0A%0Aint%20dist%5BM%5D%2C%20map%5BM%5D%5BM%5D%2C%20n%3B%0Abool%20mark%5BM%5D%3B%0A%0Avoid%20init%20()%0A%7B%0A%09int%20i%2C%20j%3B%0A%09for%20(i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B)%20%20%20%20%2F%2Fi%3D%3Dj%E7%9A%84%E6%97%B6%E5%80%99%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%BA0%EF%BC%8C%E5%8F%AA%E6%98%AF%E6%9C%89%E6%97%B6%E5%80%99%E4%B8%8D%E5%90%88%E9%80%82%0A%09%09for%20(j%20%3D%201%3B%20j%20%3C%3D%20n%3B%20j%2B%2B)%0A%09%09%09map%5Bi%5D%5Bj%5D%20%3D%20inf%3B%0A%7D%0A%0Avoid%20dijk%20(int%20u)%0A%7B%0A%09int%20i%2C%20j%2C%20mins%2C%20v%3B%0A%09for%20(i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B)%0A%09%7B%0A%09%09dist%5Bi%5D%20%3D%20map%5Bu%5D%5Bi%5D%3B%0A%09%09mark%5Bi%5D%20%3D%20false%3B%0A%09%7D%0A%09mark%5Bu%5D%20%3D%20true%3B%0A%09dist%5Bu%5D%20%3D%200%3B%20%20%20%20%2F%2F%E6%97%A2%E7%84%B6%E4%B8%8A%E9%9D%A2%E7%9A%84map%E5%BD%93i%3D%3Dj%E6%97%B6%E4%B8%8D%E6%98%AF0%EF%BC%8C%E5%B0%B1%E8%A6%81%E8%BF%99%E5%8F%A5%0A%09while%20(1)%0A%09%7B%0A%09%09mins%20%3D%20inf%3B%0A%09%09for%20(j%20%3D%201%3B%20j%20%3C%3D%20n%3B%20j%2B%2B)%0A%09%09%09if%20(!mark%5Bj%5D%20%26%26%20dist%5Bj%5D%20%3C%20mins)%0A%09%09%09%09mins%20%3D%20dist%5Bj%5D%2C%20v%20%3D%20j%3B%0A%09%09if%20(mins%20%3D%3D%20inf)%0A%09%09%09break%3B%0A%09%09mark%5Bv%5D%20%3D%20true%3B%0A%09%09for%20(j%20%3D%201%3B%20j%20%3C%3D%20n%3B%20j%2B%2B)%0A%09%09%09if%20(!mark%5Bj%5D%20%26%26%20dist%5Bv%5D%20%2B%20map%5Bv%5D%5Bj%5D%20%3C%20dist%5Bj%5D)%0A%09%09%09%09dist%5Bj%5D%20%3D%20dist%5Bv%5D%20%2B%20map%5Bv%5D%5Bj%5D%3B%0A%09%7D%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-cpp"><li><span><span class="preprocessor">#define&nbsp;inf&nbsp;0x3fffffff</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="preprocessor">#define&nbsp;M&nbsp;105</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="datatypes">int</span><span>&nbsp;dist[M],&nbsp;map[M][M],&nbsp;n;&nbsp;&nbsp;</span></span></li><li><span><span class="datatypes">bool</span><span>&nbsp;mark[M];&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">void</span><span>&nbsp;init&nbsp;()&nbsp;&nbsp;</span></span></li><li><span>{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="datatypes">int</span><span>&nbsp;i,&nbsp;j;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(i&nbsp;=&nbsp;1;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//i==j的时候也可以初始化为0，只是有时候不合适</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(j&nbsp;=&nbsp;1;&nbsp;j&nbsp;&lt;=&nbsp;n;&nbsp;j++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map[i][j]&nbsp;=&nbsp;inf;&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">void</span><span>&nbsp;dijk&nbsp;(</span><span class="datatypes">int</span><span>&nbsp;u)&nbsp;&nbsp;</span></span></li><li><span>{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="datatypes">int</span><span>&nbsp;i,&nbsp;j,&nbsp;mins,&nbsp;v;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(i&nbsp;=&nbsp;1;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dist[i]&nbsp;=&nbsp;map[u][i];&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mark[i]&nbsp;=&nbsp;<span class="keyword">false</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;mark[u]&nbsp;=&nbsp;<span class="keyword">true</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;dist[u]&nbsp;=&nbsp;0;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//既然上面的map当i==j时不是0，就要这句</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span><span>&nbsp;(1)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mins&nbsp;=&nbsp;inf;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(j&nbsp;=&nbsp;1;&nbsp;j&nbsp;&lt;=&nbsp;n;&nbsp;j++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(!mark[j]&nbsp;&amp;&amp;&nbsp;dist[j]&nbsp;&lt;&nbsp;mins)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mins&nbsp;=&nbsp;dist[j],&nbsp;v&nbsp;=&nbsp;j;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(mins&nbsp;==&nbsp;inf)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mark[v]&nbsp;=&nbsp;<span class="keyword">true</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(j&nbsp;=&nbsp;1;&nbsp;j&nbsp;&lt;=&nbsp;n;&nbsp;j++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(!mark[j]&nbsp;&amp;&amp;&nbsp;dist[v]&nbsp;+&nbsp;map[v][j]&nbsp;&lt;&nbsp;dist[j])&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dist[j]&nbsp;=&nbsp;dist[v]&nbsp;+&nbsp;map[v][j];&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="C++" style="display: none; " codeable_id="1156071" codeable_type="Blog" source_url="http://972169909-qq-com.iteye.com/blog/1156071" pre_index="0" title="【最短路/3大模板】总结【2012-1-22新增前插的spfa】">#define inf 0x3fffffff
+#define M 105
+
+int dist[M], map[M][M], n;
+bool mark[M];
+
+void init ()
+{
+	int i, j;
+	for (i = 1; i &lt;= n; i++)    //i==j的时候也可以初始化为0，只是有时候不合适
+		for (j = 1; j &lt;= n; j++)
+			map[i][j] = inf;
+}
+
+void dijk (int u)
+{
+	int i, j, mins, v;
+	for (i = 1; i &lt;= n; i++)
+	{
+		dist[i] = map[u][i];
+		mark[i] = false;
+	}
+	mark[u] = true;
+	dist[u] = 0;    //既然上面的map当i==j时不是0，就要这句
+	while (1)
+	{
+		mins = inf;
+		for (j = 1; j &lt;= n; j++)
+			if (!mark[j] &amp;&amp; dist[j] &lt; mins)
+				mins = dist[j], v = j;
+		if (mins == inf)
+			break;
+		mark[v] = true;
+		for (j = 1; j &lt;= n; j++)
+			if (!mark[j] &amp;&amp; dist[v] + map[v][j] &lt; dist[j])
+				dist[j] = dist[v] + map[v][j];
+	}
+}
+</pre>
+<br><span style="font-size: medium;">②Floyd</span>
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">C++代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%23define%20inf%200x3fffffff%09%2F%2F%E6%B3%A8%E6%84%8F%EF%BC%8C%E5%A4%AA%E5%A4%A7%E4%BC%9A%E6%BA%A2%E5%87%BA%0A%23define%20M%09%09%09%09%2F%2F%E6%9C%80%E5%A4%A7%E7%82%B9%E6%95%B0%0Aint%20n%2C%20dist%5BM%5D%5BM%5D%3B%20%20%20%20%20%20%20%20%20%20%20%2F%2Fn%EF%BC%9A%E5%AE%9E%E9%99%85%E7%82%B9%E6%95%B0%0A%0Avoid%20init%20()%09%09%09%2F%2F%E6%9C%89%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E5%88%9D%E5%A7%8B%E5%8C%96%0A%7B%0A%20%20%20%20int%20i%2C%20j%3B%0A%20%20%20%20for%20(i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B)%0A%20%20%20%20%20%20%20%20for%20(j%20%3D%20i%20%2B%201%3B%20j%20%3C%3D%20n%3B%20j%2B%2B)%0A%20%20%20%20%20%20%20%20%20%20%20%20dist%5Bi%5D%5Bj%5D%20%3D%20dist%5Bj%5D%5Bi%5D%20%3D%20inf%3B%0A%7D%0A%0Avoid%20floyd%20()%0A%7B%0A%20%20%20%20int%20i%2C%20j%2C%20k%3B%0A%20%20%20%20for%20(k%20%3D%201%3B%20k%20%3C%3D%20n%3B%20k%2B%2B)%0A%20%20%20%20%20%20%20%20for%20(i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B)%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(j%20%3D%201%3B%20j%20%3C%3D%20n%3B%20j%2B%2B)%20%20%20%20%2F%2F%E6%9C%89%E7%9A%84%E9%A2%98%E7%9B%AE%E4%BC%9A%E6%BA%A2%E5%87%BA%E5%B0%B1%E8%A6%81%E8%87%AA%E5%B7%B1%E5%8F%98%E9%80%9A%E4%BA%86%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(dist%5Bi%5D%5Bk%5D%20%2B%20dist%5Bk%5D%5Bj%5D%20%3C%20dist%5Bi%5D%5Bj%5D)%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dist%5Bi%5D%5Bj%5D%20%3D%20dist%5Bi%5D%5Bk%5D%20%2B%20dist%5Bk%5D%5Bj%5D%3B%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-cpp"><li><span><span class="preprocessor">#define&nbsp;inf&nbsp;0x3fffffff&nbsp;&nbsp;//注意，太大会溢出</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="preprocessor">#define&nbsp;M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//最大点数</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="datatypes">int</span><span>&nbsp;n,&nbsp;dist[M][M];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//n：实际点数</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">void</span><span>&nbsp;init&nbsp;()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//有时候需要初始化</span><span>&nbsp;&nbsp;</span></span></li><li><span>{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="datatypes">int</span><span>&nbsp;i,&nbsp;j;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(i&nbsp;=&nbsp;1;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(j&nbsp;=&nbsp;i&nbsp;+&nbsp;1;&nbsp;j&nbsp;&lt;=&nbsp;n;&nbsp;j++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dist[i][j]&nbsp;=&nbsp;dist[j][i]&nbsp;=&nbsp;inf;&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">void</span><span>&nbsp;floyd&nbsp;()&nbsp;&nbsp;</span></span></li><li><span>{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="datatypes">int</span><span>&nbsp;i,&nbsp;j,&nbsp;k;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(k&nbsp;=&nbsp;1;&nbsp;k&nbsp;&lt;=&nbsp;n;&nbsp;k++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(i&nbsp;=&nbsp;1;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(j&nbsp;=&nbsp;1;&nbsp;j&nbsp;&lt;=&nbsp;n;&nbsp;j++)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//有的题目会溢出就要自己变通了</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(dist[i][k]&nbsp;+&nbsp;dist[k][j]&nbsp;&lt;&nbsp;dist[i][j])&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dist[i][j]&nbsp;=&nbsp;dist[i][k]&nbsp;+&nbsp;dist[k][j];&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="C++" style="display: none; " codeable_id="1156071" codeable_type="Blog" source_url="http://972169909-qq-com.iteye.com/blog/1156071" pre_index="1" title="【最短路/3大模板】总结【2012-1-22新增前插的spfa】">#define inf 0x3fffffff	//注意，太大会溢出
+#define M				//最大点数
+int n, dist[M][M];           //n：实际点数
+
+void init ()			//有时候需要初始化
+{
+    int i, j;
+    for (i = 1; i &lt;= n; i++)
+        for (j = i + 1; j &lt;= n; j++)
+            dist[i][j] = dist[j][i] = inf;
+}
+
+void floyd ()
+{
+    int i, j, k;
+    for (k = 1; k &lt;= n; k++)
+        for (i = 1; i &lt;= n; i++)
+            for (j = 1; j &lt;= n; j++)    //有的题目会溢出就要自己变通了
+                if (dist[i][k] + dist[k][j] &lt; dist[i][j])
+	                    dist[i][j] = dist[i][k] + dist[k][j];
+}
+</pre>
+<br><span style="font-size: medium;">③vector后插的SPFA</span>
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">C++代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%23define%20inf%200x3fffffff%0A%23define%20M%20105%20%20%20%20%2F%2F%E6%9C%80%E5%A4%A7%E7%82%B9%E6%95%B0%0Astruct%20son%7B%0A%20%20%20%20int%20v%2C%20w%3B%0A%7D%3B%0Avector%3Cson%3E%20g%5BM%5D%3B%0Abool%20inq%5BM%5D%3B%20%20%20%20%20%20%20%2F%2F%E5%85%A5%E9%98%9F%E5%88%97%E6%A0%87%E8%AE%B0%0Aint%20dist%5BM%5D%2C%20n%3B%20%20%20%20%2F%2Fn%EF%BC%9A%E5%AE%9E%E9%99%85%E7%82%B9%E6%95%B0%0A%0Avoid%20init%20()%0A%7B%0A%09for%20(int%20i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B)%0A%09%09g%5Bi%5D.clear()%3B%0A%7D%0A%0Avoid%20spfa%20(int%20u)%0A%7B%0A%20%20%20%20int%20i%2C%20v%2C%20w%3B%0A%20%20%20%20for%20(i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B)%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20dist%5Bi%5D%20%3D%20inf%3B%0A%20%20%20%20%20%20%20%20inq%5Bi%5D%20%3D%20false%3B%0A%20%20%20%20%7D%0A%20%20%20%20queue%3Cint%3E%20q%3B%0A%20%20%20%20q.push%20(u)%3B%0A%20%20%20%20inq%5Bu%5D%20%3D%20true%3B%0A%20%20%20%20dist%5Bu%5D%20%3D%200%3B%0A%20%20%20%20while%20(!q.empty())%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20u%20%3D%20q.front()%3B%0A%20%20%20%20%20%20%20%20q.pop()%3B%0A%20%20%20%20%20%20%20%20inq%5Bu%5D%20%3D%20false%3B%0A%20%20%20%20%20%20%20%20for%20(i%20%3D%200%3B%20i%20%3C%20g%5Bu%5D.size()%3B%20i%2B%2B)%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20v%20%3D%20g%5Bu%5D%5Bi%5D.v%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20w%20%3D%20g%5Bu%5D%5Bi%5D.w%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(dist%5Bu%5D%20%2B%20w%20%3C%20dist%5Bv%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dist%5Bv%5D%20%3D%20dist%5Bu%5D%20%2B%20w%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(!inq%5Bv%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20q.push%20(v)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20inq%5Bv%5D%20%3D%20true%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-cpp"><li><span><span class="preprocessor">#define&nbsp;inf&nbsp;0x3fffffff</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="preprocessor">#define&nbsp;M&nbsp;105&nbsp;&nbsp;&nbsp;&nbsp;//最大点数</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">struct</span><span>&nbsp;son{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="datatypes">int</span><span>&nbsp;v,&nbsp;w;&nbsp;&nbsp;</span></span></li><li><span>};&nbsp;&nbsp;</span></li><li><span>vector&lt;son&gt;&nbsp;g[M];&nbsp;&nbsp;</span></li><li><span><span class="datatypes">bool</span><span>&nbsp;inq[M];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//入队列标记</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="datatypes">int</span><span>&nbsp;dist[M],&nbsp;n;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//n：实际点数</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">void</span><span>&nbsp;init&nbsp;()&nbsp;&nbsp;</span></span></li><li><span>{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(</span><span class="datatypes">int</span><span>&nbsp;i&nbsp;=&nbsp;1;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g[i].clear();&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">void</span><span>&nbsp;spfa&nbsp;(</span><span class="datatypes">int</span><span>&nbsp;u)&nbsp;&nbsp;</span></span></li><li><span>{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="datatypes">int</span><span>&nbsp;i,&nbsp;v,&nbsp;w;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(i&nbsp;=&nbsp;1;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dist[i]&nbsp;=&nbsp;inf;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inq[i]&nbsp;=&nbsp;<span class="keyword">false</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;queue&lt;<span class="datatypes">int</span><span>&gt;&nbsp;q;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;q.push&nbsp;(u);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;inq[u]&nbsp;=&nbsp;<span class="keyword">true</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;dist[u]&nbsp;=&nbsp;0;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span><span>&nbsp;(!q.empty())&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;=&nbsp;q.front();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.pop();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inq[u]&nbsp;=&nbsp;<span class="keyword">false</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;g[u].size();&nbsp;i++)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v&nbsp;=&nbsp;g[u][i].v;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w&nbsp;=&nbsp;g[u][i].w;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(dist[u]&nbsp;+&nbsp;w&nbsp;&lt;&nbsp;dist[v])&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dist[v]&nbsp;=&nbsp;dist[u]&nbsp;+&nbsp;w;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(!inq[v])&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.push&nbsp;(v);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inq[v]&nbsp;=&nbsp;<span class="keyword">true</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="C++" style="display: none; " codeable_id="1156071" codeable_type="Blog" source_url="http://972169909-qq-com.iteye.com/blog/1156071" pre_index="2" title="【最短路/3大模板】总结【2012-1-22新增前插的spfa】">#define inf 0x3fffffff
+#define M 105    //最大点数
+struct son{
+    int v, w;
+};
+vector&lt;son&gt; g[M];
+bool inq[M];       //入队列标记
+int dist[M], n;    //n：实际点数
+
+void init ()
+{
+	for (int i = 1; i &lt;= n; i++)
+		g[i].clear();
+}
+
+void spfa (int u)
+{
+    int i, v, w;
+    for (i = 1; i &lt;= n; i++)
+    {
+        dist[i] = inf;
+        inq[i] = false;
+    }
+    queue&lt;int&gt; q;
+    q.push (u);
+    inq[u] = true;
+    dist[u] = 0;
+    while (!q.empty())
+    {
+        u = q.front();
+        q.pop();
+        inq[u] = false;
+        for (i = 0; i &lt; g[u].size(); i++)
+        {
+            v = g[u][i].v;
+            w = g[u][i].w;
+            if (dist[u] + w &lt; dist[v])
+            {
+                dist[v] = dist[u] + w;
+                if (!inq[v])
+                {
+                    q.push (v);
+                    inq[v] = true;
+                }
+            }
+        }
+    }
+}
+</pre>
+<br><span style="font-size: medium;">④模拟前插的SPFA(多数情况下比③快，数据较为复杂就会看出来)</span>
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">C++代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%23define%20inf%200x3fffffff%0A%23define%20M%201005%09%2F%2F%E6%9C%80%E5%A4%A7%E7%82%B9%E6%95%B0%0A%0Astruct%20edge%7B%0A%20%20%20%20int%20v%2C%20w%2C%20next%3B%0A%7De%5B10005%5D%3B%09%09%2F%2F%E4%BC%B0%E8%AE%A1%E5%A5%BD%E6%9C%89%E5%A4%9A%E5%B0%91%E6%9D%A1%E8%BE%B9%0A%0Aint%20pre%5BM%5D%2C%20cnt%2C%20dist%5BM%5D%2C%20n%3B%0Abool%20inq%5BM%5D%3B%0A%2F%2F%E6%B3%A8%E6%84%8F%E5%88%9D%E5%A7%8B%E5%8C%96%0Avoid%20init%20()%0A%7B%0A%20%20%20%20cnt%20%3D%200%3B%0A%20%20%20%20memset%20(pre%2C%20-1%2C%20sizeof(pre))%3B%0A%7D%0A%2F%2F%E6%B3%A8%E6%84%8F%E5%8F%8C%E5%90%91%E5%8A%A0%E8%BE%B9%20%0Avoid%20addedge%20(int%20u%2C%20int%20v%2C%20int%20w)%20%20%20%20%2F%2F%E5%8A%A0%E8%BE%B9%E5%87%BD%E6%95%B0%EF%BC%8C%E6%85%A2%E6%85%A2%E6%A8%A1%E6%8B%9F%E5%B0%B1%E4%BC%9A%E6%98%8E%E7%99%BD%E7%9A%84%0A%7B%0A%20%20%20%20e%5Bcnt%5D.v%20%3D%20v%3B%0A%20%20%20%20e%5Bcnt%5D.w%20%3D%20w%3B%0A%20%20%20%20e%5Bcnt%5D.next%20%3D%20pre%5Bu%5D%3B%09%09%2F%2F%E6%8E%A5%E6%9B%BF%E5%B7%B2%E6%9C%89%E8%BE%B9%0A%20%20%20%20pre%5Bu%5D%20%3D%20cnt%2B%2B%3B%09%09%09%09%2F%2F%E8%87%AA%E5%B7%B1%E5%89%8D%E6%8F%92%E6%88%90%E4%B8%BAu%E6%B4%BE%E7%94%9F%E7%9A%84%E7%AC%AC%E4%B8%80%E6%9D%A1%E8%BE%B9%0A%7D%0A%0Avoid%20spfa%20(int%20u)%0A%7B%0A%20%20%20%20int%20v%2C%20w%2C%20i%3B%0A%20%20%20%20for%20(i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B)%09%2F%2F%E5%AF%B9%E4%BA%8E%E4%BB%8E1%E5%88%B0n%E7%9A%84%E7%BC%96%E5%8F%B7%0A%20%20%20%20%20%20%20%20dist%5Bi%5D%20%3D%20inf%2C%20inq%5Bi%5D%20%3D%20false%3B%0A%20%20%20%20dist%5Bu%5D%20%3D%200%3B%0A%20%20%20%20queue%3Cint%3E%20q%3B%0A%20%20%20%20q.push%20(u)%3B%0A%20%20%20%20inq%5Bu%5D%20%3D%20true%3B%0A%20%20%20%20while%20(!q.empty())%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20u%20%3D%20q.front()%3B%0A%20%20%20%20%20%20%20%20q.pop()%3B%0A%20%20%20%20%20%20%20%20inq%5Bu%5D%20%3D%20false%3B%0A%20%20%20%20%20%20%20%20for%20(i%20%3D%20pre%5Bu%5D%3B%20i%20!%3D%20-1%3B%20i%20%3D%20e%5Bi%5D.next)%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20w%20%3D%20e%5Bi%5D.w%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20v%20%3D%20e%5Bi%5D.v%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(dist%5Bu%5D%20%2B%20w%20%3C%20dist%5Bv%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dist%5Bv%5D%20%3D%20dist%5Bu%5D%20%2B%20w%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(!inq%5Bv%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20q.push%20(v)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20inq%5Bv%5D%20%3D%20true%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-cpp"><li><span><span class="preprocessor">#define&nbsp;inf&nbsp;0x3fffffff</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="preprocessor">#define&nbsp;M&nbsp;1005&nbsp;&nbsp;//最大点数</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">struct</span><span>&nbsp;edge{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="datatypes">int</span><span>&nbsp;v,&nbsp;w,&nbsp;next;&nbsp;&nbsp;</span></span></li><li><span>}e[10005];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//估计好有多少条边</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="datatypes">int</span><span>&nbsp;pre[M],&nbsp;cnt,&nbsp;dist[M],&nbsp;n;&nbsp;&nbsp;</span></span></li><li><span><span class="datatypes">bool</span><span>&nbsp;inq[M];&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//注意初始化</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">void</span><span>&nbsp;init&nbsp;()&nbsp;&nbsp;</span></span></li><li><span>{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;cnt&nbsp;=&nbsp;0;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;memset&nbsp;(pre,&nbsp;-1,&nbsp;<span class="keyword">sizeof</span><span>(pre));&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li><li><span><span class="comment">//注意双向加边&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">void</span><span>&nbsp;addedge&nbsp;(</span><span class="datatypes">int</span><span>&nbsp;u,&nbsp;</span><span class="datatypes">int</span><span>&nbsp;v,&nbsp;</span><span class="datatypes">int</span><span>&nbsp;w)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//加边函数，慢慢模拟就会明白的</span><span>&nbsp;&nbsp;</span></span></li><li><span>{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;e[cnt].v&nbsp;=&nbsp;v;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;e[cnt].w&nbsp;=&nbsp;w;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;e[cnt].next&nbsp;=&nbsp;pre[u];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//接替已有边</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;pre[u]&nbsp;=&nbsp;cnt++;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//自己前插成为u派生的第一条边</span><span>&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">void</span><span>&nbsp;spfa&nbsp;(</span><span class="datatypes">int</span><span>&nbsp;u)&nbsp;&nbsp;</span></span></li><li><span>{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="datatypes">int</span><span>&nbsp;v,&nbsp;w,&nbsp;i;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(i&nbsp;=&nbsp;1;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++)&nbsp;</span><span class="comment">//对于从1到n的编号</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dist[i]&nbsp;=&nbsp;inf,&nbsp;inq[i]&nbsp;=&nbsp;<span class="keyword">false</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;dist[u]&nbsp;=&nbsp;0;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;queue&lt;<span class="datatypes">int</span><span>&gt;&nbsp;q;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;q.push&nbsp;(u);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;inq[u]&nbsp;=&nbsp;<span class="keyword">true</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span><span>&nbsp;(!q.empty())&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;=&nbsp;q.front();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.pop();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inq[u]&nbsp;=&nbsp;<span class="keyword">false</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(i&nbsp;=&nbsp;pre[u];&nbsp;i&nbsp;!=&nbsp;-1;&nbsp;i&nbsp;=&nbsp;e[i].next)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w&nbsp;=&nbsp;e[i].w;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v&nbsp;=&nbsp;e[i].v;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(dist[u]&nbsp;+&nbsp;w&nbsp;&lt;&nbsp;dist[v])&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dist[v]&nbsp;=&nbsp;dist[u]&nbsp;+&nbsp;w;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(!inq[v])&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.push&nbsp;(v);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inq[v]&nbsp;=&nbsp;<span class="keyword">true</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="C++" style="display: none; " codeable_id="1156071" codeable_type="Blog" source_url="http://972169909-qq-com.iteye.com/blog/1156071" pre_index="3" title="【最短路/3大模板】总结【2012-1-22新增前插的spfa】">#define inf 0x3fffffff
+#define M 1005	//最大点数
+
+struct edge{
+    int v, w, next;
+}e[10005];		//估计好有多少条边
+
+int pre[M], cnt, dist[M], n;
+bool inq[M];
+//注意初始化
+void init ()
+{
+    cnt = 0;
+    memset (pre, -1, sizeof(pre));
+}
+//注意双向加边 
+void addedge (int u, int v, int w)    //加边函数，慢慢模拟就会明白的
+{
+    e[cnt].v = v;
+    e[cnt].w = w;
+    e[cnt].next = pre[u];		//接替已有边
+    pre[u] = cnt++;				//自己前插成为u派生的第一条边
+}
+
+void spfa (int u)
+{
+    int v, w, i;
+    for (i = 1; i &lt;= n; i++)	//对于从1到n的编号
+        dist[i] = inf, inq[i] = false;
+    dist[u] = 0;
+    queue&lt;int&gt; q;
+    q.push (u);
+    inq[u] = true;
+    while (!q.empty())
+    {
+        u = q.front();
+        q.pop();
+        inq[u] = false;
+        for (i = pre[u]; i != -1; i = e[i].next)
+        {
+            w = e[i].w;
+            v = e[i].v;
+            if (dist[u] + w &lt; dist[v])
+            {
+                dist[v] = dist[u] + w;
+                if (!inq[v])
+                {
+                    q.push (v);
+                    inq[v] = true;
+                }
+            }
+        }
+    }
+}
+</pre>
+<br>
+<br><strong><span style="font-size: medium;"><span style="color: green;">第一题：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2544" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=2544</a></span>
+<br>灰常水，floyd、dijk、spfa都可以
+<br>
+<br><span style="color: green;">第二题：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2066" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=2066</a></span>
+<br>简单题，多源多终点，spfa、dijk都很快解决
+<br>
+<br><span style="color: green;">第三题：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2112" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=2112</a></span>
+<br>用STL的map把地名映射到编号就可以套模板了，注意路是双向的就行了
+<br>
+<br><span style="color: green;">第四题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1874" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=1874</a>
+<br>和第一题一样的水
+<br>
+<br><span style="color: green;">第五题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1142" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=1142</a>
+<br>最短路+记忆化搜索
+<br>详情：<a href="http://972169909-qq-com.iteye.com/blog/1149589" target="_blank">http://972169909-qq-com.iteye.com/blog/1149589</a>
+<br>
+<br>
+<br><span style="color: green;">第六题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1385" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=1385</a>
+<br>floyd记忆路径
+<br>详情：<a href="http://972169909-qq-com.iteye.com/blog/1150803" target="_blank">http://972169909-qq-com.iteye.com/blog/1150803</a>
+<br>
+<br><span style="color: green;">第七题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1548" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=1548</a>
+<br>水题，构图后直接dijk或spfa就可以了
+<br>
+<br><span style="color: green;">第八题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1217" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=1217</a>
+<br>floyd的灵活运用
+<br>详情：<a href="http://972169909-qq-com.iteye.com/blog/1149095" target="_blank">http://972169909-qq-com.iteye.com/blog/1149095</a>
+<br>
+<br><span style="color: green;">第九题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2680" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=2680</a>
+<br>简单题，多起点单终点，反过来dijk或者spfa就可以了，注意路是单向的，所有路都要反过来，逆向思维
+<br>
+<br><span style="color: green;">第十题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2923" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=2923</a>
+<br>题目意思可能比较难懂，而且有重边，floyd
+<br>详情：<a href="http://972169909-qq-com.iteye.com/blog/1150818" target="_blank">http://972169909-qq-com.iteye.com/blog/1150818</a>
+<br>
+<br><span style="color: green;">第十一题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2962" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=2962</a>
+<br>直接枚举或二分枚举+最短路
+<br>详情：<a href="http://972169909-qq-com.iteye.com/blog/1159652" target="_blank">http://972169909-qq-com.iteye.com/blog/1159652</a>
+<br>
+<br><span style="color: green;">第十二题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2722" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=2722</a>
+<br>这题主要是构图麻烦，会用sscanf就比较好做了，构好图之后就是水题了
+<br>
+<br><span style="color: green;">第十三题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1690" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=1690</a>
+<br>暴力构图，枚举2点间距离，根据表格定好花费，然后直接floyd就可以了【注意数太大要用64位，无穷大定为-1比较好处理】
+<br>
+<br><span style="color: green;">第十四题表示压力好大……</span>
+<br>
+<br><span style="color: green;">第十五题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1596" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=1596</a>
+<br>floyd水题
+<br>
+<br><span style="color: green;">第十六题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1598" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=1598</a>
+<br>并查集+贪心 或 二分枚举+最短路
+<br>详情：<a href="http://972169909-qq-com.iteye.com/blog/1159593" target="_blank">http://972169909-qq-com.iteye.com/blog/1159593</a>
+<br>
+<br><span style="color: green;">第十七题表示不想做……</span>
+<br>
+<br><span style="color: green;">第十八题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2363" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=2363</a>
+<br>枚举高度差+最短路，比较容易错
+<br>详情：<a href="http://972169909-qq-com.iteye.com/blog/1159650" target="_blank">http://972169909-qq-com.iteye.com/blog/1159650</a>
+<br>
+<br><span style="color: green;">第十九题表示很蛋疼……</span>
+<br>
+<br><span style="color: green;">第二十题：</span><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2833" target="_blank">http://acm.hdu.edu.cn/showproblem.php?pid=2833</a>
+<br>一题比较难的记忆化搜索+最短路【或dp+最短路】
+<br>详情：<a href="http://972169909-qq-com.iteye.com/blog/1159661" target="_blank">http://972169909-qq-com.iteye.com/blog/1159661</a>
+<br></span></strong>
+<br>
+<br>
+<br>
+<br>
+  </div>
+
+  
+
+
+  <iframe src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/794.html" scrolling="no" width="468" height="60" frameborder="0"></iframe>
+  
+  <div id="bottoms" class="clearfix">
+    <div id="digg_bottom" class="clearfix"><div class="digged"><strong>3</strong> <br>顶</div><div class="digged"><strong>2</strong> <br>踩</div></div>
+    <div id="share_weibo">分享到：
+      <a data-type="sina" href="javascript:;" title="分享到新浪微博"><img src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/sina.jpg"></a>
+      <a data-type="qq" href="javascript:;" title="分享到腾讯微博"><img src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="http://972169909-qq-com.iteye.com/blog/1165348" class="next" title="大连2011ACM网络赛【5道水题总结】……很黄很暴力">大连2011ACM网络赛【5道水题总结】……很 ...</a>
+      |
+      <a href="http://972169909-qq-com.iteye.com/blog/1159661" class="pre" title="【记忆化搜索+最短路】HDU 2833 WuKong">【记忆化搜索+最短路】HDU 2833 WuKong</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2011-08-28 18:15</li>
+      <li>浏览 559</li>
+      <li><a href="http://972169909-qq-com.iteye.com/blog/1156071#comments">评论(0)</a></li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/language">编程语言</a></li>      
+      <li class="last"><a href="http://www.iteye.com/wiki/blog/1156071" target="_blank" class="more">相关推荐</a></li>
+    </ul>
+  </div>
+
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="http://972169909-qq-com.iteye.com/login" style="background-color:white;"> <img src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/login_icon.png" style="vertical-align:middle; margin-right: 10px;"></a><a href="http://972169909-qq-com.iteye.com/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 1156071;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', '【最短路/3大模板】总结【2012-1-22新增前插的spfa】');
+  });
+  $$('#main .blog_comment > div').each(function(comment){// comment
+    var post_id = comment.id.substr(2);
+    $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+      var location = window.location;
+      source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+      source_url += "#" + comment.id;
+      pre.writeAttribute('codeable_id', post_id);
+      pre.writeAttribute('codeable_type', "BlogComment");
+      pre.writeAttribute('source_url', source_url);
+      pre.writeAttribute('pre_index', index);
+      pre.writeAttribute('title', '【最短路/3大模板】总结【2012-1-22新增前插的spfa】');
+    });
+  });
+  code_favorites_init();
+
+  fix_image_size($$('div.blog_content img'), 700);
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href="http://972169909-qq-com.iteye.com/"><img alt="基德KID.1412的博客" class="logo" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/a8bc0bea-c8ca-33c0-9024-4179e58f3971.jpg" title="基德KID.1412的博客: KIDxの博客"></a></div>
+  <div id="blog_owner_name">基德KID.1412</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 29284 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/icon_minigender_1.gif" title="男"></li>
+              <li>来自: 珠海</li>
+              <li><img src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/offline.gif"></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style="font-weight:normal;font-size:12px;padding-left:30px;"><a href="http://972169909-qq-com.iteye.com/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://gzhu-101majia.iteye.com/" target="_blank"><img alt="gzhu_101majia的博客" class="logo" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/14ae41d7-c2b1-3f2b-b653-39cba0e3212a-thumb.jpg" title="gzhu_101majia的博客: "></a></div>
+                <div class="left"><a href="http://gzhu-101majia.iteye.com/" target="_blank" title="gzhu_101majia">gzhu_101majia</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://zhaoyang87.iteye.com/" target="_blank"><img alt="zhaoyang87的博客" class="logo" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/user-logo-thumb.gif" title="zhaoyang87的博客: "></a></div>
+                <div class="left"><a href="http://zhaoyang87.iteye.com/" target="_blank" title="zhaoyang87">zhaoyang87</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://syy523347482.iteye.com/" target="_blank"><img alt="syy523347482的博客" class="logo" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/user-logo-thumb.gif" title="syy523347482的博客: "></a></div>
+                <div class="left"><a href="http://syy523347482.iteye.com/" target="_blank" title="syy523347482">syy523347482</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://chuanwang66.iteye.com/" target="_blank"><img alt="chuanwang66的博客" class="logo" src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/312bd22d-a069-3355-8aa1-a46d8ef37546-thumb.jpg" title="chuanwang66的博客: 三木的激流岛"></a></div>
+                <div class="left"><a href="http://chuanwang66.iteye.com/" target="_blank" title="chuanwang66">chuanwang66</a></div>
+              </div>
+            
+          </div>
+
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="http://972169909-qq-com.iteye.com/">全部博客 (113)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/156591">KMP (4)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/156594">深搜 (12)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/156595">广搜 (4)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/157222">贪心 (3)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/157524">数论 (25)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/170686">图论 (17)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/166974">几何 (5)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/174393">矩阵 (1)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/156665">并查集 (4)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/157044">母函数 (1)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/171063">最短路 (10)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/156602">DP (12)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/173324">二分匹配 (2)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/157532">拓扑排序 (4)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/167297">超级大数 (4)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/167570">状态压缩 (1)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/168116">数据结构 (8)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/194281">二分 三分 (7)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/157612">超级大水题 (16)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/156597">java写acm (3)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/159562">USACO-Chapter 1 (10)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/187316">Codeforces (4)</a></li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/category/224787">HGE游戏 (1)</a></li>
+                
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="http://972169909-qq-com.iteye.com/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="http://972169909-qq-com.iteye.com/blog/post">我的论坛</a> (2)
+                </li>
+                <li><a href="http://972169909-qq-com.iteye.com/blog/answered_problems">我的问答</a> (0)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/blog/monthblog/2012-05">2012-05</a> (3)</li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/blog/monthblog/2012-03">2012-03</a> (4)</li>
+                
+                  <li><a href="http://972169909-qq-com.iteye.com/blog/monthblog/2012-02">2012-02</a> (1)</li>
+                
+                <li><a href="http://972169909-qq-com.iteye.com/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+              <div id="comments_top">
+                <h5>评论排行榜</h5>
+                <ul>
+                  
+                    <li><a href="http://972169909-qq-com.iteye.com/blog/1184514" title="【完美匹配-KM算法】HDU总结">【完美匹配-KM算法】HDU总结</a></li>
+                  
+                    <li><a href="http://972169909-qq-com.iteye.com/blog/1541721" title="(开源游戏) DOTA音效版 俄罗斯方块">(开源游戏) DOTA音效版 俄罗斯方块</a></li>
+                  
+                    <li><a href="http://972169909-qq-com.iteye.com/blog/1134689" title="【二进制状态压缩+子集枚举/新增深搜】HDU 1557 权利指数">【二进制状态压缩+子集枚举/新增深搜】HD ...</a></li>
+                  
+                    <li><a href="http://972169909-qq-com.iteye.com/blog/1142130" title="【叉积+二分】POJ 2318 TOYS">【叉积+二分】POJ 2318 TOYS</a></li>
+                  
+                    <li><a href="http://972169909-qq-com.iteye.com/blog/1137803" title="【素数筛法求欧拉值前n项和】POJ 2478 Farey Sequence">【素数筛法求欧拉值前n项和】POJ 2478 Far ...</a></li>
+                  
+                </ul>
+              </div>
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+                <li>
+                  <a href="http://972169909-qq-com.iteye.com/" target="_blank" title="基德KID.1412">基德KID.1412</a>： 
+                  burningblood 写道界面不错啊，那些位图是自己画的吗 ...<br>
+                  <a href="http://972169909-qq-com.iteye.com/blog/1541721#bc2267755">(开源游戏) DOTA音效版 俄罗斯方块</a>
+                </li>
+                
+                <li>
+                  <a href="http://burningblood.iteye.com/" target="_blank" title="burningblood">burningblood</a>： 
+                  界面不错啊，那些位图是自己画的吗？<br>
+                  <a href="http://972169909-qq-com.iteye.com/blog/1541721#bc2267732">(开源游戏) DOTA音效版 俄罗斯方块</a>
+                </li>
+                
+                <li>
+                  <a href="http://972169909-qq-com.iteye.com/" target="_blank" title="基德KID.1412">基德KID.1412</a>： 
+                  lijunle 写道KIDx大神，我想问下，第14题。我用二分 ...<br>
+                  <a href="http://972169909-qq-com.iteye.com/blog/1184514#bc2261802">【完美匹配-KM算法】HDU总结</a>
+                </li>
+                
+                <li>
+                  <a href="http://lijunle.iteye.com/" target="_blank" title="lijunle">lijunle</a>： 
+                  KIDx大神，我想问下，第14题。我用二分+枚举差值，跑最快也 ...<br>
+                  <a href="http://972169909-qq-com.iteye.com/blog/1184514#bc2261601">【完美匹配-KM算法】HDU总结</a>
+                </li>
+                
+                <li>
+                  <a href="http://972169909-qq-com.iteye.com/" target="_blank" title="基德KID.1412">基德KID.1412</a>： 
+                  tenderuser 写道背包问题&nbsp;
+纳尼？！怎么用背包搞？&nbsp; ...<br>
+                  <a href="http://972169909-qq-com.iteye.com/blog/1533617#bc2259426">【数论+容斥】POJ 1091 跳蚤</a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+      </div>
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br>
+          © 2003-2011 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script><img src="./【最短路 3大模板】总结【2012-1-22新增前插的spfa】 - KIDxの博客 - ITeye技术网站_files/saved_resource" width="0" height="0">
+
+    
+  
+
+</body></html>

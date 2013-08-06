@@ -1,0 +1,169 @@
+#include <stdio.h>
+#include <iostream>
+#include <map>
+#include <math.h>
+using namespace std;
+
+typedef long long ll;
+#define M 50001
+bool tag[M];
+int prime[5200]={2},top=1;
+map <ll,ll> h;
+
+void init_prime()
+{
+	int j,k,tmp,i=3,max = sqrt((double)M)+1;
+	for( ;i<max;i+=2)
+		if(!tag[i])
+		{
+			prime[top++] = i;
+			for(k = i*i,tmp = i<<1;k<M;k+=tmp)
+				tag[k] = true;
+		}
+	for( ; i<M;i+=2)
+		if(!tag[i])prime[top++] = i;
+	return ;
+}
+
+// a^b mod c
+ll pow_mod(ll a,ll b, ll c)
+{
+	ll ans = 1;
+	while(b)
+	{
+		if(b&1)ans = ans*a%c;
+		a = a*a%c;
+		b >>= 1;
+	}
+	return ans;
+}
+
+//寻找p的一个原根
+ll findsqrt(ll p)
+{
+	ll tt=p-1,tmp=p-1,ans=2,queue[64];
+	int i,flag=0;
+	for( i=0;i<top&&prime[i]*prime[i]<=tmp;i++)
+	{
+		if(tmp%prime[i] == 0)
+			queue[flag++] = tt/prime[i];
+		while(tmp%prime[i] == 0)
+			tmp /= prime[i];
+	}
+	if(tmp>1)queue[flag++] = tt/tmp;
+
+	for( ; ans < p;ans++)
+	{
+		for(i= 0;i<flag&&pow_mod(ans,queue[i],p)!=1;i++);
+		if(i >= flag)return ans;
+	}
+	return -1;
+}
+
+//shanks 小步-大步 a^x = b mod c  gcd(a,c)=1,x=i*m+j;
+ll shanks_small_big(ll a,ll b,ll c)
+{
+	ll i,ans = -1,m = ceil(sqrt((double)c)),bit=pow_mod(a,m,c),value=b;
+	for( i=0 ;i<m;i++,value = value*a%c)
+		h[value] = i;
+	value = bit;
+	for( i = 1;i<=m;i++,value = value*bit%c)
+		if(h.find(value) != h.end())
+		{
+			ans = i*m - h[value];
+			h.clear();
+			return ans;
+		}
+	h.clear();
+	return ans;//-1 没解
+}
+
+//查找 x^2 = d mod p ====> 设g为 p的原根 x=g^k ==>g^2*k = d mod p ===>解2*k即可
+ll find(ll d , ll p , ll sqrtnum)
+{
+	ll ans = shanks_small_big(sqrtnum,d,p);
+	if(ans &1)
+		return -1;
+	return pow_mod(sqrtnum,ans/2,p);
+}
+
+void Matrix_mul(ll a[2][2],ll b[2][2],ll mod)
+{
+	ll ans[2][2];
+	for(int i=0;i<2;i++)
+		for(int j=0;j<2;j++)
+		{
+			ans[i][j] = 0;
+			for(int k=0;k<2;k++)
+				ans[i][j] += a[i][k]*b[k][j];
+			ans[i][j] %= mod;
+		}
+
+	for(int i=0;i<2;i++)
+		for(int j=0;j<2;j++)
+			a[i][j] = ans[i][j];
+	return ;
+}
+
+void Matrix_pow(ll bit[2][2],ll c,ll mod)
+{
+	ll ans[2][2]={
+		{1,0},
+		{0,1}};
+	while(c)
+	{
+		if(c&1) Matrix_mul(ans,bit,mod);
+		Matrix_mul(bit,bit,mod);
+		c >>= 1;
+	}
+
+	for(int i=0;i<2;i++)
+		for(int j=0;j<2;j++)
+			bit[i][j] = ans[i][j];
+	return ;
+}
+
+ll F(ll n,ll p)
+{
+	ll bit_Matrix[2][2] = {
+					{1,1},
+					{1,0}};
+	ll ans_Matrix[2][2] ={{1,0},{0,0}};//a[1]
+
+	Matrix_pow(bit_Matrix,n,p);
+	Matrix_mul(ans_Matrix,bit_Matrix,p);
+	return ans_Matrix[0][0];
+}
+
+int main()
+{
+	init_prime();
+	int t;
+	ll a,b,n,p,ans,sqrtvalue;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%I64d%I64d%I64d%I64d",&a,&b,&n,&p);
+		ans = pow_mod(a,(p-1)/2,p);
+		if(ans == 1)
+		{
+			ans = 2;
+			ans = pow_mod(b,(p-1)/2,p);
+			if(ans == 1)
+			{
+				ans = 4;
+				sqrtvalue = findsqrt(p);
+				a = find(a,p,sqrtvalue);
+				b = find(b,p,sqrtvalue);
+				n = F(n,p-1);
+				ans = pow_mod(a+b,2*n,p);
+				ans = ans + pow_mod(a>b?(a-b):(b-a),2*n,p);
+				ans = 4*ans%p;
+				printf("%I64d\n",ans);
+			}
+			else  printf("0\n");
+		}
+		else  printf("0\n");
+	}
+	return 0;
+}

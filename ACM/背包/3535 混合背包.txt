@@ -1,0 +1,269 @@
+AreYouBusy
+Time Limit: 2000/1000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)
+
+
+Problem Description
+Happy New Term!
+As having become a junior, xiaoA recognizes that there is not much time for her to AC problems, because there are some other things for her to do, which makes her nearly mad.
+What's more, her boss tells her that for some sets of duties, she must choose at least one job to do, but for some sets of things, she can only choose at most one to do, which is meaningless to the boss. And for others, she can do of her will. We just define the things that she can choose as "jobs". A job takes time , and gives xiaoA some points of happiness (which means that she is always willing to do the jobs).So can you choose the best sets of them to give her the maximum points of happiness and also to be a good junior(which means that she should follow the boss's advice)?
+
+ 
+
+Input
+There are several test cases, each test case begins with two integers n and T (0<=n,T<=100) , n sets of jobs for you to choose and T minutes for her to do them. Follows are n sets of description, each of which starts with two integers m and s (0<m<=100), there are m jobs in this set , and the set type is s, (0 stands for the sets that should choose at least 1 job to do, 1 for the sets that should choose at most 1 , and 2 for the one you can choose freely).then m pairs of integers ci,gi follows (0<=ci,gi<=100), means the ith job cost ci minutes to finish and gi points of happiness can be gained by finishing it. One job can be done only once.
+ 
+
+Output
+One line for each test case contains the maximum points of happiness we can choose from all jobs .if she can’t finish what her boss want, just output -1 .
+ 
+
+Sample Input
+3 3
+2 1
+2 5
+3 8
+2 0
+1 0
+2 1
+3 2
+4 3
+2 1
+1 1
+
+3 4
+2 1
+2 5
+3 8
+2 0
+1 1
+2 8
+3 2
+4 4
+2 1
+1 1
+
+1 1
+1 0
+2 1
+
+5 3
+2 0
+1 0
+2 1
+2 0
+2 2
+1 1
+2 0
+3 2
+2 1
+2 1
+1 5
+2 8
+3 2
+3 8
+4 9
+5 10
+ 
+
+Sample Output
+5
+13
+-1
+-1
+ 
+
+
+
+
+
+#include<iostream>
+using namespace std;
+
+int dp[102][102];
+
+int Max(int a,int b)
+{
+	if(a>b) return a;
+	return b;
+}
+
+int main()
+{
+	int n,T,m,s,i,j,k,va[101],vo[101];
+	while(scanf("%d%d",&n,&T)!=EOF)
+	{
+		memset(dp[0],-1,sizeof(dp[0]));
+		dp[0][0]=0;
+		for(i=1;i<=n;i++)
+		{
+			scanf("%d%d",&m,&s);
+			for(j=0;j<m;j++)
+			{
+				scanf("%d%d",&vo[j],&va[j]);
+			}
+			if(s==0)//至少一个
+			{
+				for(j=0;j<=T;j++)
+				{
+					dp[i][j]=-1;
+				}
+				for(j=0;j<m;j++)//每个工作
+				{
+					for(k=T;k>=vo[j];k--)
+					{
+						if(dp[i][k-vo[j]]!=-1)
+							dp[i][k]=Max(dp[i][k],dp[i][k-vo[j]]+va[j]);
+						if(dp[i-1][k-vo[j]]!=-1)
+							dp[i][k]=Max(dp[i][k],dp[i-1][k-vo[j]]+va[j]);//保证一个
+					}
+				}
+			}
+			else if(s==1)//至多一个
+			{
+				for(k=0;k<=T;k++)//初始化，继承
+				{
+					dp[i][k]=dp[i-1][k];
+				}
+				for(j=0;j<m;j++)
+				{
+					for(k=T;k>=vo[j];k--)
+					{
+						if(dp[i-1][k-vo[j]]!=-1)
+						dp[i][k]=Max(dp[i][k],dp[i-1][k-vo[j]]+va[j]);
+					}
+				}
+				/*//为什么会错，不懂了,当vo[j]==0的时候会出错，自身会变
+				for(k=T;k>=0;k--)//容积从大到小遍历
+				{
+					for(j=0;j<m;j++)//每个工作
+					{
+						if(k>=vo[j]&&dp[i][k-vo[j]]!=-1)
+							dp[i][k]=Max(dp[i][k],dp[i][k-vo[j]]+va[j]);
+					}
+				}*/
+			}
+			else//01背包
+			{
+				for(k=0;k<=T;k++)
+				{
+					dp[i][k]=dp[i-1][k];
+				}
+				for(j=0;j<m;j++)
+				{
+					for(k=T;k>=vo[j];k--)
+					{
+						if(dp[i][k-vo[j]]!=-1)
+							dp[i][k]=Max(dp[i][k],dp[i][k-vo[j]]+va[j]);
+					}
+				}
+			}
+		}
+		int MAX=-1;
+		for(k=0;k<=T;k++)
+		{
+			if(MAX<dp[n][k])
+			{
+				MAX=dp[n][k];
+			}
+		}
+		printf("%d\n",MAX);
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#include<iostream>
+using namespace std;
+
+int dp[102][102];
+
+int Max(int a,int b)
+{
+	if(a>b) return a;
+	return b;
+}
+
+int main()
+{
+	int n,T,m,s,i,j,k,va[101],vo[101];
+	while(scanf("%d%d",&n,&T)!=EOF)
+	{
+		memset(dp[0],-1,sizeof(dp[0]));
+		dp[0][0]=0;
+		for(i=1;i<=n;i++)
+		{
+			scanf("%d%d",&m,&s);
+			for(j=0;j<m;j++)
+			{
+				scanf("%d%d",&vo[j],&va[j]);
+			}
+			if(s==0)//至少一个
+			{
+				for(j=0;j<=T;j++)
+				{
+					dp[i][j]=-1;
+				}
+				for(j=0;j<m;j++)//每个工作
+				{
+					for(k=T;k>=vo[j];k--)
+					{
+						if(dp[i][k-vo[j]]!=-1)
+							dp[i][k]=Max(dp[i][k],dp[i][k-vo[j]]+va[j]);
+						if(dp[i-1][k-vo[j]]!=-1)
+							dp[i][k]=Max(dp[i][k],dp[i-1][k-vo[j]]+va[j]);//保证一个
+					}
+				}
+			}
+			else if(s==1)//至多一个
+			{
+				for(k=0;k<=T;k++)//初始化，继承
+				{
+					dp[i][k]=dp[i-1][k];
+				}
+				for(k=T;k>=0;k--)//容积从大到小遍历
+				{
+					for(j=0;j<m;j++)//每个工作
+					{
+						if(k>=vo[j]&&dp[i-1][k-vo[j]]!=-1)
+							dp[i][k]=Max(dp[i][k],dp[i-1][k-vo[j]]+va[j]);
+					}
+				}
+			}
+			else//01背包
+			{
+				for(k=0;k<=T;k++)
+				{
+					dp[i][k]=dp[i-1][k];
+				}
+				for(j=0;j<m;j++)
+				{
+					for(k=T;k>=vo[j];k--)
+					{
+						if(dp[i][k-vo[j]]!=-1)
+							dp[i][k]=Max(dp[i][k],dp[i][k-vo[j]]+va[j]);
+					}
+				}
+			}
+		}
+		int MAX=-1;
+		for(k=0;k<=T;k++)
+		{
+			if(MAX<dp[n][k])
+			{
+				MAX=dp[n][k];
+			}
+		}
+		printf("%d\n",MAX);
+	}
+	return 0;
+}

@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+
+void Perm(int a[], int k, int n)
+{
+if (k<n-1)
+{
+int i, t;
+for (i=k; i<n; i++)
+{
+t = a[k];
+a[k] = a[i];
+a[i] = t;
+Perm(a, k+1, n);
+t = a[k];
+a[k] = a[i];
+a[i] = t;
+}
+}
+else
+{
+int i;
+for (i=0; i<n; i++)
+{
+cout<<a[i]<<'\t';
+}
+cout<<endl;
+}
+}
+
+int main()
+{
+int a[3] = {1, 2, 3};
+Perm(a, 0, 3);
+return 0;
+}

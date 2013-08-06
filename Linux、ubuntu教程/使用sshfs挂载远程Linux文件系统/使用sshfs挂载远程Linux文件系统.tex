@@ -1,0 +1,112 @@
+\documentclass[12pt,a4paper,landscape]{article}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{CJK}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+\title{使用sshfs挂载远程Linux文件系统}
+\author{ismdeep}
+\date{Date}
+
+
+\maketitle
+
+%??listings
+\lstset{numbers=left,
+numberstyle=\tiny,
+keywordstyle=\color{blue!100}, commentstyle=\color{red!50!green!50!blue!50},
+frame=single,tabsize=4,showtabs=false,extendedchars=false,
+rulesepcolor=\color{red!20!green!20!blue!20}
+}
+
+
+在使用Linux的时候，很多时候我们需要挂载远程的目录来工作，比如笔者自己就喜欢挂载远程sourceforge上的数据目录来获取一些源代码，或者编辑个人主页；还有时候需要挂载学校内某个服务器的目录来处理管理网站的处理。这些远程目录的挂载都可以通过sshfs这个软件来实现。
+
+下面就说一下常用ubuntu系统怎么使用sshfs吧。
+
+ubuntu系统下安装sshfs只需要使用下面命令便可以完成。
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install sshfs
+\end{lstlisting}
+
+sshfs选项很多啊。
+\begin{lstlisting}[language=bash]
+general options:
+    -o opt,[opt...]        mount options
+    -h   --help            print help
+    -V   --version         print version
+
+SSHFS options:
+    -p PORT                equivalent to '-o port=PORT'
+    -C                     equivalent to '-o compression=yes' #启用压缩,建议配上
+    -F ssh_configfile      specifies alternative ssh configuration file #使用非默认的ssh配置文件
+    -1                     equivalent to '-o ssh_protocol=1' #不要用啊
+    -o reconnect           reconnect to server               #自动重连
+    -o delay_connect       delay connection to server
+    -o sshfs_sync          synchronous writes
+    -o no_readahead        synchronous reads (no speculative readahead) #提前预读
+    -o sshfs_debug         print some debugging information
+    -o cache=BOOL          enable caching {yes,no} (default: yes) #能缓存目录结构之类的信息
+    -o cache_timeout=N     sets timeout for caches in seconds (default: 20)
+    -o cache_X_timeout=N   sets timeout for {stat,dir,link} cache
+    -o workaround=LIST     colon separated list of workarounds
+             none             no workarounds enabled
+             all              all workarounds enabled
+             [no]rename       fix renaming to existing file (default: off)
+             [no]nodelaysrv   set nodelay tcp flag in sshd (default: off)
+             [no]truncate     fix truncate for old servers (default: off)
+             [no]buflimit     fix buffer fillup bug in server (default: on)
+    -o idmap=TYPE          user/group ID mapping, possible types are:  #文件权限uid/gid映射关系
+             none             no translation of the ID space (default)
+             user             only translate UID of connecting user
+    -o ssh_command=CMD     execute CMD instead of 'ssh'
+    -o ssh_protocol=N      ssh protocol to use (default: 2) #肯定要2的
+    -o sftp_server=SERV    path to sftp server or subsystem (default: sftp)
+    -o directport=PORT     directly connect to PORT bypassing ssh
+    -o transform_symlinks  transform absolute symlinks to relative
+    -o follow_symlinks     follow symlinks on the server
+    -o no_check_root       don't check for existence of 'dir' on server
+    -o password_stdin      read password from stdin (only for pam_mount)
+    -o SSHOPT=VAL          ssh options (see man ssh_config)
+
+Module options:
+
+[subdir]
+    -o subdir=DIR       prepend this directory to all paths (mandatory)
+    -o [no]rellinks     transform absolute symlinks to relative
+
+[iconv]
+    #字符集转换,对我这种UTF8控,默认已经是最好的
+    -o from_code=CHARSET   original encoding of file names (default: UTF-8)
+    -o to_code=CHARSET      new encoding of the file names (default: UTF-8)
+\end{lstlisting}
+
+
+实际使用
+
+远程挂载
+
+\begin{lstlisting}
+sshfs root@192.168.1.101:/home/files /home/files_remote
+\end{lstlisting}
+
+卸载
+\begin{lstlisting}
+fusermount -u /home/files_remote
+\end{lstlisting}
+
+
+
+
+\end{CJK}
+\end{document}
+
+

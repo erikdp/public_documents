@@ -1,0 +1,77 @@
+ACboy needs your help
+Time Limit: 1000/1000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)
+
+Problem Description
+ACboy has N courses this term, and he plans to spend at most M days on study.Of course,the profit he will gain from different course depending on the days he spend on it.How to arrange the M days for the N courses to maximize the profit?
+
+ 
+
+Input
+The input consists of multiple data sets. A data set starts with a line containing two positive integers N and M, N is the number of courses, M is the days ACboy has.
+Next follow a matrix A[i][j], (1<=i<=N<=100,1<=j<=M<=100).A[i][j] indicates if ACboy spend j days on ith course he will get profit of value A[i][j].
+N = 0 and M = 0 ends the input.
+
+ 
+
+Output
+For each data set, your program should output a line which contains the number of the max profit ACboy will gain.
+
+ 
+
+Sample Input
+2 2
+1 2
+1 3
+2 2
+2 1
+2 1
+2 3
+3 2 1
+3 2 1
+0 0
+ 
+
+Sample Output
+3
+4
+6
+
+//每组至多一个背包
+#include<iostream>
+using namespace std;
+
+int dp[101],bag[101][101];
+
+int Max(int a,int b)
+{
+	if(a>b) return a;
+	return b;
+}
+
+int main()
+{
+	int n,v,i,j,va,k;
+	while(scanf("%d%d",&n,&v)!=EOF&&(n+v))
+	{
+		memset(dp,0,sizeof(dp));
+		for(i=1;i<=n;i++)//第几组
+		{	
+			for(j=1;j<=v;j++)//几天
+			{
+				scanf("%d",&bag[i][j]);
+			}
+		}
+		for(i=1;i<=n;i++)//第几组背包
+		{
+			for(j=v;j>=0;j--)//几天,//第二重循环和第三重循环不能交换，否则变成了一个课程可以用不同天多次完成。
+			{
+				for(k=1;k<=j;k++)//第i组各个背包的容积
+				{
+					dp[j]=Max(dp[j],dp[j-k]+bag[i][k]);
+				}
+			}
+		}
+		printf("%d\n",dp[v]);
+	}
+	return 0;
+}

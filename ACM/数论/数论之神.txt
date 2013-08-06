@@ -1,0 +1,284 @@
+#include <iostream>
+#include <algorithm>
+#include <stdio.h>
+#include <string.h>
+#include <cmath>
+using namespace std;
+
+#define M 50001
+bool flag[M];
+int prime[5200]={2},top=1;
+
+void init_prime()
+{
+	int k,tmp,i=3,max = sqrt((double)M)+1;
+	for( ;i<max;i+=2)
+		if(!flag[i])
+		{
+			prime[top++] = i;
+			for(k = i*i,tmp = i<<1;k<M;k+=tmp)
+				flag[k] = true;
+		}
+	for( ; i<M;i+=2)
+		if(!flag[i])prime[top++] = i;
+	return ;
+}
+
+const int len = (1<<15)-1;
+struct node
+{
+	int top,value,next;
+}thash[len<<1];
+bool tag[len+10];
+int ppp;
+
+void insert(int a,int b)
+{
+	int c = a&len;
+	if(!tag[c])
+	{
+		tag[c] = true;
+		thash[c].top = b;
+		thash[c].value = a;
+		thash[c].next = -1;
+		return ;
+	}
+	if(thash[c].value == a)
+	{
+			thash[c].top = b;
+			return;
+	}
+	while(thash[c].next > -1)
+	{
+		c =  thash[c].next;
+		if(thash[c].value == a)
+		{
+			thash[c].top = b;
+			return;
+		}
+	}
+	thash[c].next = ++ppp;
+	thash[ppp].top = b;
+	thash[ppp].value = a;
+	thash[ppp].next = -1;
+	return ;
+}
+
+int findhash(int a)
+{
+	int t=a&len;
+	if(!tag[t])return -1;
+	while(thash[t].value != a)
+	{
+		if(thash[t].next == -1)
+			return -1;
+		t = thash[t].next;
+	}
+	return thash[t].top;
+}
+
+int pow_mod(int a,int b,int c)
+{
+	long long ans=1,tmp=a%c;
+	while(b)
+	{
+		if(b&1)ans=ans*tmp%c;
+		tmp = tmp*tmp%c;
+		b >>= 1;
+	}
+	return ans;
+}
+
+//a^x = b mod c，  gcd(a,c)==1
+//shanks 小步-大步算法
+int find(int a,int b,int c)
+{
+	b%=c;a%=c;
+	memset(tag,0,sizeof(tag));
+	ppp = len+5;
+
+	//寻找
+	long long search,i,max = ceil(sqrt((double)c)),bit = pow_mod(a,max,c),value=b;
+	int temp;
+	//先计算 b,b*a,b*a^2...b*a^max，i,尽可能选大的
+	for(i=0;i<max;value = (long long)value*a%c,i++)
+		insert(value,i);
+
+	//在计算 a^max,a^2*max...a^max*max，看有没有 b*a^i==a^max*j mod c  C为素数时在0--c中解唯一否则将发生错误
+	search = bit;
+	for(i=1;i<=max;i++,search = (long long)search*bit%c)
+		if((temp = findhash(search))>-1)
+		{
+			int ans  = i*max - temp;
+			return ans;
+		}
+	return -1;
+}
+
+int gcd(int a,int b)
+{
+	return  !b?a:gcd(b,a%b);
+}
+void ex_gcd(int &x,int &y,int a,int b,int &d)
+{
+	if(!b)
+	{
+		d = a;
+		x=1;
+		y=0;
+	}
+	else 
+	{
+		ex_gcd(y,x,b,a%b,d);
+		y -= a/b*x;
+	}
+	return ;
+}
+
+//a^x = b mod c 
+int search(int a,int b,int c)
+{
+	if(b == 1)return 0;
+	a %= c;
+	int ans = 1%c,count=0,tmp,ni;
+
+	//c 小于 2^32
+	for(int i=0;i<33;i++,ans=(long long)ans*a%c)
+		if(ans == b)return i;
+
+	// a*k mod a*d === a*(k%d)
+	while((tmp=gcd(a,c)) != 1)
+	{
+		if(b%tmp != 0)
+			return -1;
+		b /= tmp;
+		c /= tmp;
+		count ++;
+		ni = a/tmp;
+		while((tmp=gcd(ni,c)) != 1)
+		{
+			if(b%tmp!=0)
+				return -1;
+			b /= tmp;
+			c /= tmp;
+			ni /= tmp; 
+		}
+		//(k*a^x-i)%c = b其中 gcd(k,c)==1,则a^(x-i) %c = (b*k^-1)%c
+		if(ni != 1)
+		{
+			int x,y,d;
+			ex_gcd(x,y,ni,c,d);
+			x = (x%c+c)%c;
+			b = ((long long)b*x)%c;
+		}
+	}
+	tmp = find(a,b,c);
+	if(tmp<0)return -1;
+	else return count+tmp;
+}
+
+//寻找p的一个原根
+int findsqrt(int p,int sqrt)
+{
+	int tt=p/sqrt*(sqrt-1),tmp=p/sqrt*(sqrt-1),ans=1,queue[64];
+	int i,flag=0;
+	for( i=0;i<top&&prime[i]*prime[i]<=tmp;i++)
+	{
+		if(tmp%prime[i] == 0)
+			queue[flag++] = tt/prime[i];
+		while(tmp%prime[i] == 0)
+			tmp /= prime[i];
+	}
+	if(tmp>1)queue[flag++] = tt/tmp;
+
+	for( ; ans < p;ans++)
+	{
+		for(i= 0;i<flag&&pow_mod(ans,queue[i],p)!=1;i++);
+		if(i >= flag)return ans;
+	}
+	return -1;
+}
+
+
+///分解 k
+int queue[32][3],l;
+void resolve(int k)
+{
+	l = 0;
+	for(int i=0;i<top&&prime[i]*prime[i]<=k;i++)
+		if(k%prime[i] == 0)
+		{
+			queue[l][0] = prime[i];
+			queue[l][1] = 0;
+			queue[l][2] = 1;
+			while(k%prime[i] == 0)
+			{
+				queue[l][1]++;
+				queue[l][2] *= prime[i];
+				k /= prime[i];
+			}
+			l++;
+		}
+	if(k>1)
+	{
+		queue[l][0] = k;
+		queue[l][1] = 1;
+		queue[l++][2] = k;
+	}
+	return ;
+}
+
+int main()
+{
+	init_prime();
+	int i,t,a,b,k,ans=1,sqrtvalue;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d%d%d",&a,&b,&k);
+        ans = 1;
+		b %= (2*k + 1); 
+		resolve(2*k+1);
+		for(i=0;i<l&&ans;i++)
+		{
+			int tmpb = b%queue[i][2];
+			/// == 0;
+			if(tmpb == 0)
+			{
+
+				int j,tmp ,count = 1,bit=queue[i][0]-1;
+				for(j = queue[i][1]-1;((long long)j*a)>=(long long)queue[i][1];j--,bit*=queue[i][0])
+					count += bit;
+				//count += queue[i][1] - tmp;
+				ans *= count;
+				continue;
+			}
+			int count = 0;
+			while(tmpb%queue[i][0] == 0)
+			{
+				tmpb /= queue[i][0];
+				count++;
+				queue[i][1]--;
+				queue[i][2] /= queue[i][0];
+			} 
+			if(count % a == 0)
+			{
+				sqrtvalue = findsqrt(queue[i][2],queue[i][0]);
+				
+				//x^a = tmpb mod p^c
+				 int min = search(sqrtvalue,tmpb,queue[i][2]);
+				 int x,y,d;
+				 ex_gcd(x,y,a,(queue[i][2]/queue[i][0])*(queue[i][0]-1),d);
+				 if(min % d == 0)
+					 ans *= d;
+				 else ans = 0;
+			}
+			else ans = 0;
+			
+		}
+		printf("%d\n",ans);
+	}
+	return 0;
+}
+
+

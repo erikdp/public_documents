@@ -1,0 +1,467 @@
+POJ 2249 Binomial Showdown
+组合数学。
+高精度，也可把分子分母的数组进行两两约分 
+
+#include<iostream>
+using namespace std;
+double c(int c,int k)
+{
+ double a=1;
+ int i,j=2;
+ for(i=c;i>c-k;i--)
+ a=a*i/(c-i+1);
+ return a;
+}
+int main()
+{
+ int n,k;
+ while(scanf("%d%d",&n,&k)!=EOF && (n!=0 || k!=0))
+ {
+  if(k>n/2 )k=n-k;
+  printf("%.0lf\n",c(n,k));
+ }
+ return 0;
+
+}
+
+
+
+poj 1023 the fun number system （经典进位制）
+
+
+题意：一种由2进制衍生出来的进制方法（我们暂且称为“类2进制”）；
+	标明'n'的位置上原2进制该位的权重要乘上-1，才是现在进制方法该位的权重；
+	譬如说；pnp对于的能表示的数2来说就是 110；即1*2^2+(-1)*1*2^1+1*2^0=2;
+算法：这是数论中的进位制问题，我们可以仿照原来的求一个数二进制表示方法；
+	但首先，我们应该考虑几个问题；
+①k位这种类2进制的表示范围；
+显然，当给出的'p','n'序列中，我们将所有p的位置都置为1其余位是0，此时最大；当我们将所有n的位置置为1，其余为0，此时最小；不过当我们求最大限max和最小限min时会有一个溢出问题；比如64位全是p的序列，那么max会溢出，值为-1；同理min在全是n时也会溢出，为1；显然是max>=0,min<=1,溢出时产生异常，依次可以判断；
+②是否是最大限和最小限之间的数都能表示呢？
+都可以，而且能够表示的数是2^k个，这个原始2进制是一样的；因为每个位上要么是0，要么是1，而且每个位上的权重唯一的，不能通过其他位的01组合获得；最后，我们就可以仿照原始二进制来算在类2进制下的表示；不断求N的二进制最后一位和右移；如果取余是1，则该位上一定是1，如果该位对于字母为‘n’，则高位应该再加1；这里对2取余可能会出错，因为对于负数，补码的表示，最后一位一定是和原码一样的每次的右移后(有时需先加1）补码表示正好符合要求（可找实例验证）；
+
+#include<iostream>
+using namespace std;
+
+__int64 N,M;
+char s[100],res[100]={'\0'};
+int main()
+{
+    int T;scanf("%d",&T);
+    int i,j;
+     __int64 _max,_min;
+    char ch;
+    while(T--)
+     {
+         scanf("%I64d",&N);
+         scanf("%s",s);
+         _max=0;_min=0;
+        for(i=0;i<N;i++)                         //找出能表示的范围； 
+         {
+            if(s[i]=='p') _max=2*_max+1,_min*=2;
+            else _min=2*_min-1,_max*=2;
+         }
+        
+         scanf("%I64d",&M);
+        if((M<_min&&_min<=0)||(M>_max&&_max>=0)) puts("Impossible");   //注意防止64位数的溢出； 
+        else
+         {
+             memset(res,'\0',sizeof(res));
+            for(i=N-1;i>=0;i--)                   
+             {
+                int flag=0;
+                if(M&1)                                   //这里不能是平常的%2； 
+                 {
+                     res[i]='1';
+                    if(s[i]=='n') flag=1;
+                 }
+                else res[i]='0';
+                 M>>=1;
+                if(flag) M++;                //如果是n就需其高位加1； 
+             }
+             printf("%s\n",res);
+         }
+        
+     }
+     system("pause");
+    return 0;
+} 
+
+
+
+POJ2506 Tiling  递推+高精
+
+给看似复杂的题找到了合适的规律就会变得简单。
+
+这个题就是这样。对于n列来说，可以在n-1列的基础上加上一块，或者是在n-2列的基础上加上2块
+
+而2块独立的，不依赖于1块的情况有两种，所以得到递推公式f(n)=f(n-1)+2f(n-2)
+
+看样例，要用到高精。
+
+
+#include<iostream>
+//f(n)=f(n-1)+2f(n-2)
+using namespace std;
+int f[251][300];
+void HPprint(int *a)
+{
+    for (int i=a[0];i>=1;i--) cout<<a[i];
+    cout<<endl; 
+}
+
+void HPplus(int *a,int *b,int *c)
+{
+int i,j;
+j=0;
+for(i=1;i<=min(a[0],b[0]);i++)
+{
+   c[i]=a[i]+b[i]+j;
+   j=c[i]/10;
+   c[i]%=10;
+   }
+if(j!=0) c[i]=j;
+c[0]=a[0]>b[0]?a[0]+2:b[0]+2;
+while(c[c[0]]==0 && c[0]>1) c[0]--; 
+}
+void HPmultyNUM(int *a,int b,int *c)
+{
+    int i,j,k;
+    for (i=1;i<=a[0];i++)
+        c[i]+=a[i]*b;
+        k=0;
+    for (j=1;j<=a[0];j++) 
+        {
+            c[j]+=k;
+            k=c[j]/10;
+            c[j]%=10;
+        }//进位 
+    if(k!=0) c[j]=k;
+    c[0]=a[0]+3; 
+    while (c[c[0]]==0 && c[0]>1) c[0]--;    
+}
+int main()
+{
+int i,j,t[300],test;
+f[0][0]=1;f[0][1]=1;
+f[1][0]=1;f[1][1]=1;f[2][0]=1;f[2][1]=3;
+for(i=3;i<=250;i++)
+{
+   memset(t,0,sizeof(t));
+   HPmultyNUM(f[i-2],2,t);
+   HPplus(t,f[i-1],f[i]);
+}
+while(cin>>test)
+   HPprint(f[test]);
+return 0;
+}
+
+
+
+POJ 1079 Ratio 分数操作 
+
+题目大意：
+给出一个分数，比如1498/902。求出当分母分别为1, 2, ....的时候，最接近1498/902的分数。
+比如：
+当分母为1的时候，最接近1498/902的分数为 1/1。
+当分母为2的时候，最接近1498/902的分数为 3/2。
+当分母为3的时候，最接近1498/902的分数为 5/3。
+。。。
+思路：
+不要用高精度哦，直接模拟分数的操作最好了。
+
+
+#include <stdio.h>
+#include <math.h>
+
+struct frac {
+    __int64 up, down;
+};
+
+__inline __int64 gcd(__int64 a, __int64 b)
+{
+    __int64 r;
+
+    if (a < b) {
+        r = a;
+        a = b;
+        b = r;
+    }
+
+    while (1) {
+        r = a % b;
+        if (!r)
+            return b;
+        a = b;
+        b = r;
+    }
+}
+
+__inline struct frac frac_init(__int64 up, __int64 down)
+{
+    __int64 r, s;
+    struct frac f;
+
+    r = up ? gcd(up, down) : 1;
+    if (r < 0)
+        r = -r;
+    f.up = up / r;
+    f.down = down / r;
+    return f;
+}
+
+__inline struct frac frac_sub(struct frac fa, struct frac fb)
+{
+    return frac_init(fa.up*fb.down-fa.down*fb.up, fa.down*fb.down);
+}
+
+__inline __int64 frac_cmp(struct frac fa, struct frac fb)
+{
+    return frac_sub(fa, fb).up;
+}
+
+__inline struct frac frac_abs(struct frac f)
+{
+    if (f.up < 0)
+        f.up = -f.up;
+    return f;
+}
+
+int main()
+{
+    __int64 up, down;
+    struct frac target, min_dis, f, dis;
+
+    while (scanf("%I64d%I64d", &up, &down) != EOF) {
+        target = frac_init(up, down);
+        min_dis.down = 1;
+        min_dis.up = (__int64)1e15;
+        for (down = 1; down <= target.down; down++) {
+            up = (down*target.up)/target.down;
+            if (((down*target.up)%target.down)*2 >= target.down)
+                up++;
+            f = frac_init(up, down);
+            dis = frac_abs(frac_sub(f, target));
+            if (frac_cmp(dis, min_dis) < 0) {
+                printf("%I64d/%I64d\n", f.up, f.down);
+                min_dis = dis;
+            }
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+
+poj 1019 Number Sequence (找规律)
+
+找规律的题目：先计算出从1到n这个小区间有多长，保存到digit[]数组中，然后计算从112123到n一共有多少位数字，然后根据输入数据查找，其中我在找那一位时比较暴力，把从1开始一直存放，直到存放的比那一位还多，然后取出那一位。
+
+
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <cmath>
+using namespace std ;
+
+const int MaxSize=100000+10 ;
+__int64 digit[MaxSize], len[MaxSize] ;
+
+stringstream ss ;
+    
+void init()
+{
+    int i ;
+    digit[1] = len[1] = 1 ;
+    for( i=2; i<MaxSize; ++i ){
+        digit[i] = digit[i-1] + (int)log10((double)i)+1 ;
+        len[i] = len[i-1] + digit[i] ;
+    }
+    /*for( i=1; i<10; ++i ){
+        cout << i << " 位数" << digit[i] << " 长度" << len[i] << endl ;
+    }*/
+}
+
+char getDigit( int num )
+{
+    int i ;
+    for( i=1; len[i]<num; ++i )
+        ;
+    int pos = num-len[i-1] ;
+    // 清空ss 
+    ss.str("");
+    for( i=1; i<=pos; ++i ){
+        ss << i ;
+        //cout << ss.str() << endl ;
+    }
+    return (ss.str())[pos-1] ;
+}
+
+int main()
+{
+    int i, sets, num ;
+    
+    init() ;
+    cin >> sets ;
+    while( sets-- ){
+        cin >> num ;
+        cout << getDigit( num ) << endl ;
+    }
+    return 0 ;
+}
+
+
+POJ 1095 Trees Made to Order
+
+思路：首先，设拥有N个结点的不同形态的有序二叉树有L[N]棵。L[N]即为卡特兰数。那么：
+(1).针对这个问题先转换为输入N，求n和k。n表示编号为N的树所拥有的结点数。k表示这棵编号为N的树是拥有结点数为n的树的有序集合的第几棵。我们可以先将Catalan数表打出来：
+int L[19]={1,1,2,5,14,42,132,429,1430,4862,16796,58786,208012,742900,2674440,9694845,35357670,129644790,477638700};
+对于输入的N，可以求出n=min(j|L[0]+L[1]+...+L[j]>=N)。而k=n-L[0]-L[1]- ...-L[n-1]。
+鉴于二叉树的固有特性，我可以构造递归函数fun(n,k)。即打印出拥有n个结点树的第k种状态。
+(2).继续转化问题，这棵树的左子树和右子树各有结点数多少？设这棵树左子树的结点数为i，右子树的结点数为n-i-1，那么这棵树是又左子树的结点数为i，右子树的结点数为n-i-1的形态的第几种(设为第s种)？可以知道当1<=k<=L[0]*L[n-1]时,左子树结点树为0，右子树结点数为n-1，s=k；L[0]*L[n-1]+1<=k<=L[1]*L[n-2]时，,左子树结点树为1，右子树结点数为n-2，s=k- L[0]*L[n-1] ；...当L[i-1]*L[n-i]+1<= L[i]*L[n-i+1]时，左子树结点树为i，右子树结点数为n-i-1,s= k- L[0]*L[n-1]- ... L[i-1]*L[n-i]。
+(3).继续想象s增长的过程即为树形态不断发生变化的过程。那么首先是右子树在发生变化，从1到L[n-i-1]。继续增长，右子树的形态复位为1，而左子树的形态增加1.因此右子树相当于秒针，左子树相当于分针。对于s，该树的左子树编号为(s-1)/L[n-i-1]+1，右子树编号为(s-1)% L[n-i-1]+1。
+(4).fun(n,k)的递归终止条件很容易知道，为n==1。此时树的形态只有一种，所以直接打印X。
+(5).综上所述，fun(n,k)的形式为：
+fun(n,k){
+   if(1==n)打印X,返回。
+   求出 s,i；
+   If(i>0){打印(；fun(i, (s-1)/L[n-i-1]+1)；打印)；}
+   打印X；
+   If(n-i-1>0) {打印(；fun(n-i-1, (s-1)%L[n-i-1]+1)；打印)；}
+}
+至此，问题得到了解决。
+
+
+#include <stdio.h>   
+int L[19]={1,1,2,5,14,42,132,429,1430,4862,16796,58786,208012,742900,2674440,9694845,35357670,129644790,477638700};   
+void fun(int n,int k){   
+    int i,sum=0;   
+    if(1==n){putchar('X');return;}   
+    for(i=0;k>sum;i++)sum+=L[i]*L[n-i-1];   
+    i--;   
+    sum-=L[i]*L[n-i-1];   
+    k-=sum;   
+    if(i){   
+       putchar('(');   
+       fun(i,(k-1)/L[n-i-1]+1);   
+       putchar(')');   
+    }   
+    putchar('X');   
+    if(n-i-1){   
+       putchar('(');   
+       fun(n-i-1,(k-1)%L[n-i-1]+1);   
+       putchar(')');   
+    }     
+}   
+  
+int main(){   
+  int n,i,j,sum;   
+  while(scanf("%d",&n)&&n){   
+     sum=0;   
+     for(i=1;n>sum;i++)sum+=L[i];   
+     i--;   
+     fun(i,n-sum+L[i]);   
+     putchar('\n');   
+  }    
+  return 0;   
+}  
+
+
+
+POJ 1905 Expanding Rods
+
+
+
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+
+int main(int argc, char* argv[])
+{
+    double N,C,L;
+    while(scanf("%lf%lf%lf",&L,&N,&C)&&N>=0&&C>=0&&L>=0)
+    {
+        if(N==0||L==0||C==0)
+        {
+            printf("0.000\n");
+            continue;
+        }
+
+        double minv = 0,maxv = acos(-1.0), midv;
+        double L2 = ( 1 + N * C ) * L;
+        while(maxv - minv > 1e-12)    
+        {
+            midv = (minv + maxv) / 2;
+            if( 2 * L2 / L > midv / sin(midv / 2))
+                minv = midv;
+            else
+                maxv = midv;
+        }
+        printf("%.3lf\n",L2 / midv * (1-cos(midv / 2)));
+    }
+    return 0;
+}
+
+
+
+
+POJ 1064 Cable master
+
+AC率较低的题，也是很明显的二分题，但是由于精度问题WA了很多次，最终看discuss过的，这题一个很重要的精度思想就是把每个浮点数全部变成int型，然后二分，不然会有很大的精度问题，其次就是读入的时候不能用double读入，可能是因为把double转换成int时有精度的丢失吧，要用字符串读入，然后再转换成int型。
+
+#include<iostream>
+using namespace std;
+#define MAX 10005
+int n,k;
+int a[MAX];
+bool can(int t){
+ int ans=0;
+ int i;
+ for(i=1;i<=n;i++){
+  ans=ans+a[i]/t;
+  if(ans>=k)return true;
+ }
+ return ans>=k;
+}
+void solve(){
+ if(!can(1)){
+  printf("0.00\n");
+  return ;
+ }
+ int bottom=1,top=0;
+ int i;
+ for(i=1;i<=n;i++){
+  if(top<a[i])top=a[i];
+ }
+ while(bottom<top){
+  if(bottom==top-1){
+   if(!can(top))top=bottom;
+   break;
+  }
+  int mid=(bottom+top)>>1;
+  if(can(mid))bottom=mid;
+  else top=mid-1;
+ }
+ double ans;
+ if(can(top))ans=top*0.01;//求出的数乘以0.01即为答案
+ else ans=bottom*0.01;
+ printf("%.2lf\n",ans);
+}
+int main(){
+ char str[100];
+ cin>>n>>k;
+ int i;
+ for(i=1;i<=n;i++){
+  scanf("%s",str);//****精度的问题，要用字符串输入******
+  int j;
+  a[i]=0;
+  for(j=0;str[j]&&str[j]!=' ';j++){
+   if(str[j]!='.')a[i]=a[i]*10+str[j]-'0';//把读入的数乘以100转换成int型
+  }
+ }
+ solve();
+ return 0;
+}
+

@@ -1,0 +1,94 @@
+#include <stdio.h>
+
+long long dp[20],bit[20]={1,10};
+//从高位往低位考虑
+
+void init()
+{
+	long long i;
+	
+	dp[0] = 0;
+	dp[1] = 5;
+	for(i = 2;i<17;i++)
+	{
+		bit[i] = bit[i-1]*10;
+		dp[i] = dp[i-1];
+
+		if(i&1)
+		{
+			//-1+0-0
+			dp[i] += 9*bit[i-1]/2;
+		}
+		else 
+		{
+			// -1+0-0+0
+			dp[i] += -1*45*bit[i-2];
+		}
+	}
+	return ;
+}
+
+int main()
+{
+	init();
+	long long i,tmp,n,num[20][2],ans=1;
+	while(~scanf("%lld",&n)&&n)
+	{
+		i = 1;
+		tmp = n;
+		num[1][1] = 0;
+		while(tmp)
+		{
+			num[i][0] = tmp%10;
+			if(i>1)num[i][1] = n%bit[i-1];
+			i++;
+			tmp /= 10;
+		}
+		ans = 0;
+		i--;
+		ans += dp[i-1];
+		if(i&1)//奇数位
+		{
+			if(n>10)n -= bit[i-1];
+			else ;
+			n++;
+			ans += n/2;
+			if(n&1)
+			{
+				long long rate = -1;
+				for( ;i;i--,rate*=-1)
+					ans += num[i][0]*rate;
+			}
+		}
+		else //偶数位
+		{
+			///把第一位特殊情况
+			ans -= num[i][0]*(num[i][0]-1)/2*bit[i-1];
+			ans += (num[i][0]-1)*45*bit[i-2];
+			ans -= num[i][0]*(num[i][1]+1);
+			///全不动
+			for(i-- ;i>0;i--)
+			{
+				long long ttt=0;
+				if(num[i][0]>0)
+				{
+					if(i&1)//+
+						ttt += (num[i][0]-1)*(num[i][0])/2*bit[i-1];
+					else //-
+					{
+						ttt -= (num[i][0]-1)*(num[i][0])/2*bit[i-1];
+						ttt += (num[i][0])*45*bit[i-2];
+					}
+					ans += ttt;
+				}
+
+					if(i&1)//+
+						ans += (num[i][1]+1)* num[i][0];
+					else //-
+						ans -= (num[i][1]+1)*num[i][0];
+			}
+		}
+		printf("%lld\n",ans);
+	}
+	return 0;
+}
