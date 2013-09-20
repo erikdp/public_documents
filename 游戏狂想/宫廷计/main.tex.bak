@@ -34,7 +34,8 @@ rulesepcolor=\color{red!20!green!20!blue!20}
 \paragraph{四大职业}
 
 \section{文士}
-
+\subsubsection{帐号}
+2628088558 -- 上官清风
 \subsection{原材料}
 \subsubsection{甲骨-439}
 \subsubsection{竹片-21}
@@ -49,7 +50,8 @@ rulesepcolor=\color{red!20!green!20!blue!20}
 
 
 \section{武卫}
-
+\subsubsection{帐号}
+870981892 -- 令狐木木
 \subsection{原材料}
 \subsubsection{}
 \subsubsection{}
@@ -66,7 +68,8 @@ rulesepcolor=\color{red!20!green!20!blue!20}
 
 
 \section{膳师}
-
+\subsubsection{帐号}
+799011746 - 令狐木叶
 \subsection{原材料}
 \subsubsection{蜂蜜}
 \subsubsection{谷物}
@@ -82,7 +85,8 @@ rulesepcolor=\color{red!20!green!20!blue!20}
 
 
 \section{药司}
-
+\subsubsection{帐号}
+1031075623 - 令狐落木
 \subsection{原材料}
 \subsubsection{牛黄}
 \subsubsection{绿麻}

@@ -1,21 +1,12 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=latex 2013.7.19)  21 JUL 2013 07:57
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.20)  20 SEP 2013 07:47
 entering extended mode
-**main.tex
-(E:\git_repo\public_documents\游戏狂想\宫廷计\main.tex
+**E:/git_repo/public_documents/游戏狂想/宫廷计/main.tex
+(E:/git_repo/public_documents/游戏狂想/宫廷计/main.tex
 LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
-abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
-croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
-lician, german, german-x-2009-06-19, greek, gujarati, hindi, hungarian, iceland
-ic, indonesian, interlingua, irish, italian, kannada, kurmanji, lao, latin, lat
-vian, lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerm
-an, ngerman-x-2009-06-19, nynorsk, oriya, panjabi, pinyin, polish, portuguese, 
-romanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swis
-sgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, u
-senglishmax, welsh, loaded.
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
+Babel <v3.8m> and hyphenation patterns for loaded.
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\base\article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\base\size12.clo"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\base\size12.clo
 File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -30,22 +21,22 @@ File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\geometry\geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\graphics\keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\generic\oberdiek\ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is not detected.
+Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
-Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+(E:\PortableApplications\CTEX\MiKTeX\tex\generic\oberdiek\ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Switches for detecting VTeX and its modes (HO)
 Package ifvtex Info: VTeX not detected.
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\generic\ifxetex\ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count87
@@ -61,20 +52,20 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\geometry\geometry.cfg))
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\base\inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks16
 \inpenc@posthook=\toks17
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\base\utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.dfu"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\base\t1enc.dfu
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -224,7 +215,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\base\ot1enc.dfu"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\base\ot1enc.dfu
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -255,7 +246,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\base\omsenc.dfu"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\base\omsenc.dfu
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -279,7 +270,7 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\listings\listings.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\listings\listings.sty
 \lst@mode=\count90
 \lst@gtempboxa=\box26
 \lst@token=\toks18
@@ -293,25 +284,25 @@ Now handling font encoding U ...
 \lst@lineno=\count95
 \lst@maxwidth=\dimen114
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\listings\lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 \c@lstnumber=\count96
 \lst@skipnumbers=\count97
 \lst@framebox=\box27
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\listings\listings.cfg"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\listings\listings.cfg
 File: listings.cfg 2007/02/22 1.4 listings configuration
 ))
 Package: listings 2007/02/22 1.4 (Carsten Heinz)
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\cjk\CJK.sty"
-Package: CJK 2012/05/07 4.8.3
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\cjk\CJK.sty
+Package: CJK 2008/12/29 4.8.2
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\cjk\mule\MULEenc.sty"
-Package: MULEenc 2012/05/07 4.8.3
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\cjk\mule\MULEenc.sty
+Package: MULEenc 2008/12/29 4.8.2
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\cjk\CJK.enc"
-File: CJK.enc 2012/05/07 4.8.3
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\cjk\CJK.enc
+File: CJK.enc 2008/12/29 4.8.2
 Now handling font encoding C00 ...
 ... no UTF-8 mapping file for font encoding C00
 Now handling font encoding C05 ...
@@ -377,21 +368,30 @@ Now handling font encoding C41 ...
 Now handling font encoding C62 ...
 ... no UTF-8 mapping file for font encoding C62
 )
-LaTeX Info: Redefining \selectfont on input line 755.
+LaTeX Info: Redefining \selectfont on input line 756.
 \CJK@indent=\box28
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\xcolor\xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\00miktex\color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
-Package xcolor Info: Driver file: dvips.def on input line 225.
+Package xcolor Info: Driver file: pdftex.def on input line 225.
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\graphics\dvips.def"
-File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\pdftex-def\pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(E:\PortableApplications\CTEX\MiKTeX\tex\generic\oberdiek\infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
+)
+(E:\PortableApplications\CTEX\MiKTeX\tex\generic\oberdiek\ltxcmds.sty
+Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count98
 )
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
 Package xcolor Info: Model `RGB' extended on input line 1353.
 Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
 Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
@@ -400,19 +400,19 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\graphics\graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\graphics\graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\graphics\trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\00miktex\graphics.cfg
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
-Package graphics Info: Driver file: dvips.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 91.
 )
 \Gin@req@height=\dimen115
 \Gin@req@width=\dimen116
@@ -496,9 +496,9 @@ LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
 
 *geometry* driver: auto-detecting
-*geometry* detected driver: dvips
+*geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
-* driver: dvips
+* driver: pdftex
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
@@ -529,40 +529,114 @@ LaTeX Font Info:    ... okay on input line 12.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count98
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\cjk\UTF8\UTF8.bdg"
-File: UTF8.bdg 2012/05/07 4.8.3
+\c@lstlisting=\count99
+(E:\PortableApplications\CTEX\MiKTeX\tex\context\base\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count100
+\scratchdimen=\dimen117
+\scratchbox=\box29
+\nofMPsegments=\count101
+\nofMParguments=\count102
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count103
+\MPscratchDim=\dimen118
+\MPnumerator=\count104
+\makeMPintoPDFobject=\count105
+\everyMPtoPDFconversion=\toks20
+) (E:\PortableApplications\CTEX\MiKTeX\tex\latex\cjk\UTF8\UTF8.bdg
+File: UTF8.bdg 2008/12/29 4.8.2
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\cjk\UTF8\UTF8.enc"
-File: UTF8.enc 2012/05/07 4.8.3
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\cjk\UTF8\UTF8.enc
+File: UTF8.enc 2008/12/29 4.8.2
 )
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\cjk\UTF8\UTF8.chr"
-File: UTF8.chr 2012/05/07 4.8.3
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\cjk\UTF8\UTF8.chr
+File: UTF8.chr 2008/12/29 4.8.2
+)
+LaTeX Font Info:    Try loading font information for C70+gbsn on input line 19.
+
+
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\cjk\UTF8\c70gbsn.fd
+File: c70gbsn.fd 2008/12/29 4.8.2
+)
+(E:\PortableApplications\CTEX\MiKTeX\tex\latex\cjk\UTF8\c70gbsn.fdx
+File: c70gbsn.fdx 2008/12/29 4.8.2
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 19.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 19.
-LaTeX Font Info:    Try loading font information for C70+gbsn on input line 30.
+ [1
+
+{E:/PortableApplications/CTEX/UserData/pdftex/config/pdftex.map{Unicode.sfd}{UG
+BK.sfd}}]
+Overfull \vbox (711.45392pt too high) has occurred while \output is active []
 
 
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\cjk\UTF8\c70gbsn.fd"
-File: c70gbsn.fd 2012/05/07 4.8.3
-)
-("D:\win8\Program Files\MiKTeX 2.9\tex\latex\cjk\UTF8\c70gbsn.fdx"
-File: c70gbsn.fdx 2012/05/07 4.8.3
-) [1
-
-]
-[2] [3] [4] [5] (E:\git_repo\public_documents\游戏狂想\宫廷计\main.aux) 
-) 
+[2] (E:\git_repo\public_documents\游戏狂想\宫廷计\main.aux) ) 
 Here is how much of TeX's memory you used:
- 4286 strings out of 494046
- 55298 string characters out of 3146392
- 118904 words of memory out of 3000000
- 7482 multiletter control sequences out of 15000+200000
- 23663 words of font info for 85 fonts, out of 3000000 for 9000
- 715 hyphenation exceptions out of 8191
- 26i,6n,35p,228b,303s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 4877 strings out of 495354
+ 63801 string characters out of 3182683
+ 133366 words of memory out of 3000000
+ 7935 multiletter control sequences out of 15000+200000
+ 26436 words of font info for 94 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 26i,6n,35p,268b,359s stack positions out of 5000i,500n,10000p,200000b,50000s
+<E:/Portabl
+eApplications/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><E:/Portabl
+eApplications/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><E:/Portable
+Applications/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><E:/PortableA
+pplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu30.pfb><E:/PortableApplic
+ations/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu4e.pfb><E:/PortableApplication
+s/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu53.pfb><E:/PortableApplications/CTE
+X/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu54.pfb><E:/PortableApplications/CTEX/MiK
+TeX/fonts/type1/arphic/gbsnu/gbsnu56.pfb><E:/PortableApplications/CTEX/MiKTeX/f
+onts/type1/arphic/gbsnu/gbsnu58.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/
+type1/arphic/gbsnu/gbsnu59.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1
+/arphic/gbsnu/gbsnu5b.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arph
+ic/gbsnu/gbsnu5e.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gb
+snu/gbsnu5f.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/g
+bsnu60.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu6
+2.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu65.pfb
+><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu66.pfb><E:/
+PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu67.pfb><E:/Porta
+bleApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu68.pfb><E:/PortableAp
+plications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu6b.pfb><E:/PortableApplica
+tions/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu6c.pfb><E:/PortableApplications
+/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu6e.pfb><E:/PortableApplications/CTEX
+/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu6f.pfb><E:/PortableApplications/CTEX/MiKT
+eX/fonts/type1/arphic/gbsnu/gbsnu70.pfb><E:/PortableApplications/CTEX/MiKTeX/fo
+nts/type1/arphic/gbsnu/gbsnu71.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/t
+ype1/arphic/gbsnu/gbsnu72.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/
+arphic/gbsnu/gbsnu73.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphi
+c/gbsnu/gbsnu75.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbs
+nu/gbsnu76.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gb
+snu77.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu78
+.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu7a.pfb>
+<E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu7c.pfb><E:/P
+ortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu7e.pfb><E:/Portab
+leApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu7f.pfb><E:/PortableApp
+lications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu80.pfb><E:/PortableApplicat
+ions/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu81.pfb><E:/PortableApplications/
+CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu82.pfb><E:/PortableApplications/CTEX/
+MiKTeX/fonts/type1/arphic/gbsnu/gbsnu83.pfb><E:/PortableApplications/CTEX/MiKTe
+X/fonts/type1/arphic/gbsnu/gbsnu86.pfb><E:/PortableApplications/CTEX/MiKTeX/fon
+ts/type1/arphic/gbsnu/gbsnu87.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/ty
+pe1/arphic/gbsnu/gbsnu89.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/a
+rphic/gbsnu/gbsnu8b.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic
+/gbsnu/gbsnu8c.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsn
+u/gbsnu8d.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbs
+nu8f.pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu90.
+pfb><E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu91.pfb><
+E:/PortableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu94.pfb><E:/Po
+rtableApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu96.pfb><E:/Portabl
+eApplications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu97.pfb><E:/PortableAppl
+ications/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu9a.pfb><E:/PortableApplicati
+ons/CTEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu9c.pfb><E:/PortableApplications/C
+TEX/MiKTeX/fonts/type1/arphic/gbsnu/gbsnu9e.pfb><E:/PortableApplications/CTEX/M
+iKTeX/fonts/type1/arphic/gbsnu/gbsnuff.pfb>
+Output written on main.pdf (2 pages, 217790 bytes).
+PDF statistics:
+ 229 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-Output written on main.dvi (5 pages, 8000 bytes).
