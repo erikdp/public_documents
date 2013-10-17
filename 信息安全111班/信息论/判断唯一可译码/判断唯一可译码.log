@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.10.1)  17 OCT 2013 11:07
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.10.1)  17 OCT 2013 11:42
 entering extended mode
  restricted \write18 enabled.
  Source specials enabled.
@@ -553,15 +553,69 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 20.
  [1
 
-] [2]
-(./判断唯一可译码.aux) ) 
-Here is how much of TeX's memory you used:
- 4263 strings out of 495050
- 54182 string characters out of 3181763
- 119686 words of memory out of 3000000
- 7355 multiletter control sequences out of 15000+200000
- 23329 words of font info for 83 fonts, out of 3000000 for 9000
- 14 hyphenation exceptions out of 8191
- 26i,6n,35p,342b,306s stack positions out of 5000i,500n,10000p,200000b,50000s
+]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+)
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 47.
 
-Output written on 判断唯一可译码.dvi (2 pages, 5204 bytes).
+(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 47.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 54.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 65.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 65.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 65.
+ [2]
+Overfull \hbox (38.25504pt too wide) in paragraph at lines 103--104
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (7.9551pt too wide) in paragraph at lines 105--107
+[][][][][][][][][][][][][][][][][][][][][]\C70/gbsn/m/n/12/5c ^^F
+ []
+
+
+Overfull \hbox (136.95486pt too wide) in paragraph at lines 108--109
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (129.90488pt too wide) in paragraph at lines 109--110
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[3] [4]
+Overfull \hbox (59.405pt too wide) in paragraph at lines 185--186
+[][][][][][][][][][][][][][] 
+ []
+
+[5] (./判断唯一可译码.aux) ) 
+Here is how much of TeX's memory you used:
+ 4645 strings out of 495050
+ 59320 string characters out of 3181763
+ 171880 words of memory out of 3000000
+ 7711 multiletter control sequences out of 15000+200000
+ 27679 words of font info for 98 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 33i,6n,60p,342b,1110s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on 判断唯一可译码.dvi (5 pages, 51592 bytes).

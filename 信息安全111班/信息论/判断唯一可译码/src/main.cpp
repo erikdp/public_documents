@@ -1,51 +1,3 @@
-\documentclass[12pt,a4paper]{article}
-\usepackage{geometry}
-\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
-
-\usepackage[utf8]{inputenc}
-\usepackage{listings}
-\usepackage{CJK}
-\usepackage{xcolor}
-\usepackage{graphicx}
-\usepackage{indentfirst}
-
-
-\begin{document}
-\begin{CJK}{UTF8}{gbsn}
-\title{判断唯一可译码}
-\author{ismdeep}
-\date{2013-10-17 10:56:58}
-
-
-\maketitle
-
-%设置listings
-\lstset{numbers=left,
-numberstyle=\tiny,
-keywordstyle=\color{blue!100}, commentstyle=\color{red!50!green!50!blue!50},
-frame=single,tabsize=4,showtabs=false,extendedchars=false,
-rulesepcolor=\color{red!20!green!20!blue!20}
-}
-
-\newpage
-\section{唯一可译码}
-任意有限长的码元序列，只能被唯一地分割成一个个的码字，便称为唯一可译码。
-
-\section{判断唯一可译码}
-    将码C中所有可能的尾随后缀组成一个集合F，当且仅当集合F中没有包含任一码字，则可判断此码C为唯一可译变长码。如何构成集合F，可以如下进行。
-
-首先，观察码C中最短的码字是否是其他码字的前缀。若是，将其所有的可能的尾随后缀排列出。而这些尾随后缀又可能是某些码字的前缀，再将由这些尾随后缀产生的新的尾随后缀列出。
-
-然后再观察这些新的尾随后缀是否是某些码字的前缀，再将产生的后缀列出。
-
-依次下去，直至没有一个尾随后缀是码字的前缀或没有新的尾随后缀产生为止。这样，首先获得由最短的码字能引起的所有尾随后缀。接着，按照上述步骤将次短的码字、….等等，所有码字可能产生的尾随后缀全部列出。
-
-由此，得到由码C的所有可能的尾随后缀组成的集合F。
-
-\section{实现代码}
-详细代码在src文件夹中。
-或者访问网址：
-\begin{lstlisting}[language=C++]
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
@@ -193,14 +145,5 @@ int main()
     }
 	return 0;
 }
-
-
-
-\end{lstlisting}
-
-
-\end{CJK}
-\end{document}
-
 
 
