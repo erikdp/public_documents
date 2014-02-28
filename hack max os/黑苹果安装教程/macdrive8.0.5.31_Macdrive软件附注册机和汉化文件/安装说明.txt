@@ -1,0 +1,1 @@
+英文原版安装完成后，将"ZH-CN"目录复制到安装目录下：（正常路径为：C:\Program Files\Mediafour\MacDrive 8）
