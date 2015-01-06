@@ -1,0 +1,1050 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0063)http://www.cnblogs.com/phinecos/archive/2008/10/20/1315176.html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" ""><HTML lang="zh-cn"><HEAD><META 
+content="IE=5.0000" http-equiv="X-UA-Compatible">
+ 
+<META http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<TITLE>Winpcap网络开发库入门 - Phinecos(洞庭散人) - 博客园</TITLE> <LINK href="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/blog-common.css" 
+rel="stylesheet" type="text/css"> <LINK id="MainCss" href="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/bundle-BOOK.css" 
+rel="stylesheet" type="text/css"> <LINK href="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/18782.css" 
+rel="stylesheet" type="text/css"> <LINK title="RSS" href="http://www.cnblogs.com/phinecos/rss" 
+rel="alternate" type="application/rss+xml"> <LINK title="RSD" href="http://www.cnblogs.com/phinecos/rsd.xml" 
+rel="EditURI" type="application/rsd+xml"> <LINK href="http://www.cnblogs.com/phinecos/wlwmanifest.xml" 
+rel="wlwmanifest" type="application/wlwmanifest+xml"> 
+<SCRIPT src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/jquery.js" type="text/javascript"></SCRIPT>
+  
+<SCRIPT type="text/javascript">var currentBlogApp = 'phinecos', cb_enable_mathjax=false;</SCRIPT>
+ 
+<SCRIPT src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/blog-common.js" type="text/javascript"></SCRIPT>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.9600.17496"></HEAD> 
+<BODY><A name="top"></A> 
+<SCRIPT type="text/javascript">
+	try {
+		if (screen.availWidth > 1200) {
+			document.getElementById("MainCss").href = '/Skins/BOOK/style2.css';
+		}
+	} catch (e) { }
+</SCRIPT>
+ 
+<DIV id="header">
+<DIV id="HeaderTitle">
+<DIV id="Title"><A class="headermaintitle" id="Header1_HeaderTitle" href="http://www.cnblogs.com/phinecos/">Phinecos(洞庭散人)</A> 
+</DIV>
+<DIV id="subTitle">专注于开源技术的研究与应用</DIV></DIV></DIV>
+<DIV id="main">
+<DIV class="post">
+<H2><A id="cb_post_title_url" href="http://www.cnblogs.com/phinecos/archive/2008/10/20/1315176.html">Winpcap网络开发库入门</A>
+		 </H2>
+<DIV id="cnblogs_post_body">
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt;"><SPAN 
+class="articletoptitle"><SPAN lang="EN-US" style="font-family: Verdana; font-size: 10pt;"><SPAN 
+style="mso-tab-count: 1;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>Winpcap</SPAN></SPAN><SPAN class="articletoptitle"><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">是一个强大的网络开发库，可以实现许多功能：获取可用的网络适配器；获取指定适配器信息（比如名称和描述信息）；捕获指定网卡的数据封包；发送数据封包；过滤捕获的包以获取特定包等。</SPAN></SPAN><SPAN 
+class="articletoptitle"><SPAN lang="EN-US" style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN></SPAN></P>
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt;"><SPAN 
+class="articletoptitle"><SPAN lang="EN-US" style="font-family: Verdana; font-size: 10pt;"><SPAN 
+style="mso-tab-count: 1;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN></SPAN></SPAN><SPAN class="articletoptitle"><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;"></SPAN></SPAN></P>
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt;"><SPAN 
+class="articletoptitle"><SPAN lang="EN-US" style="font-family: Verdana; font-size: 10pt;"><SPAN 
+style="mso-tab-count: 1;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN></SPAN></SPAN><SPAN class="articletoptitle"><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">首先到</SPAN></SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;"><A href="http://www.winpcap.org/install/default.htm">http://www.winpcap.org/install/default.htm</A></SPAN><SPAN 
+style='font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: "Times New Roman";'>下载</SPAN><SPAN 
+class="articletoptitle"><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">安装</SPAN></SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">winpcap </SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">驱动和</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">DLL</SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">组件。</SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;"><BR></SPAN><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN></P><IMG alt="" 
+src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/winpcap_basic1_small.gif"><BR><BR><IMG 
+alt="" src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/winpcap_basic2.gif"><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;"> 
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt;"><SPAN lang="EN-US" style="font-family: Verdana; font-size: 10pt;"><SPAN 
+style="mso-tab-count: 1;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN></SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">然后到</SPAN><SPAN 
+lang="EN-US"><A href="http://www.winpcap.org/devel.htm"><FONT face="Times New Roman" 
+size="3">http://www.winpcap.org/devel.htm</FONT></A><FONT face="Times New Roman" 
+size="3">.</FONT></SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">下载</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">winpcap</SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">开发包，解压到指定目录，这里我解压到</SPAN><EM><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;">C:\WpdPack_4_0_2\WpdPack</SPAN></EM><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">，可以看到里面包含了：</SPAN><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;">Lib,Include,</SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">文档和示例程序。<BR></SPAN><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN></P></SPAN><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN><IMG alt="" 
+src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/winpcap_basic3_small.gif"><BR><BR><IMG 
+alt="" src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/winpcap_basic4_small.gif"><BR><BR>
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt;"><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">首先创建一个</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">C++</SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">控制台程序，设置如下：</SPAN><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN></P>
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt 39pt; text-indent: -18pt; mso-list: l0 level1 lfo1; tab-stops: list 39.0pt;"><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt; mso-fareast-font-family: Verdana; mso-bidi-font-family: Verdana;"><SPAN 
+style="mso-list: Ignore;">1）<SPAN style='font: 7pt/normal "Times New Roman"; font-size-adjust: none; font-stretch: normal;'>&nbsp; 
+</SPAN></SPAN></SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">在</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">“Configuration 
+Properties -&gt; C/C++ -&gt; General”</SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">中，在</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">Additional Include 
+Directories</SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">加入</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">Include</SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">路径</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">(“<EM><SPAN style="font-family: Verdana;">C:\WpdPack_4_0_2\WpdPack\Include</SPAN></EM>”)</SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">。<BR></SPAN><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN></P><IMG alt="" 
+src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/winpcap_basic5_small.gif"><BR><BR>
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt 39pt; text-indent: -18pt; mso-list: l0 level1 lfo1; tab-stops: list 39.0pt;"><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt; mso-fareast-font-family: Verdana; mso-bidi-font-family: Verdana;"><SPAN 
+style="mso-list: Ignore;">2）<SPAN style='font: 7pt/normal "Times New Roman"; font-size-adjust: none; font-stretch: normal;'>&nbsp; 
+</SPAN></SPAN></SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">在</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;"> “Configuration 
+Properties -&gt; Linker -&gt; General” </SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">中，在</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">Additional Library 
+Directories</SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">中加入</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;"> winpcap 
+</SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">库文件路径</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;"> ( “<EM><SPAN style="font-family: Verdana;">C:\WpdPack_4_0_2\WpdPack\Lib</SPAN></EM>” 
+) </SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">。<BR></SPAN><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN></P><IMG alt="" 
+src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/winpcap_basic6_small.gif"><BR>
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt 39pt; text-indent: -18pt; mso-list: l0 level1 lfo1; tab-stops: list 39.0pt;"><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt; mso-fareast-font-family: Verdana; mso-bidi-font-family: Verdana;"><SPAN 
+style="mso-list: Ignore;">3）<SPAN style='font: 7pt/normal "Times New Roman"; font-size-adjust: none; font-stretch: normal;'>&nbsp; 
+</SPAN></SPAN></SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">在</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">“Configuration 
+Properties -&gt; Linker -&gt; Input”</SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">中，</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;"> Additional 
+Dependencies </SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">加入用到的两个</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">winpcap </SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">库文件（</SPAN><EM><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;">wpcap.lib</SPAN></EM><SPAN lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"> and <EM><SPAN style="font-family: Verdana;">Packet.lib</SPAN></EM> 
+) </SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">。<BR></SPAN><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN></P><IMG alt="" 
+src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/winpcap_basic7_small.gif"><BR>
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt 39pt; text-indent: -18pt; mso-list: l0 level1 lfo1; tab-stops: list 39.0pt;"><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt; mso-fareast-font-family: Verdana; mso-bidi-font-family: Verdana;"><SPAN 
+style="mso-list: Ignore;">4）<SPAN style='font: 7pt/normal "Times New Roman"; font-size-adjust: none; font-stretch: normal;'>&nbsp; 
+</SPAN></SPAN></SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">为了使用</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">Winpcap</SPAN><SPAN 
+style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">的远程访问，必须在预处理器中加入</SPAN><STRONG><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;">HAVE_REMOTE<BR></SPAN></STRONG><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN></P><IMG alt="" 
+src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/winpcap_basic8_small.gif"><BR>
+<P class="MsoNormal" style="margin: 0cm 0cm 0pt;"><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">示例程序</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt;">1<SPAN style="mso-spacerun: yes;">&nbsp; 
+</SPAN></SPAN><SPAN style="font-family: 宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana;">获取适配器列表<BR></SPAN><SPAN 
+lang="EN-US" 
+style="font-family: Verdana; font-size: 10pt;"><o:p></o:p></SPAN></P>
+<DIV class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><SPAN 
+style="color: rgb(0, 0, 0);">#include&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&lt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">pcap.h</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;_tmain(</SPAN><SPAN style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;argc,&nbsp;_TCHAR</SPAN><SPAN style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;argv[])<BR>{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;pcap_if_t&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;allAdapters;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">适配器列表</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;pcap_if_t&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapter;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">char</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;errorBuffer[&nbsp;PCAP_ERRBUF_SIZE&nbsp;];</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">错误信息缓冲区</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;pcap_findalldevs_ex(&nbsp;PCAP_SRC_IF_STRING,&nbsp;NULL,&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&amp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">allAdapters,&nbsp;errorBuffer&nbsp;)&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">检索机器连接的所有网络适配器</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fprintf(&nbsp;stderr,&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">Error&nbsp;in&nbsp;pcap_findalldevs_ex&nbsp;function:&nbsp;%s\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;errorBuffer&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;allAdapters&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;NULL&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">不存在人任何适配器</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\nNo&nbsp;adapters&nbsp;found!&nbsp;Make&nbsp;sure&nbsp;WinPcap&nbsp;is&nbsp;installed.\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;crtAdapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">for</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;adapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;allAdapters;&nbsp;adapter&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">!=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;NULL;&nbsp;adapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">next)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">遍历输入适配器信息(名称和描述信息)</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\n%d.%s&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">++</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">crtAdapter,&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">name&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">--&nbsp;%s\n</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">description&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;pcap_freealldevs(&nbsp;allAdapters&nbsp;);</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">释放适配器列表</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;system(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">PAUSE</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>}<BR></SPAN></DIV>
+<P><SPAN style="font-family: 新宋体; font-size: 10pt;">示例程序</SPAN><SPAN style="font-family: Verdana; font-size: 10pt;">2 
+</SPAN><SPAN 
+style="font-family: 新宋体; font-size: 10pt;">打开指定适配器并捕获数据包</SPAN><SPAN style="font-family: 新宋体; font-size: 10pt;"></SPAN></P>
+<DIV class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><SPAN 
+style="color: rgb(0, 0, 0);">#include&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&lt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">pcap.h</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;_tmain(</SPAN><SPAN style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;argc,&nbsp;_TCHAR</SPAN><SPAN style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;argv[])<BR>{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;pcap_if_t&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;allAdapters;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">适配器列表</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;pcap_if_t&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapter;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;pcap_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapterHandle;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">适配器句柄</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">struct</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;pcap_pkthdr&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;packetHeader;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">const</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;u_char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;packetData;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">char</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;errorBuffer[&nbsp;PCAP_ERRBUF_SIZE&nbsp;];</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">错误信息缓冲区</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;pcap_findalldevs_ex(&nbsp;PCAP_SRC_IF_STRING,&nbsp;NULL,&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&amp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">allAdapters,&nbsp;errorBuffer&nbsp;)&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">检索机器连接的所有网络适配器</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fprintf(&nbsp;stderr,&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">Error&nbsp;in&nbsp;pcap_findalldevs_ex&nbsp;function:&nbsp;%s\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;errorBuffer&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;allAdapters&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;NULL&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">不存在任何适配器</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\nNo&nbsp;adapters&nbsp;found!&nbsp;Make&nbsp;sure&nbsp;WinPcap&nbsp;is&nbsp;installed.\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;crtAdapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">for</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;adapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;allAdapters;&nbsp;adapter&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">!=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;NULL;&nbsp;adapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">next)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">遍历输入适配器信息(名称和描述信息)</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\n%d.%s&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">++</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">crtAdapter,&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">name&nbsp;);&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">--&nbsp;%s\n</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">description&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">选择要捕获数据包的适配器</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapterNumber;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">Enter&nbsp;the&nbsp;adapter&nbsp;number&nbsp;between&nbsp;1&nbsp;and&nbsp;%d:</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;crtAdapter&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;scanf_s(&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">%d</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&amp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">adapterNumber&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;adapterNumber&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&lt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">||</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapterNumber&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;crtAdapter&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\nAdapter&nbsp;number&nbsp;out&nbsp;of&nbsp;range.\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;释放适配器列表</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pcap_freealldevs(&nbsp;allAdapters&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;adapter&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;allAdapters;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">for</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;crtAdapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;&nbsp;crtAdapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&lt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapterNumber&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;&nbsp;crtAdapter</SPAN><SPAN style="color: rgb(0, 0, 0);">++</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;adapter&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">next;<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;打开指定适配器</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;adapterHandle&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;pcap_open(&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">name,&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;name&nbsp;of&nbsp;the&nbsp;adapter</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">65536</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;portion&nbsp;of&nbsp;the&nbsp;packet&nbsp;to&nbsp;capture<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;65536&nbsp;guarantees&nbsp;that&nbsp;the&nbsp;whole&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;packet&nbsp;will&nbsp;be&nbsp;captured</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PCAP_OPENFLAG_PROMISCUOUS,&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;promiscuous&nbsp;mode</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1000</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;read&nbsp;timeout&nbsp;-&nbsp;1&nbsp;millisecond</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NULL,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;authentication&nbsp;on&nbsp;the&nbsp;remote&nbsp;machine</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorBuffer&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;error&nbsp;buffer</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;adapterHandle&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;NULL&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">指定适配器打开失败</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fprintf(&nbsp;stderr,&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\nUnable&nbsp;to&nbsp;open&nbsp;the&nbsp;adapter\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">name&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;释放适配器列表</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pcap_freealldevs(&nbsp;allAdapters&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\nCapture&nbsp;session&nbsp;started&nbsp;on&nbsp;&nbsp;adapter&nbsp;%s<IMG 
+alt="" 
+src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/dot.gif">\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">name&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;pcap_freealldevs(&nbsp;allAdapters&nbsp;);</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">释放适配器列表<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;开始捕获数据包</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;retValue;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">while</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;(&nbsp;retValue&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;pcap_next_ex(&nbsp;adapterHandle,&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&amp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">packetHeader,&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&amp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">packetData&nbsp;)&nbsp;)&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&gt;=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;timeout&nbsp;elapsed&nbsp;if&nbsp;we&nbsp;reach&nbsp;this&nbsp;point</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;retValue&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">continue</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">打印捕获数据包的信息</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">length&nbsp;of&nbsp;packet:&nbsp;%d\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;packetHeader</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">len&nbsp;);<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;if&nbsp;we&nbsp;get&nbsp;here,&nbsp;there&nbsp;was&nbsp;an&nbsp;error&nbsp;reading&nbsp;the&nbsp;packets</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;retValue&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">Error&nbsp;reading&nbsp;the&nbsp;packets:&nbsp;%s\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;pcap_geterr(&nbsp;adapterHandle&nbsp;)&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;system(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">PAUSE</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>}<BR></SPAN></DIV>
+<P><SPAN style="font-family: 新宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana; mso-font-kerning: 0pt; mso-no-proof: yes;">示例程序</SPAN><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt; mso-fareast-font-family: 新宋体; mso-font-kerning: 0pt; mso-no-proof: yes;">3 
+</SPAN><SPAN style="font-family: 新宋体; font-size: 10pt; mso-ascii-font-family: Verdana; mso-hansi-font-family: Verdana; mso-font-kerning: 0pt; mso-no-proof: yes;">发送数据封包</SPAN></P><SPAN 
+lang="EN-US" style="font-family: Verdana; font-size: 10pt; mso-fareast-font-family: 新宋体; mso-font-kerning: 0pt; mso-no-proof: yes;"><o:p>
+<DIV class="cnblogs_code"><!--<br /><br />Code highlighting produced by Actipro CodeHighlighter (freeware)<br />http://www.CodeHighlighter.com/<br /><br />--><SPAN 
+style="color: rgb(0, 0, 0);">#include&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&lt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">pcap.h</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;_tmain(</SPAN><SPAN style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;argc,&nbsp;_TCHAR</SPAN><SPAN style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;argv[])<BR>{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;pcap_if_t&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;allAdapters;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">适配器列表</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;pcap_if_t&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapter;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;pcap_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">*</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapterHandle;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">适配器句柄</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;u_char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packet[&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">20</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;];&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">待发送的数据封包</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">char</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;errorBuffer[&nbsp;PCAP_ERRBUF_SIZE&nbsp;];</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">错误信息缓冲区</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;pcap_findalldevs_ex(&nbsp;PCAP_SRC_IF_STRING,&nbsp;NULL,&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&amp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">allAdapters,&nbsp;errorBuffer&nbsp;)&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">检索机器连接的所有网络适配器</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fprintf(&nbsp;stderr,&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">Error&nbsp;in&nbsp;pcap_findalldevs_ex&nbsp;function:&nbsp;%s\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;errorBuffer&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;allAdapters&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;NULL&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">不存在人任何适配器</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\nNo&nbsp;adapters&nbsp;found!&nbsp;Make&nbsp;sure&nbsp;WinPcap&nbsp;is&nbsp;installed.\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;crtAdapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">for</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;adapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;allAdapters;&nbsp;adapter&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">!=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;NULL;&nbsp;adapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">next)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">遍历输入适配器信息(名称和描述信息)</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\n%d.%s&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">++</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">crtAdapter,&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">name&nbsp;);&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">--&nbsp;%s\n</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">description&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">选择适配器</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapterNumber;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">Enter&nbsp;the&nbsp;adapter&nbsp;number&nbsp;between&nbsp;1&nbsp;and&nbsp;%d:</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;crtAdapter&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;scanf_s(&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">%d</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&amp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">adapterNumber&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;adapterNumber&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&lt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">||</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapterNumber&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;crtAdapter&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;</SPAN><SPAN style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\nAdapter&nbsp;number&nbsp;out&nbsp;of&nbsp;range.\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;释放适配器列表</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pcap_freealldevs(&nbsp;allAdapters&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;adapter&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;allAdapters;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">for</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;crtAdapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;&nbsp;crtAdapter&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&lt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapterNumber&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;&nbsp;crtAdapter</SPAN><SPAN style="color: rgb(0, 0, 0);">++</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;adapter&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">next;<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;打开指定适配器</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;adapterHandle&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;pcap_open(&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">name,&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;name&nbsp;of&nbsp;the&nbsp;adapter</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">65536</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;portion&nbsp;of&nbsp;the&nbsp;packet&nbsp;to&nbsp;capture<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;65536&nbsp;guarantees&nbsp;that&nbsp;the&nbsp;whole&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;packet&nbsp;will&nbsp;be&nbsp;captured</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PCAP_OPENFLAG_PROMISCUOUS,&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;promiscuous&nbsp;mode</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1000</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;read&nbsp;timeout&nbsp;-&nbsp;1&nbsp;millisecond</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NULL,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;authentication&nbsp;on&nbsp;the&nbsp;remote&nbsp;machine</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorBuffer&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;error&nbsp;buffer</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;adapterHandle&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">==</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;NULL&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">指定适配器打开失败</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fprintf(&nbsp;stderr,&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\nUnable&nbsp;to&nbsp;open&nbsp;the&nbsp;adapter\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;adapter</SPAN><SPAN style="color: rgb(0, 0, 0);">-&gt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">name&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;释放适配器列表</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pcap_freealldevs(&nbsp;allAdapters&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;pcap_freealldevs(&nbsp;allAdapters&nbsp;);</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">释放适配器列表<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">创建数据封包<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;设置目标的MAC地址为01&nbsp;:&nbsp;01&nbsp;:&nbsp;01&nbsp;:&nbsp;01&nbsp;:&nbsp;01&nbsp;:&nbsp;01</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x01</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x01</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">2</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x01</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">3</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x01</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">4</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x01</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">5</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x01</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;设置源的MAC地址为02&nbsp;:&nbsp;02&nbsp;:&nbsp;02&nbsp;:&nbsp;02&nbsp;:&nbsp;02&nbsp;:&nbsp;02</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN style="color: rgb(128, 0, 128);">6</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x02</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">7</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x02</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">8</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x02</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">9</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x02</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">10</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x02</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;packet[</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">11</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">]&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0x02</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;设置封包其他部分内容</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">for</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">int</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;index&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">12</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;&nbsp;index&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 0);">&lt;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">20</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;&nbsp;index</SPAN><SPAN style="color: rgb(0, 0, 0);">++</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packet[index]&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0xC4</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">发送数据封包</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">if</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">(&nbsp;pcap_sendpacket(&nbsp;adapterHandle,&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;the&nbsp;adapter&nbsp;handle</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packet,&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;the&nbsp;packet</SPAN><SPAN style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">20</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">//</SPAN><SPAN 
+style="color: rgb(0, 128, 0);">&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;packet</SPAN><SPAN 
+style="color: rgb(0, 128, 0);"><BR></SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">!=</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fprintf(&nbsp;stderr,</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">\nError&nbsp;sending&nbsp;the&nbsp;packet:&nbsp;\n</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">,&nbsp;pcap_geterr(&nbsp;adapterHandle&nbsp;)&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">-</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">1</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;system(&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">PAUSE</SPAN><SPAN 
+style="color: rgb(128, 0, 0);">"</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;);<BR>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="color: rgb(0, 0, 255);">return</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">&nbsp;</SPAN><SPAN 
+style="color: rgb(128, 0, 128);">0</SPAN><SPAN 
+style="color: rgb(0, 0, 0);">;<BR>}<BR></SPAN></DIV>
+<P>&nbsp;</P>
+<P><SPAN style="font-family: 新宋体; font-size: 10pt;">参考文章：</SPAN></P>
+<P><SPAN style="font-family: Verdana; font-size: 10pt;">1</SPAN><SPAN style="font-family: 宋体; font-size: 10pt;">，</SPAN><SPAN 
+style="font-family: Verdana; font-size: 10pt;"><A href="http://www.codeproject.com/KB/IP/winpcap_basic.aspx">Introduction 
+to the Winpcap Networking Libraries</A></SPAN></P></o:p></SPAN></DIV>
+<DIV id="MySignature"></DIV>
+<DIV class="clear"></DIV>
+<DIV id="blog_post_info_block">
+<DIV id="BlogPostCategory"></DIV>
+<DIV id="EntryTag"></DIV>
+<DIV id="blog_post_info"></DIV>
+<DIV class="clear"></DIV>
+<DIV id="post_next_prev"></DIV></DIV>
+<P class="postfoot">			posted on <SPAN id="post-date">2008-10-20 16:03</SPAN> <A 
+href="http://www.cnblogs.com/phinecos/">Phinecos(洞庭散人)</A> 阅读(<SPAN id="post_view_count">...</SPAN>) 
+评论(<SPAN id="post_comment_count">...</SPAN>)  <A href="http://i.cnblogs.com/EditPosts.aspx?postid=1315176" 
+rel="nofollow">编辑</A> <A onclick="AddToWz(1315176);return false;" href="http://www.cnblogs.com/phinecos/archive/2008/10/20/1315176.html#">收藏</A>
+		 </P></DIV>
+<SCRIPT type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=18782,cb_entryId=1315176,cb_blogApp=currentBlogApp,cb_blogUserGuid='c555360b-63cf-dd11-9e4d-001cf0cd104b',cb_entryCreatedDate='2008/10/20 16:03:00';loadViewCount(cb_entryId);</SCRIPT>
+		 <A name="!comments"></A>
+<DIV id="blog-comments-placeholder"></DIV>
+<SCRIPT type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</SCRIPT>
+ 
+<DIV class="commentform" id="comment_form"><A name="commentform"></A> 
+<DIV id="divCommentShow"></DIV>
+<DIV id="comment_nav"><SPAN id="span_refresh_tips"></SPAN><A id="lnk_RefreshComments" 
+onclick="return RefreshCommentList();" href="javascript:void(0);">刷新评论</A><A 
+onclick="return RefreshPage();" href="http://www.cnblogs.com/phinecos/archive/2008/10/20/1315176.html#">刷新页面</A><A 
+href="http://www.cnblogs.com/phinecos/archive/2008/10/20/1315176.html#top">返回顶部</A></DIV>
+<DIV id="comment_form_container"></DIV>
+<DIV class="ad_text_commentbox" id="ad_text_under_commentbox"></DIV>
+<DIV id="site_nav_under"><A title="开发者的网上家园" href="http://www.cnblogs.com/" 
+target="_blank">博客园首页</A><A title="程序员问答社区" href="http://q.cnblogs.com/" target="_blank">博问</A><A 
+title="IT新闻" href="http://news.cnblogs.com/" target="_blank">新闻</A><A href="http://home.cnblogs.com/ing/" 
+target="_blank">闪存</A><A href="http://job.cnblogs.com/" 
+target="_blank">程序员招聘</A><A href="http://kb.cnblogs.com/" 
+target="_blank">知识库</A></DIV>
+<DIV id="opt_under_post"></DIV>
+<SCRIPT type="text/javascript">
+    var enableGoogleAd = canShowAdsense(); var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];
+    fixPostBodyFormat();
+</SCRIPT>
+ 
+<DIV id="ad_under_post_holder">
+<SCRIPT type="text/javascript">
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function () {
+        if (enableGoogleAd) {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        }
+    })();
+</SCRIPT>
+ 
+<SCRIPT type="text/javascript">
+    try {
+        if (enableGoogleAd) {
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C1_sitehome', [300, 250], 'div-gpt-ad-1346480159711-0').addService(googletag.pubads());
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C2', [468, 60], 'div-gpt-ad-1410860226396-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+        };
+    } catch (e) { }
+</SCRIPT>
+ 
+<DIV class="c_ad_block" id="google_ad_c1">
+<DIV id="div-gpt-ad-1346480159711-0" style="width: 300px; height: 250px;">
+<SCRIPT type="text/javascript">
+        try {
+            if (enableGoogleAd) {
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1346480159711-0'); });            
+            } else {
+                $('#div-gpt-ad-1346480159711-0').hide();
+            }
+    } catch (e) { }
+    </SCRIPT>
+     </DIV></DIV></DIV>
+<DIV id="under_post_news"></DIV>
+<DIV class="c_ad_block" id="google_ad_c2">
+<DIV id="div-gpt-ad-1410860226396-0" style="width: 468px; height: 60px;">
+<SCRIPT type="text/javascript">
+try {
+    if (enableGoogleAd) {
+        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1410860226396-0'); });
+    } else {
+        $('#div-gpt-ad-1346480159711-0').hide();
+    }
+} catch (e) { }
+</SCRIPT>
+ </DIV></DIV>
+<DIV id="under_post_kb"></DIV>
+<DIV class="c_ad_block" id="HistoryToday"></DIV>
+<SCRIPT type="text/javascript">
+$(function () {
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 200);
+});
+</SCRIPT>
+ </DIV>
+<P id="footer">	Powered by: 	 <BR><A name="Hyperlink1" id="Footer1_Hyperlink3" 
+style="font-family: Verdana; font-size: 12px;" 
+href="http://www.cnblogs.com/">博客园</A>	 <BR>Copyright © Phinecos(洞庭散人) 
+</P></DIV>
+<DIV id="rightmenu">
+<DIV id="blog-calendar" style="display: none;"></DIV>
+<SCRIPT type="text/javascript">loadBlogDefaultCalendar();</SCRIPT>
+		 
+<H3>导航</H3>
+<UL>
+  <LI><A id="MyLinks1_HomeLink" href="http://www.cnblogs.com/">博客园</A></LI>
+  <LI><A id="MyLinks1_MyHomeLink" 
+  href="http://www.cnblogs.com/phinecos/">首页</A></LI>
+  <LI><A id="MyLinks1_NewPostLink" href="http://i.cnblogs.com/EditPosts.aspx?opt=1" 
+  rel="nofollow">新随笔</A></LI>
+  <LI><A id="MyLinks1_ContactLink" accesskey="9" href="http://space.cnblogs.com/msg/send/Phinecos(%e6%b4%9e%e5%ba%ad%e6%95%a3%e4%ba%ba)" 
+  rel="nofollow">联系</A></LI>
+  <LI><A id="MyLinks1_Syndication" 
+  href="http://www.cnblogs.com/phinecos/rss">订阅</A><A id="MyLinks1_XMLLink" 
+  href="http://www.cnblogs.com/phinecos/rss"><IMG alt="订阅" src="Winpcap网络开发库入门%20-%20Phinecos(洞庭散人)%20-%20博客园_files/xml.gif"></A>
+  			 
+  <LI><A id="MyLinks1_Admin" href="http://i.cnblogs.com/" 
+  rel="nofollow">管理</A></LI></UL>
+<H3>统计</H3>
+<UL>
+  <LI>随笔 - 607		 
+  <LI>文章 - 2		 
+  <LI>评论 - 1553		 
+  <LI>引用 - 117	 </LI></UL>
+<H3>公告</H3>
+<DIV id="blog-news"></DIV>
+<SCRIPT type="text/javascript">loadBlogNews();</SCRIPT>
+		 
+<DIV id="blog-sidecolumn"></DIV>
+<SCRIPT type="text/javascript">loadBlogSideColumn();</SCRIPT>
+	 </DIV></BODY></HTML>
